@@ -120,8 +120,6 @@ class AnilistSeeder
           fo.write URI.open(anime['coverImage']['large']).read
         end
         cover = File.open(cover_dest)
-      rescue Errno::ENOENT
-        binding.pry
         saved_anime.cover_image.attach(io: cover, filename:  filename)
       end
     end
