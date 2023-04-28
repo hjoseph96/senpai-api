@@ -123,6 +123,8 @@ class AnilistSeeder
         saved_anime.cover_image.attach(io: cover, filename:  filename)
       end
     end
+
+    FileUtils.rm_rf("#{Rails.root}/db/seeds/tmp_imgs/.", secure: true)
   end
 
   def extract_studios(data)
