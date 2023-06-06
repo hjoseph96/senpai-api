@@ -12,5 +12,11 @@ module Types
     field :last_sign_in_ip, String
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+
+    field :animes, [Types::AnimeType]
+
+    def animes
+      current_user.animes
+    end
   end
 end
