@@ -40,6 +40,7 @@ gem 'devise'
 gem 'graphql'
 gem 'jwt'
 gem 'bcrypt'
+gem 'twilio-ruby'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

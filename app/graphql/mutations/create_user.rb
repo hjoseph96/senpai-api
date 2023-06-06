@@ -10,6 +10,21 @@ module Mutations
         begin
           user = User.create!(user_params)
   
+          verify_token = (SecureRandom.random_number(9e5) + 1e5).to_i
+          user.password = token
+          user.save
+
+          twilio_sid = Rails.application.secrets.twilio_sid.to_s
+          twilio_token = Rails.application.secrets.twilio_token.to_s
+          @client = Twilio::REST::Client.new(twilio_sid, twilio_token)
+
+          @client.messages
+            .create(
+              body: "Your Senpai verification code: #{verify_token}",
+              from: '+22395',
+              to: user.phone
+            )
+
           token = JsonWebToken.encode(user_id: @user.id)
           { user: user, token: token }
         rescue ActiveRecord::RecordInvalid => e

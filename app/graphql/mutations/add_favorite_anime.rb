@@ -19,7 +19,7 @@ module Mutations
             @current_user.save
 
             { user: @current_user }
-            rescue ActiveRecord::RecordInvalid => e
+        rescue ActiveRecord::RecordInvalid => e
             GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}: #{e.record.errors.full_messages.join(', ')}")
         end
       end
