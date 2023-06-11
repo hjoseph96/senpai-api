@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_02_005023) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_11_170147) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,6 +58,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_005023) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.integer "like_type"
+    t.bigint "user_id", null: false
+    t.integer "likee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["likee_id"], name: "index_likes_on_likee_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "user_animes", force: :cascade do |t|
     t.integer "user_id"
     t.integer "anime_id"
@@ -67,9 +77,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_005023) do
     t.index ["user_id"], name: "index_user_animes_on_user_id"
   end
 
+  create_table "user_likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "like_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["like_id"], name: "index_user_likes_on_like_id"
+    t.index ["user_id"], name: "index_user_likes_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "phone", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.integer "gender"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
@@ -82,4 +102,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_005023) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "likes", "users"
+  add_foreign_key "user_likes", "likes"
+  add_foreign_key "user_likes", "users"
 end

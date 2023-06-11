@@ -6,6 +6,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       ## Database authenticatable
       t.string :phone,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
+      t.integer :gender
 
       # Trackable
       t.integer  :sign_in_count, default: 0, null: false

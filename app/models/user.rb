@@ -6,6 +6,10 @@ class User < ApplicationRecord
 
   has_many :user_animes, dependent: :destroy
   has_many :animes, through: :user_animes
+  has_many :user_likes, dependent: :destroy
+  has_many :likes, through: :user_likes
+
+  enum :gender, [ :male, :female ]
 
   validates :phone, presence: true, uniqueness: true
 
