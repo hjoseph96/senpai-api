@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_11_170147) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_11_173945) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,6 +68,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_11_170147) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "matches", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "matchee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["matchee_id"], name: "index_matches_on_matchee_id"
+    t.index ["user_id"], name: "index_matches_on_user_id"
+  end
+
   create_table "user_animes", force: :cascade do |t|
     t.integer "user_id"
     t.integer "anime_id"
@@ -103,6 +112,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_11_170147) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "likes", "users"
+  add_foreign_key "matches", "users"
   add_foreign_key "user_likes", "likes"
   add_foreign_key "user_likes", "users"
 end

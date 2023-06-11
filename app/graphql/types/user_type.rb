@@ -15,9 +15,13 @@ module Types
     field :gender, Integer
 
     field :animes, [Types::AnimeType]
+    field :matches, [Types::MatchType]
 
     def animes
       current_user.animes
     end
+
+    def matches
+      current_user.matches
   end
 end
