@@ -99,11 +99,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_11_173945) do
     t.string "phone", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.integer "gender"
+    t.integer "desired_gender"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.text "bio", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["phone"], name: "index_users_on_phone", unique: true

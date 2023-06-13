@@ -7,6 +7,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.string :phone,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
       t.integer :gender
+      t.integer :desired_gender
 
       # Trackable
       t.integer  :sign_in_count, default: 0, null: false
@@ -25,6 +26,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       # t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
+
+      t.text :bio, null: false, default: ""
 
 
       t.timestamps null: false

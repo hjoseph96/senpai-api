@@ -41,6 +41,9 @@ gem 'graphql'
 gem 'jwt'
 gem 'bcrypt'
 gem 'twilio-ruby'
+gem 'geocoder'
+gem 'rspotify'
+
 
 # Use Sass to process CSS
 # gem "sassc-rails"

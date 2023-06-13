@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :likes, through: :user_likes
 
   enum :gender, [ :male, :female ]
+  enum :desired_gender, [ :desires_men, :desires_women ]
 
   validates :phone, presence: true, uniqueness: true
 

@@ -13,6 +13,8 @@ module Types
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :gender, Integer
+    field :desired_gender, Integer
+    field :bio, String
 
     field :animes, [Types::AnimeType]
     field :matches, [Types::MatchType]
