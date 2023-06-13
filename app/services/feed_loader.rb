@@ -10,7 +10,7 @@ class FeedLoader
 
         user_pool = User.where(current_sign_in_at: 1.month.ago..Date.today)
 
-        if @user.desires_women
+        if @user.desires_women?
             user_pool = user_pool.where(gender: :female)
         else
             user_pool = user_pool.where(gender: :male)
