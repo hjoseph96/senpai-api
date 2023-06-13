@@ -151,6 +151,7 @@ type Mutation {
 
 type Query {
   fetchAnime(params: AnimeInput!): [Anime!]!
+  fetchFeed(page: Int, userId: Int!): [User!]!
 }
 
 """

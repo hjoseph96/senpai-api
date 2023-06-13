@@ -9,5 +9,6 @@ module Types
 
     # TODO: remove me
     field :fetch_anime, resolver: Queries::FetchAnime
+    field :fetch_feed, resolver: Queries::FetchFeed
   end
 end

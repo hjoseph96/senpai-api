@@ -6,4 +6,4 @@ module Types
         argument :likee_id, Integer, required: true
       end
     end
-  end
+end
