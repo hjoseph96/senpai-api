@@ -97,7 +97,7 @@ class AnilistSeeder
 
         attributes = {}
 
-        attributes[:title] = anime['title'].to_json
+        attributes[:title] = anime['title']['english']
         attributes[:year] = anime['seasonYear']
         attributes[:genres] = anime['genres'].to_json
         attributes[:popularity] = anime['popularity']

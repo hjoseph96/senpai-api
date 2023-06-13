@@ -44,7 +44,8 @@ gem 'twilio-ruby'
 gem 'geocoder'
 gem 'rspotify'
 gem 'sidekiq'
-
+gem 'pg_search', '~> 2.3', '>= 2.3.6' 
+gem 'kaminari'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

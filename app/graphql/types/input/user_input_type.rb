@@ -4,4 +4,4 @@ module Types
         argument :phone, String, required: true
       end
     end
-  end
+end

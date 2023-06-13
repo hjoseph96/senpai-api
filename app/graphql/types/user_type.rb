@@ -25,5 +25,6 @@ module Types
 
     def matches
       current_user.matches
+    end
   end
 end
