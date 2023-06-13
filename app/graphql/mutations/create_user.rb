@@ -3,6 +3,7 @@ module Mutations
       argument :params, Types::Input::UserInputType, required: true
   
       field :user, Types::UserType, null: false
+      field :token, String, null: false
   
       def resolve(params:)
         user_params = Hash params
@@ -10,7 +11,7 @@ module Mutations
         begin
           user = User.create!(user_params)
           user.gallery = Gallery.new
-          
+
           verify_token = (SecureRandom.random_number(9e5) + 1e5).to_i
           user.password = token
           user.save

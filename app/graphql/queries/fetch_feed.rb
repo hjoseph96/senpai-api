@@ -4,7 +4,7 @@ module Queries
 
         argument :user_id, Integer, required: true
         argument :page, Integer, required: false
-  
+
         type [Types::UserType], null: false
 
       def resolve(params:)

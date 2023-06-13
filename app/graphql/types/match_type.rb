@@ -7,5 +7,10 @@ module Types
     field :matchee_id, Integer
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+    field :conversation, Types::ConversationType, null: false
+
+    def conversation
+      match.conversation
+    end
   end
 end

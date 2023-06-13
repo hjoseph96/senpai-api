@@ -6,5 +6,6 @@ module Types
     field :add_favorite_anime, mutation: Mutations::AddFavoriteAnime
     field :upload_photo, mutation: Mutations::UploadPhoto
     field :like_user, mutation: Mutations::LikeUser
+    field :send_message, mutation: Mutations::SendMessage
   end
 end

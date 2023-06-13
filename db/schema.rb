@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_13_220605) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_13_220745) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,7 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_13_220605) do
     t.index ["match_id"], name: "index_conversations_on_match_id"
   end
 
-  create_table "galleries", id: :uuid, default: nil, force: :cascade do |t|
+  create_table "galleries", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -94,9 +94,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_13_220605) do
   create_table "messages", force: :cascade do |t|
     t.integer "sender_id"
     t.text "context"
+    t.integer "reaction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["sender_id"], name: "index_messages_on_sender_id"
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.bigint "gallery_id", null: false
+    t.integer "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gallery_id"], name: "index_photos_on_gallery_id"
+    t.index ["order"], name: "index_photos_on_order"
   end
 
   create_table "user_animes", force: :cascade do |t|
@@ -139,6 +149,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_13_220605) do
   add_foreign_key "galleries", "users"
   add_foreign_key "likes", "users"
   add_foreign_key "matches", "users"
+  add_foreign_key "photos", "galleries"
   add_foreign_key "user_likes", "likes"
   add_foreign_key "user_likes", "users"
 end

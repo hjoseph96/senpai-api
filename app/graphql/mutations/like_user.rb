@@ -17,8 +17,9 @@ module Mutations
 
             matched =  false
             if @likee.likes.where(likee_id: @current_user.id).not(like_type: :rejection).count > 0
-                Match.create(user_id: @current_user.id, matchee_id: @likee.id)
-                Match.create(user_id: @likee.id, matchee_id: @current_user.id)
+                match = Match.create(user_id: @current_user.id, matchee_id: @likee.id)
+                conversation = Conversation.create(match_id: match.id)
+
                 matched = true
             end
 
