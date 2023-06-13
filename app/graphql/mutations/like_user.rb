@@ -28,4 +28,4 @@ module Mutations
         end
       end
     end
-  end
+end

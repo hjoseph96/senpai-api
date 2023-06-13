@@ -47,6 +47,7 @@ gem 'sidekiq'
 gem 'pg_search', '~> 2.3', '>= 2.3.6' 
 gem 'kaminari'
 gem 'appsignal'
+gem 'apollo_upload_server', '2.0.1'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

@@ -18,6 +18,7 @@ module Types
 
     field :animes, [Types::AnimeType]
     field :matches, [Types::MatchType]
+    field :gallery, [String]
 
     def animes
       current_user.animes
@@ -25,6 +26,10 @@ module Types
 
     def matches
       current_user.matches
+    end
+
+    def gallery
+      current_user.gallery.map {|img| rails_blob_path(object.image, only_path: true) }
     end
   end
 end

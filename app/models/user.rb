@@ -10,7 +10,8 @@ class User < ApplicationRecord
   has_many :likes, through: :user_likes
   has_and_belongs_to_many :conversations, dependent: :destroy
 
-  has_many_attached :photos
+  has_one :gallery
+  has_many :photos, through: :gallery
 
   enum :gender, [ :male, :female ]
   enum :desired_gender, [ :desires_men, :desires_women ]

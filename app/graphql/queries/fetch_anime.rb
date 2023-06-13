@@ -1,9 +1,9 @@
 module Queries
     class FetchAnime < Queries::BaseQuery
-        graphql_name "FetchAnime"
+      graphql_name "FetchAnime"
 
-        argument :params, Types::Input::AnimeInputType, required: true
-        type [Types::AnimeType], null: false
+      argument :params, Types::Input::AnimeInputType, required: true
+      type [Types::AnimeType], null: false
   
       def resolve(params:)
         anime_params = Hash params
