@@ -43,6 +43,7 @@ gem 'bcrypt'
 gem 'twilio-ruby'
 gem 'geocoder'
 gem 'rspotify'
+gem 'sidekiq'
 
 
 # Use Sass to process CSS

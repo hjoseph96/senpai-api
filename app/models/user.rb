@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :animes, through: :user_animes
   has_many :user_likes, dependent: :destroy
   has_many :likes, through: :user_likes
+  has_and_belongs_to_many :conversations, dependent: :destroy
 
   enum :gender, [ :male, :female ]
   enum :desired_gender, [ :desires_men, :desires_women ]
