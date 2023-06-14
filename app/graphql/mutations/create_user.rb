@@ -13,7 +13,7 @@ module Mutations
           user.gallery = Gallery.new
 
           verify_token = (SecureRandom.random_number(9e5) + 1e5).to_i
-          user.password = token
+          user.password = verify_token
           user.save
 
           twilio_sid = Rails.application.credentials.twilio_sid
