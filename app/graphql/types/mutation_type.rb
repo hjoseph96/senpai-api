@@ -7,5 +7,6 @@ module Types
     field :upload_photo, mutation: Mutations::UploadPhoto
     field :like_user, mutation: Mutations::LikeUser
     field :send_message, mutation: Mutations::SendMessage
+    field :submit_verify_request, mutation: Mutations::SubmitVerifyRequest
   end
 end

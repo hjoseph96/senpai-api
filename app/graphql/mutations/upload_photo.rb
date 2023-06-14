@@ -11,9 +11,10 @@ module Mutations
       field :user, Types::UserType, null: false
   
       def resolve(params:)
-        @current_user = User.find(params[:user_id])
+        upload_params = Hash params
+        @current_user = User.find(upload_params[:user_id])
 
-        file = input[:image]
+        file = upload_params[:image]
         blob = ActiveStorage::Blob.create_and_upload!(
             io: file,
             filename: file.original_filename,

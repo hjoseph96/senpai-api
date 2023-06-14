@@ -28,7 +28,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       # t.datetime :locked_at
 
       t.text :bio, null: false, default: ""
-
+      t.boolean :verified, null: false, default: false
 
       t.timestamps null: false
     end

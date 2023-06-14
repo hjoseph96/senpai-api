@@ -15,6 +15,8 @@ class User < ApplicationRecord
 
   has_many :favorite_music
 
+  has_many :verify_requests
+
   enum :gender, [ :male, :female ]
   enum :desired_gender, [ :desires_men, :desires_women ]
 

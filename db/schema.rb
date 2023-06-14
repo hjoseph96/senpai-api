@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_14_173432) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_14_185943) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -150,9 +150,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_14_173432) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.text "bio", default: "", null: false
+    t.boolean "verified", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["phone"], name: "index_users_on_phone", unique: true
+  end
+
+  create_table "verify_requests", force: :cascade do |t|
+    t.integer "status", default: 0, null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["status"], name: "index_verify_requests_on_status"
+    t.index ["user_id"], name: "index_verify_requests_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -165,4 +175,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_14_173432) do
   add_foreign_key "photos", "galleries"
   add_foreign_key "user_likes", "likes"
   add_foreign_key "user_likes", "users"
+  add_foreign_key "verify_requests", "users"
 end
