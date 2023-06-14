@@ -19,7 +19,6 @@ module Mutations
           twilio_sid = Rails.application.credentials.twilio_sid
           twilio_token = Rails.application.credentials.twilio_token
           @client = Twilio::REST::Client.new(twilio_sid, twilio_token)
-
           @client.messages
             .create(
               body: "Your Senpai verification code: #{verify_token}",
