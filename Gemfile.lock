@@ -71,7 +71,7 @@ GEM
     apollo_upload_server (2.1.5)
       actionpack (>= 6.1.6)
       graphql (>= 1.8)
-    appsignal (3.3.10)
+    appsignal (3.4.4)
       rack
     bcrypt (3.1.18)
     bindex (0.8.1)
@@ -327,7 +327,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 2.7.3p183
+   ruby 3.2.2p53
 
 BUNDLED WITH
-   2.3.25
+   2.4.14
