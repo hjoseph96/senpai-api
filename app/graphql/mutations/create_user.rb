@@ -16,8 +16,8 @@ module Mutations
           user.password = token
           user.save
 
-          twilio_sid = Rails.application.secrets.twilio_sid.to_s
-          twilio_token = Rails.application.secrets.twilio_token.to_s
+          twilio_sid = Rails.application.credentials.twilio_sid
+          twilio_token = Rails.application.credentials.twilio_token
           @client = Twilio::REST::Client.new(twilio_sid, twilio_token)
 
           @client.messages

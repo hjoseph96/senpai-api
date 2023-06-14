@@ -1,5 +1,5 @@
 class FeedLoader
-    def initialize(user_id:)
+    def self.create_feed(user_id:)
         new.create_feed(user_id)
     end
 

@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_one :gallery
   has_many :photos, through: :gallery
 
+  has_many :favorite_music
+
   enum :gender, [ :male, :female ]
   enum :desired_gender, [ :desires_men, :desires_women ]
 
@@ -23,6 +25,10 @@ class User < ApplicationRecord
   end
 
   def email_changed?
+    false
+  end
+
+  def will_save_change_to_email?
     false
   end
 end

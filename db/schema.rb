@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_13_220745) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_14_173432) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -63,6 +63,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_13_220745) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["match_id"], name: "index_conversations_on_match_id"
+  end
+
+  create_table "favorite_musics", force: :cascade do |t|
+    t.integer "music_type"
+    t.string "cover_url"
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["music_type"], name: "index_favorite_musics_on_music_type"
+    t.index ["name"], name: "index_favorite_musics_on_name"
+    t.index ["user_id"], name: "index_favorite_musics_on_user_id"
   end
 
   create_table "galleries", force: :cascade do |t|
@@ -146,6 +158,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_13_220745) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "conversations", "matches"
+  add_foreign_key "favorite_musics", "users"
   add_foreign_key "galleries", "users"
   add_foreign_key "likes", "users"
   add_foreign_key "matches", "users"

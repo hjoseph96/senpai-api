@@ -16,5 +16,10 @@ module Types
     field :end_date, GraphQL::Types::ISO8601DateTime
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+    field :cover, String
+
+    def cover
+      rails_blob_path(anime.cover, only_path: true)
+    end
   end
 end
