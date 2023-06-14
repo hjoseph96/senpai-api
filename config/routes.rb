@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   get '/auth/spotify/callback', to: 'spotify#callback'
   get '/auth/spotify/', to: 'spotify#test'
 
+  root 'hello#hi_senpai'
   devise_for :users
 end

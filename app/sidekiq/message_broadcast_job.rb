@@ -15,4 +15,3 @@ class MessageBroadcastJob
     "ChatRoom-#{id}"
   end
 end
-end
