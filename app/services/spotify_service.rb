@@ -15,7 +15,7 @@ class SpotifyService
 
         return if top_artists.empty?
 
-        top_artists.each do |artist|
+        top_artists[0..4].each do |artist|
             image_url = artist.images[0]['url']
 
             FavoriteMusic.create!(user_id: @user.id, music_type: :artist, cover_url: image_url, name: artist.name)
@@ -27,7 +27,7 @@ class SpotifyService
 
         return if top_tracks.empty?
 
-        top_tracks.each do |song|
+        top_tracks[0..4].each do |song|
             image_url = song.album.images[0]['url']
 
             FavoriteMusic.create!(user_id: @user.id, music_type: :track, cover_url: image_url, name: song.name)
