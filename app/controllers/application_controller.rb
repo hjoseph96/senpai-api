@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  protect_from_forgery with: :null_session
+  
   def not_found
     render json: { error: 'not_found' }
   end
