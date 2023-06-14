@@ -9,7 +9,7 @@ module Mutations
         user_params = Hash params
   
         begin
-          user = User.create!(user_params)
+          user = User.new!(user_params)
           user.gallery = Gallery.new
 
           verify_token = (SecureRandom.random_number(9e5) + 1e5).to_i
