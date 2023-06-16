@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ruby version: 3.2.2
 
-Things you may want to cover:
+## Getting Started
 
-* Ruby version
+`rails db:create db:migrate db:seed`
 
-* System dependencies
+This create a local database and pull the list of anime from the AniList API to seed the `animes` table.
 
-* Configuration
+`rails s`
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Start your server on localhost:3000
