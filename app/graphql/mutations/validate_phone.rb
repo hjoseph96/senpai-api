@@ -4,16 +4,17 @@ module Mutations
       argument :user_id, ID
   
       field :user, Types::UserType, null: false
+      field :token, String, null: false
   
-      def resolve(params:)
+      def resolve(code:, user_id:)
         begin
-          user = User.find(params[:user_id])
+          user = User.find(user_id)
 
-          if user.valid_password?(params[:code])
+          if user.valid_password?(code)
             token = JsonWebToken.encode(user_id: user.id)
             { user: user, token: token }
           else
-            GraphQL::ExecutionError.new("Invalid tokren")
+            GraphQL::ExecutionError.new("Invalid token")
           end
         rescue ActiveRecord::RecordInvalid => e
           GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}: #{e.record.errors.full_messages.join(', ')}")

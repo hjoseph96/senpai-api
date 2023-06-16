@@ -3,7 +3,6 @@ module Mutations
       argument :params, Types::Input::UserInputType, required: true
   
       field :user, Types::UserType, null: false
-      field :token, String, null: false
   
       def resolve(params:)
         user_params = Hash params
@@ -22,12 +21,11 @@ module Mutations
           @client.messages
             .create(
               body: "Your Senpai verification code: #{verify_token}",
-              from: '+22395',
+              from: '+1-(866) 671-1046"              ',
               to: user.phone
             )
 
-          token = JsonWebToken.encode(user_id: @user.id)
-          { user: user, token: token }
+          { user: user }
         rescue ActiveRecord::RecordInvalid => e
           GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}: #{e.record.errors.full_messages.join(', ')}")
         end

@@ -20,11 +20,11 @@ module Types
     field :matches, [Types::MatchType]
 
     def animes
-      current_user.animes
+      object.animes
     end
 
     def matches
-      current_user.matches
+      object.matches
     end
   end
 end

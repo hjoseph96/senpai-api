@@ -10,9 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_14_185943) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_15_235102) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -58,7 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_14_185943) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "conversations", id: :uuid, default: nil, force: :cascade do |t|
+  create_table "conversations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.bigint "match_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -105,10 +107,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_14_185943) do
 
   create_table "messages", force: :cascade do |t|
     t.integer "sender_id"
-    t.text "context"
+    t.text "content"
     t.integer "reaction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "conversation_id", null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
@@ -128,6 +132,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_14_185943) do
     t.datetime "updated_at", null: false
     t.index ["anime_id"], name: "index_user_animes_on_anime_id"
     t.index ["user_id"], name: "index_user_animes_on_user_id"
+  end
+
+  create_table "user_conversations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.uuid "conversation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_user_conversations_on_conversation_id"
+    t.index ["user_id"], name: "index_user_conversations_on_user_id"
   end
 
   create_table "user_likes", force: :cascade do |t|
@@ -172,7 +185,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_14_185943) do
   add_foreign_key "galleries", "users"
   add_foreign_key "likes", "users"
   add_foreign_key "matches", "users"
+  add_foreign_key "messages", "conversations"
   add_foreign_key "photos", "galleries"
+  add_foreign_key "user_conversations", "conversations"
+  add_foreign_key "user_conversations", "users"
   add_foreign_key "user_likes", "likes"
   add_foreign_key "user_likes", "users"
   add_foreign_key "verify_requests", "users"

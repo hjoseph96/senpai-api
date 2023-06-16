@@ -1,5 +1,6 @@
 class Conversation < ApplicationRecord
     has_many :messages, dependent: :destroy
-    has_and_belongs_to_many :users
+    has_many :user_conversations, dependent: :destroy
+    has_many :users, through: :user_conversations
     belongs_to :match
 end

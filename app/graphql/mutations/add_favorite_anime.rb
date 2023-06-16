@@ -9,11 +9,11 @@ module Mutations
   
       field :user, Types::UserType, null: false
   
-      def resolve(params:)
-        @current_user = User.find(params[:user_id])
+      def resolve(user_id:, anime_ids:)
+        @current_user = User.find(user_id)
 
         begin
-            @animes = Anime.where(params[:anime_ids])
+            @animes = Anime.where(id: anime_ids)
             @current_user.animes << @animes
 
             @current_user.save

@@ -1,6 +1,8 @@
 class CreateConversations < ActiveRecord::Migration[7.0]
   def change
-    create_table :conversations, id: :UUID do |t|
+    enable_extension 'pgcrypto'
+
+    create_table :conversations, id: :uuid do |t|
       t.references :match, null: false, foreign_key: true
 
       t.timestamps

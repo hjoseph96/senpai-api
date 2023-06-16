@@ -10,7 +10,7 @@ module Types
     field :conversation, Types::ConversationType, null: false
 
     def conversation
-      match.conversation
+      object.conversation
     end
   end
 end

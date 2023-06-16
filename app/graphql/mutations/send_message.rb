@@ -6,19 +6,23 @@ module Mutations
   
       argument :params, Types::Input::MessageInputType, required: true
 
-      field :message, Types::LikeType, null: false
+      field :message, Types::MessageType, null: false
   
       def resolve(params:)
         @current_user = User.find(params[:sender_id])
 
         begin
-            @message = Message.create!(
-                sender_id: params[:sender_id],
-                content: params[:content],
-                match: params[:match_id]
-                )
+          @conversation = Conversation.where(match_id: params[:match_id])[0]
+          @message = Message.new(
+              sender_id: params[:sender_id],
+              content: params[:content],
+              conversation_id: @conversation.id
+          )
 
-            { message: @message }
+          @conversation.messages << @message
+          @conversation.save!
+
+          { message: @message }
         rescue ActiveRecord::RecordInvalid => e
             GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}: #{e.record.errors.full_messages.join(', ')}")
         end

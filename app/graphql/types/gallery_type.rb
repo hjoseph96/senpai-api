@@ -9,7 +9,7 @@ module Types
     field :gallery, [String], null: false
 
     def gallery
-      gallery.images.order(order: :desc).map {|img| rails_blob_path(img, only_path: true) }
+      object.images.order(order: :desc).map {|img| rails_blob_path(img, only_path: true) }
     end
   end
 end

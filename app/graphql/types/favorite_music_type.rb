@@ -12,7 +12,7 @@ module Types
     field :cover, String
 
     def cover
-      rails_blob_path(favorite_music.cover, only_path: true)
+      rails_blob_path(object.cover, only_path: true)
     end
   end
 end

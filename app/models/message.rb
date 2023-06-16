@@ -6,5 +6,5 @@ class Message < ApplicationRecord
 
     enum :reaction, %w(funny like heart vomit angry demon)
   
-    after_create_commit { MessageBroadcastJob.perform_later(self) }
+    after_create_commit { MessageBroadcastJob.perform_async(self.id) }
 end

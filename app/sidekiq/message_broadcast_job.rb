@@ -1,7 +1,9 @@
 class MessageBroadcastJob
   include Sidekiq::Job
 
-  def perform(message)
+  def perform(message_id)
+    message = Message.find(message_id)
+    
     payload = {
       room_id: message.conversation.id,
       content: message.content,
