@@ -153,7 +153,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2023.0218.1)
     mini_mime (1.1.2)
-    minitest (5.18.0)
+    minitest (5.18.1)
     msgpack (1.7.1)
     multi_xml (0.6.0)
     net-imap (0.3.6)
@@ -168,6 +168,8 @@ GEM
     netrc (0.11.0)
     nio4r (2.5.9)
     nokogiri (1.15.2-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.15.2-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
@@ -291,6 +293,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-22
+  x86_64-linux
 
 DEPENDENCIES
   apollo_upload_server (>= 2.1.0)
