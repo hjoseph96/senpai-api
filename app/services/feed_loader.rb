@@ -1,6 +1,6 @@
 class FeedLoader
     def self.create_feed(user_id:)
-        new.create_feed(user_id)
+        new.create_feed(user_id: user_id)
     end
 
     def create_feed(user_id:)
@@ -8,7 +8,7 @@ class FeedLoader
 
         rejects = @user.likes.where(like_type: :rejection).pluck(:likee_id)
 
-        user_pool = User.where(current_sign_in_at: 1.month.ago..Date.today)
+        user_pool = User.where(current_sign_in_at: 1.month.ago..DateTime.now)
 
         if @user.desires_women?
             user_pool = user_pool.where(gender: :female)
@@ -16,19 +16,20 @@ class FeedLoader
             user_pool = user_pool.where(gender: :male)
         end
 
-        user_location = Geocoder.search(@user.last_sign_in_ip)
+        user_location = Geocoder.search(@user.current_sign_in_ip)[0].data['loc'].split(',')
 
-        order_by_similarity(user_pool)
+        order_by_similarity(user_pool, user_location)
     end
 
     def order_by_similarity(user_pool, user_latlong)
         location_weight = 0.7
 
         ranks = {}
-        user_pool.find_in_batches(start: 1000) do |group|
+        user_pool.find_in_batches do |group|
             group.each do |u|
-                location = Geocoder.search(u.last_sign_in_at)
-                distance = Geocoder.distance_between(user_latlong[0], user_latlong,[1], location[0], location[1])
+                location = Geocoder.search(u.current_sign_in_ip)[0].data['loc'].split(',')
+                distance = Geocoder::Calculations.distance_between(user_latlong, location[0], units: :mi)
+                
                 ranks[u.id] = {
                     distance: distance / location_weight,
                     anime_similarity_score: anime_similarity_score(@user, u)
@@ -36,10 +37,10 @@ class FeedLoader
             end
         end
 
-        feed = ranks.sort_by {|k, v| v[:distance] }.reverse
-        feed = feed.sort_by {|k, v| v[:anime_similarity_score] }
+        feed = ranks.sort_by {|k, v| v[:distance] }.reverse.to_h
+        feed = feed.sort_by {|k, v| v[:anime_similarity_score] }.to_h
 
-        User.where(id: feed.values)
+        User.where(id: feed.keys)
     end
 
     def anime_similarity_score(current_user, potential_match)

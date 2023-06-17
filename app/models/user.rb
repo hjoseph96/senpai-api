@@ -14,8 +14,8 @@ class User < ApplicationRecord
   has_one :gallery, dependent: :destroy
   has_many :photos, through: :gallery
 
+  has_many :matches
   has_many :favorite_music
-
   has_many :verify_requests
 
   enum :gender, [ :male, :female ]
@@ -33,5 +33,15 @@ class User < ApplicationRecord
 
   def will_save_change_to_email?
     false
+  end
+
+  def update_devise_fields!(ip)
+    self.update!(
+      current_sign_in_at: DateTime.now,
+      current_sign_in_ip: ip,
+      sign_in_count: self.sign_in_count + 1,
+      last_sign_in_at: self.current_sign_in_at,
+      last_sign_in_ip: self.current_sign_in_ip
+    )
   end
 end

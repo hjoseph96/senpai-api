@@ -2,6 +2,8 @@
 
 module Types
   class AnimeType < Types::BaseObject
+    include Rails.application.routes.url_helpers
+
     field :id, ID, null: false
     field :title, String
     field :year, Integer
@@ -19,7 +21,7 @@ module Types
     field :cover, String
 
     def cover
-      rails_blob_path(object.cover, only_path: true)
+      Rails.application.routes.url_helpers.rails_blob_path(object.cover_image, only_path: true)
     end
   end
 end

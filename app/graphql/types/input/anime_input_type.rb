@@ -1,7 +1,7 @@
 module Types
     module Input
       class AnimeInputType < Types::BaseInputObject
-        argument :title, String, required: true
+        argument :title, String, required: false
         argument :page, Integer
       end
     end

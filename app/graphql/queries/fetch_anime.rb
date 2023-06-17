@@ -10,9 +10,10 @@ module Queries
 
         page = anime_params[:page] || 1
 
-        results = Anime.search_by_title(params[:title]).order(popularity: :asc).page(page)
+        results = Anime.order(popularity: :desc).page(page)
+        results = Anime.search_by_title(params[:title]).order(popularity: :desc).page(page) if params[:title].present?
 
-        { results: results, page: page }
+        results
       end
     end
   end

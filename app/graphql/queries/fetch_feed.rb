@@ -2,17 +2,17 @@ module Queries
     class FetchFeed < Queries::BaseQuery
         graphql_name "FetchFeed"
 
-        argument :user_id, Integer, required: true
+        argument :user_id, ID, required: true
         argument :page, Integer, required: false
 
         type [Types::UserType], null: false
 
-      def resolve(params:)
-        page = params[:page] || 1
+      def resolve(user_id:, page:)
+        page = page || 1
 
-        results = FeedLoader.create_feed(params[:user_id]).page(page)
+        results = FeedLoader.create_feed(user_id: user_id).page(page)
 
-        { results: results, page: page }
+        results
       end
     end
 end
