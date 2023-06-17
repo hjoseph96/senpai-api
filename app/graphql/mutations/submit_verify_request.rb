@@ -14,7 +14,7 @@ module Mutations
 
         file = verify_params[:image]
         blob = ActiveStorage::Blob.create_and_upload!(
-            io: file,
+            io: file.tempfile,
             filename: file.original_filename,
             content_type: file.content_type
         )

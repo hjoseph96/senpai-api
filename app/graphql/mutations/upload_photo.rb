@@ -5,22 +5,21 @@ module Mutations
       graphql_name "UploadPhoto"
   
       argument :user_id, Integer, required: true
-      argument :image, ApolloUploadServer::Upload, required: true
+      argument :image, ApolloUploadServer::Upload, required: false
       argument :order, Integer, required: true
 
       field :user, Types::UserType, null: false
   
-      def resolve(params:)
-        upload_params = Hash params
-        @current_user = User.find(upload_params[:user_id])
+      def resolve(user_id:, image:, order:)
+        @current_user = User.find(user_id)
 
-        file = upload_params[:image]
+        file = image
         blob = ActiveStorage::Blob.create_and_upload!(
-            io: file,
+            io: file.tempfile,
             filename: file.original_filename,
             content_type: file.content_type
         )
-        photo = Photo.new
+        photo = Photo.new(order: order)
         photo.image.attach(blob)
         @current_user.gallery.photos << photo
 

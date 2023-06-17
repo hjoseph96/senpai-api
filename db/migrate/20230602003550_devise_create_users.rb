@@ -8,6 +8,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.string :encrypted_password, null: false, default: ""
       t.integer :gender
       t.integer :desired_gender
+      t.boolean :premium, null: false, default: false
+      t.boolean :admin, null: false, default: false
 
       # Trackable
       t.integer  :sign_in_count, default: 0, null: false
@@ -34,6 +36,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
     end
 
     add_index :users, :phone,   unique: true
+    add_index :users, :premium
     # add_index :users, :unlock_token,         unique: true
   end
 end

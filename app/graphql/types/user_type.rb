@@ -15,9 +15,11 @@ module Types
     field :gender, Integer
     field :desired_gender, Integer
     field :bio, String
+    field :premium, Boolean, null: false
 
     field :animes, [Types::AnimeType]
     field :matches, [Types::MatchType]
+    field :gallery, Types::GalleryType
 
     def animes
       object.animes
@@ -25,6 +27,10 @@ module Types
 
     def matches
       object.matches
+    end
+
+    def gallery
+      object.gallery
     end
   end
 end

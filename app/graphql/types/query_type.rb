@@ -7,8 +7,8 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    # TODO: remove me
     field :fetch_anime, resolver: Queries::FetchAnime
     field :fetch_feed, resolver: Queries::FetchFeed
+    field :fetch_conversations, resolver: Queries::FetchConversations
   end
 end

@@ -157,6 +157,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_15_235102) do
     t.string "encrypted_password", default: "", null: false
     t.integer "gender"
     t.integer "desired_gender"
+    t.boolean "premium", default: false, null: false
+    t.boolean "admin", default: false, null: false
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
@@ -167,6 +169,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_15_235102) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["phone"], name: "index_users_on_phone", unique: true
+    t.index ["premium"], name: "index_users_on_premium"
   end
 
   create_table "verify_requests", force: :cascade do |t|
