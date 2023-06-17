@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'graphclient'
 
 class AnilistSeeder
   def self.create_animes
