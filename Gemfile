@@ -48,6 +48,7 @@ gem 'pg_search', '~> 2.3', '>= 2.3.6'
 gem 'kaminari'
 gem 'appsignal'
 gem "apollo_upload_server", ">= 2.1.0"
+gem 'graphlient'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
