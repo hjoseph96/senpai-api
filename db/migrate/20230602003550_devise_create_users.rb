@@ -31,6 +31,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
 
       t.text :bio, null: false, default: ""
       t.boolean :verified, null: false, default: false
+      t.string :school, null: false, default: ""
+
 
       t.timestamps null: false
     end

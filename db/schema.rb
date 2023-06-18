@@ -166,6 +166,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_15_235102) do
     t.string "last_sign_in_ip"
     t.text "bio", default: "", null: false
     t.boolean "verified", default: false, null: false
+    t.string "school", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["phone"], name: "index_users_on_phone", unique: true

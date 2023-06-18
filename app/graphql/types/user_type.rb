@@ -20,6 +20,7 @@ module Types
     field :animes, [Types::AnimeType]
     field :matches, [Types::MatchType]
     field :gallery, Types::GalleryType
+    field :favorite_music, [Types::FavoriteMusicType]
 
     def animes
       object.animes
@@ -31,6 +32,10 @@ module Types
 
     def gallery
       object.gallery
+    end
+
+    def favorite_music
+      object.favorite_music
     end
   end
 end
