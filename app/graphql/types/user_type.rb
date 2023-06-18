@@ -16,6 +16,8 @@ module Types
     field :desired_gender, Integer
     field :bio, String
     field :premium, Boolean, null: false
+    field :verified, Boolean, null: false
+    field :admin, Boolean, null: false
 
     field :animes, [Types::AnimeType]
     field :matches, [Types::MatchType]

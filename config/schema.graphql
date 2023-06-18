@@ -373,6 +373,7 @@ type UploadPhotoPayload {
 }
 
 type User {
+  admin: Boolean!
   animes: [Anime!]
   bio: String
   createdAt: ISO8601DateTime!
@@ -391,6 +392,7 @@ type User {
   premium: Boolean!
   signInCount: Int!
   updatedAt: ISO8601DateTime!
+  verified: Boolean!
 }
 
 input UserInput {
