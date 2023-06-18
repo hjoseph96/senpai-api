@@ -49,6 +49,7 @@ gem 'kaminari'
 gem 'appsignal'
 gem "apollo_upload_server", ">= 2.1.0"
 gem 'graphlient'
+gem 'ruby-vips'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
