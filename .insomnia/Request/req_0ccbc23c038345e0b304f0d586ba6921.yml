@@ -1,0 +1,27 @@
+_id: req_0ccbc23c038345e0b304f0d586ba6921
+type: Request
+parentId: fld_cc26cf57b87c40fe99f81617dba4afb4
+modified: 1687118485916
+created: 1686847339378
+url: "{{ _.localUrl }}"
+name: Validate Phone Number
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"mutation validatePhone($input: ValidatePhoneInput!)
+    {\n\tvalidatePhone(input: $input) {\n\t\tuser
+    {\n\t\t\tphone\n\t\t}\n\t\ttoken\n\t}\n}","operationName":"validatePhone","variables":{"input":{"code":305547,"userId":1}}}'
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1687004076064.9688
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

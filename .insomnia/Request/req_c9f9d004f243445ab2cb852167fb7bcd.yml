@@ -1,0 +1,28 @@
+_id: req_c9f9d004f243445ab2cb852167fb7bcd
+type: Request
+parentId: fld_2df360c214e54bfa946e5eba2890e97d
+modified: 1687201824106
+created: 1687201249172
+url: "{{ _.localUrl }}"
+name: Fetch User
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query fetchUser($userId: ID!) {\n\tfetchUser(userId: $userId)
+    {\n\t\tid\n\t\tmatches {\n\t\t\tid\n\t\t\tmatcheeId\n\t\t\tconversation { id
+    }\n\t\t}\n\t\tgallery
+    {\n\t\t\tphotoUrls\n\t\t}\n\t}\n}","operationName":"fetchUser","variables":{"userId":1}}'
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1687201249172
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

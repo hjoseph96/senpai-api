@@ -1,0 +1,27 @@
+_id: req_4ffad704690a40a3ab28bd987f1f3d86
+type: Request
+parentId: fld_cc26cf57b87c40fe99f81617dba4afb4
+modified: 1687118452105
+created: 1686852154735
+url: "{{ _.localUrl }}"
+name: Add Favorite Anime
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"mutation addFavoriteAnime($input: AddFavoriteAnimeInput!)
+    {\n\taddFavoriteAnime(input: $input) {\n\t\tuser {\n\t\t\tanimes
+    {\n\t\t\t\ttitle\n\t\t\t}\n\t\t}\n\t}\n}","operationName":"addFavoriteAnime","variables":{"input":{"userId":1,"animeIds":[5,1,444,555,999]}}}'
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1687004076014.9688
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

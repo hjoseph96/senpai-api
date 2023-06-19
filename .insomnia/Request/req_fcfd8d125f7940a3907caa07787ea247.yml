@@ -1,0 +1,27 @@
+_id: req_fcfd8d125f7940a3907caa07787ea247
+type: Request
+parentId: fld_2df360c214e54bfa946e5eba2890e97d
+modified: 1687118552790
+created: 1687022469398
+url: "{{ _.localUrl }}"
+name: Fetch Conversations
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query fetchConversations($userId: ID!)
+    {\n\tfetchConversations(userId: $userId)
+    {\n\t\tid\n\t\tmatchId\n\t}\n}","operationName":"fetchConversations","variables":{"userId":1}}'
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1687014065019
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

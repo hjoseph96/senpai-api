@@ -1,0 +1,28 @@
+_id: req_d9a24161364b4a89bd276124f72bcb30
+type: Request
+parentId: fld_cc26cf57b87c40fe99f81617dba4afb4
+modified: 1687118512225
+created: 1686866015540
+url: "{{ _.localUrl }}"
+name: Send Message
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"mutation sendMMessage($input: SendMessageInput!)
+    {\n\tsendMessage(input: $input) {\n\t\tmessage
+    {\n\t\t\tcontent\n\t\t\tsenderId\n\t\t\tconversationId\n\t\t\treaction\n\t\t}\n\t}\n}","operationName":"sendMMessage","variables":{"input":{"params":{"content":"wassup
+    baddie","senderId":1,"conversationId":"675449dd-76dc-4f1b-ac63-90e082b2262c","matchId":1}}}}'
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1687004075914.9688
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

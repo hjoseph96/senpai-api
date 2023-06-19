@@ -1,0 +1,27 @@
+_id: req_54eac9b57c4a417d9c97d2e8cefbfda4
+type: Request
+parentId: fld_cc26cf57b87c40fe99f81617dba4afb4
+modified: 1687118474006
+created: 1687018113161
+url: "{{ _.localUrl }}"
+name: Sign In
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"mutation signIn($input: SignInInput!) {\n\tsignIn(input:
+    $input) {\n\t\tuser
+    {\n\t\t\tid\n\t\t\tcurrentSignInAt\n\t\t\tlastSignInAt\n\t\t\tphone\n\t\t}\n\t}\n}","operationName":"signIn","variables":{"input":{"token":"eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3MTg2NDA0ODh9.dCHzdxJH-_wknUb1lWIMT9377sPRxjOrc9ZaMGPR3EA"}}}'
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1687004076039.9688
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

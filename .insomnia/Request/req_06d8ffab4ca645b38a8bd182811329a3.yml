@@ -1,0 +1,27 @@
+_id: req_06d8ffab4ca645b38a8bd182811329a3
+type: Request
+parentId: fld_cc26cf57b87c40fe99f81617dba4afb4
+modified: 1687118461915
+created: 1686860109504
+url: "{{ _.localUrl }}"
+name: Like User
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"mutation likeUser($input: LikeUserInput!) {\n\tlikeUser(input:
+    $input) {\n\t\tlike
+    {\n\t\t\tuserId\n\t\t\tlikeeId\n\t\t\tlikeType\n\t\t}\n\t\tmatched\n\t}\n}\n","operationName":"likeUser","variables":{"input":{"params":{"userId":2,"likeeId":1,"likeType":0}}}}'
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1687004075964.9688
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

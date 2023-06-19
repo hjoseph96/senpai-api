@@ -1,0 +1,29 @@
+_id: req_67d73d2760c743a78d47e1e42bff4c7f
+type: Request
+parentId: fld_2df360c214e54bfa946e5eba2890e97d
+modified: 1687118544609
+created: 1687015304612
+url: "{{ _.localUrl }}"
+name: Fetch Swipe Feed
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query fetchFeed($userId: ID!, $page: Int)
+    {\n\tfetchFeed(userId: $userId, page: $page)
+    {\n\t\tid\n\t\tphone\n\t\tpremium\n\t\tcurrentSignInAt\n\t\tcurrentSignInIp\n\t\tdesiredGender\n\t\tbio\n\t\tgallery
+    {\n\t\t\tphotoUrls\n\t\t}\n\t\tmatches {\n\t\t\tconversation { id
+    }\n\t\t\tmatcheeId\n\t\t\tuserId\n\t\t\tcreatedAt\n\t\t}\n\t}\n}","operationName":"fetchFeed","variables":{"userId":1,"page":0}}'
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1687014065069
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

@@ -1,0 +1,55 @@
+_id: req_d0a3c14e685c48a8972fdc48069ff75f
+type: Request
+parentId: fld_cc26cf57b87c40fe99f81617dba4afb4
+modified: 1687118528991
+created: 1686959633959
+url: "{{ _.localUrl }}"
+name: Submit Verify Request
+description: ""
+method: POST
+body:
+  mimeType: multipart/form-data
+  params:
+    - name: operations
+      value: >-
+        {
+        	"query": "mutation submitVerifyRequest($input: SubmitVerifyRequestInput!) {\n\tsubmitVerifyRequest(input: $input) {\n\t\tuser {\n\t\t\tid\n\t\t\tphone\n\t\t}\n\t}\n}",
+        	"operationName": "submitVerifyRequest",
+        	"variables": {
+        		"input": {
+        			"params": {
+        				"image": null,
+        				"userId": 1
+        			}
+        		}
+        	}
+        }
+      id: pair_8da10ab3f06e449c9892b151bbc2394f
+      type: text
+      multiline: true
+    - id: pair_4538fba231c5475baeb36f2d306ecb43
+      name: map
+      value: '{ "file": ["variables.input.params.image"] }'
+      description: ""
+      type: text
+      multiline: application/json
+    - id: pair_7e7ede4c5069400189c2073460e24c01
+      name: file
+      value: ""
+      description: ""
+      type: file
+      fileName: /private/var/folders/2w/ztbc10fx0nx_r5w6lvn3fdcm0000gn/T/com.apple.Photos.NSItemProvider/version=1&uuid=AD96B6AF-1C5D-4FE1-BD7C-35CD2B13A397&mode=compatible&noloc=0.jpeg/Photo
+        on 6-1-23 at 7.40 PM.jpeg
+parameters: []
+headers:
+  - name: Content-Type
+    value: multipart/form-data
+authentication: {}
+metaSortKey: -1687004075814.9688
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

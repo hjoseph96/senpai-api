@@ -1,0 +1,27 @@
+_id: req_a4a4250a24a341f8a1930ff0e1784a91
+type: Request
+parentId: fld_cc26cf57b87c40fe99f81617dba4afb4
+modified: 1687118497342
+created: 1686777201896
+url: "{{ _.localUrl }}"
+name: Create User
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"mutation createUser($input: CreateUserInput!)
+    {\n\tcreateUser(input: $input) {\n\t\tuser
+    {\n\t\t\tphone\n\t\t\tcreatedAt\n\t\t\tupdatedAt\n\t\t}\n\t}\n}","operationName":"createUser","variables":{"input":{"params":{"phone":"+19179429777"}}}}'
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1687004076114.9688
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

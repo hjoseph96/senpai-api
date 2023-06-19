@@ -1,0 +1,32 @@
+_id: req_f46ef59a56dd4d0f8c641699b7a491eb
+type: Request
+parentId: fld_cc26cf57b87c40fe99f81617dba4afb4
+modified: 1687118442681
+created: 1687113188703
+url: "{{ _.localUrl }}"
+name: Update User
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: "{\"query\":\"mutation updateUser($input: UpdateUserInput!)
+    {\\n\\tupdateUser(input: $input) {\\n\\t\\tuser
+    {\\n\\t\\t\\tid\\n\\t\\t\\tbio\\n\\t\\t\\tgender\\n\\t\\t\\tdesiredGender\\n\
+    \\t\\t\\tphone\\n\\t\\t\\tphone\\n\\t\\t\\tverified\\n\\t\\t\\tadmin\\n\\t\\
+    \t}\\n\\t}\\n}\",\"operationName\":\"updateUser\",\"variables\":{\"input\":{\
+    \"params\":{\"userId\":1,\"admin\":true,\"desiredGender\":0,\"gender\":0,\"\
+    verified\":true,\"bio\":\"I'm just a cool guy\",\"school\":\"Turing
+    School\"}}}}"
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1687004076027.4688
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

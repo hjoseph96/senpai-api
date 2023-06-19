@@ -1,0 +1,16 @@
+_id: env_363729002d37fff6ad08bfae39406abf647027c0
+type: Environment
+parentId: wrk_b6c21e9e020f43a39e17936f0ab2b9f6
+modified: 1687205619414
+created: 1687204950730
+name: Base Environment
+data:
+  localUrl: http://localhost:3000/graphql
+  productionUrl: https://senpai--api-24fa5c16f8f3.herokuapp.com/graphql
+dataPropertyOrder:
+  "&":
+    - localUrl
+    - productionUrl
+color: null
+isPrivate: false
+metaSortKey: 1687204950730

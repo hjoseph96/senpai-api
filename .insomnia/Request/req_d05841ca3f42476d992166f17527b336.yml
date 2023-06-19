@@ -1,0 +1,27 @@
+_id: req_d05841ca3f42476d992166f17527b336
+type: Request
+parentId: fld_cc26cf57b87c40fe99f81617dba4afb4
+modified: 1687118536582
+created: 1686960390110
+url: "{{ _.localUrl }}"
+name: Grant User Premium
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"mutation grantUserPremium($input: GrantUserPremiumInput!)
+    {\n\tgrantUserPremium(input: $input) {\n\t\tuser
+    {\n\t\t\tid\n\t\t\tpremium\n\t\t}\n\t}\n}","operationName":"grantUserPremium","variables":{"input":{"userId":1}}}'
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1687004075764.9688
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

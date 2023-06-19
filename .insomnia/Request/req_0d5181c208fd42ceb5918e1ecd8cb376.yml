@@ -1,0 +1,54 @@
+_id: req_0d5181c208fd42ceb5918e1ecd8cb376
+type: Request
+parentId: fld_cc26cf57b87c40fe99f81617dba4afb4
+modified: 1687118520697
+created: 1686943629242
+url: "{{ _.localUrl }}"
+name: Upload Photo
+description: ""
+method: POST
+body:
+  mimeType: multipart/form-data
+  params:
+    - name: operations
+      value: >-
+        {
+        	"query": "mutation uploadPhoto($input: UploadPhotoInput!) {\n\tuploadPhoto(input: $input) {\n\t\tuser {\n\t\t\tgallery {\n\t\t\t\tphotoUrls\n\t\t\t}\n\t\t}\n\t}\n}",
+        	"operationName": "uploadPhoto",
+        	"variables": {
+        		"input": {
+        			"image": null,
+        			"order": 0,
+        			"userId": 1
+        		}
+        	}
+        }
+      id: pair_bf01543b4d7940e0a29a8c98c3e88120
+      type: text
+      multiline: application/json
+    - id: pair_c7293e5acfee4a8097bb0ceac4dc4b72
+      name: map
+      value: '{  "file": ["variables.input.image"] }'
+      description: ""
+      type: text
+      multiline: application/json
+    - id: pair_93b0167e8e4c44a786620a802481abfb
+      name: file
+      value: ""
+      description: ""
+      type: file
+      fileName: /private/var/folders/2w/ztbc10fx0nx_r5w6lvn3fdcm0000gn/T/com.apple.Photos.NSItemProvider/version=1&uuid=AD96B6AF-1C5D-4FE1-BD7C-35CD2B13A397&mode=compatible&noloc=0.jpeg/Photo
+        on 6-1-23 at 7.40 PM.jpeg
+parameters: []
+headers:
+  - name: Content-Type
+    value: multipart/form-data
+authentication: {}
+metaSortKey: -1687004075864.9688
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

@@ -1,0 +1,27 @@
+_id: req_0aaf6c29f5e54c19bb0c780fbc4ed85c
+type: Request
+parentId: fld_2df360c214e54bfa946e5eba2890e97d
+modified: 1687118560331
+created: 1687014065118
+url: "{{ _.localUrl }}"
+name: Fetch / Search Anime
+description: ""
+method: POST
+body:
+  mimeType: application/graphql
+  text: '{"query":"query fetchAnime($params: AnimeInput!) {\n\tfetchAnime(params:
+    $params)
+    {\n\t\tid\n\t\ttitle\n\t\tgenres\n\t\tcover\n\t\tepisodes\n\t\tpopularity\n\t\taverageScore\n\t\tstartDate\n\t\tendDate\n\t\tstudios\n\t\tyear\n\t\tstatus\n\t}\n}","operationName":"fetchAnime","variables":{"params":{"page":0}}}'
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1687014065119
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
