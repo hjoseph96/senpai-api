@@ -251,6 +251,7 @@ type Query {
   fetchAnime(params: AnimeInput!): [Anime!]!
   fetchConversations(userId: ID!): [Conversation!]!
   fetchFeed(page: Int, userId: ID!): [User!]!
+  fetchUser(userId: ID!): User!
 }
 
 """

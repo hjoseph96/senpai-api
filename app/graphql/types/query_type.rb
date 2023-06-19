@@ -10,5 +10,6 @@ module Types
     field :fetch_anime, resolver: Queries::FetchAnime
     field :fetch_feed, resolver: Queries::FetchFeed
     field :fetch_conversations, resolver: Queries::FetchConversations
+    field :fetch_user, resolver: Queries::FetchUser
   end
 end
