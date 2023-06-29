@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_29_140050) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_29_154505) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -58,6 +58,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_29_140050) do
     t.datetime "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "blocks", force: :cascade do |t|
+    t.integer "blocker_id"
+    t.integer "blockee_id"
+    t.bigint "report_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blockee_id"], name: "index_blocks_on_blockee_id"
+    t.index ["blocker_id"], name: "index_blocks_on_blocker_id"
+    t.index ["report_id"], name: "index_blocks_on_report_id"
   end
 
   create_table "conversations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -136,6 +147,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_29_140050) do
     t.datetime "updated_at", null: false
     t.index ["conversation_id"], name: "index_reports_on_conversation_id"
     t.index ["offense_id"], name: "index_reports_on_offense_id"
+    t.index ["reason"], name: "index_reports_on_reason"
     t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
@@ -198,6 +210,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_29_140050) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "blocks", "reports"
   add_foreign_key "conversations", "matches"
   add_foreign_key "favorite_musics", "users"
   add_foreign_key "galleries", "users"

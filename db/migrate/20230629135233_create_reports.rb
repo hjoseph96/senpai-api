@@ -9,5 +9,6 @@ class CreateReports < ActiveRecord::Migration[7.0]
       t.timestamps
     end
     add_index :reports, :offense_id
+    add_index :reports, :reason
   end
 end
