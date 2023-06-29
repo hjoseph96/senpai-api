@@ -11,5 +11,6 @@ module Types
     field :submit_verify_request, mutation: Mutations::SubmitVerifyRequest
     field :grant_user_premium, mutation: Mutations::GrantUserPremium
     field :reorder_photos, mutation: Mutations::ReorderPhotos
+    field :report_user, mutation: Mutations::ReportUser
   end
 end
