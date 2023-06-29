@@ -7,12 +7,13 @@ module Mutations
       argument :params, Types::Input::LikeInputType, required: true
 
       field :like, Types::LikeType, null: false
-      field :matched, Boolean, null: false
+      field :match, Types::MatchType, null: false
 
       def resolve(params:)
         @current_user = User.find(params[:user_id])
         @likee = User.find(params[:likee_id])
 
+        match = nil
         begin
             @like = Like.create(user_id: @current_user.id, likee_id: params[:likee_id], like_type: params[:like_type])
             UserLike.create(user_id: @current_user.id, like_id: @like.id)
@@ -31,7 +32,7 @@ module Mutations
                 matched = true
             end
 
-            { like: @like, matched: matched }
+            { like: @like, match: match }
         rescue ActiveRecord::RecordInvalid => e
             GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}: #{e.record.errors.full_messages.join(', ')}")
         end
