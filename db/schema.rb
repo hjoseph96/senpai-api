@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_15_235102) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_29_140050) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -64,6 +64,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_15_235102) do
     t.bigint "match_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_conversations_on_deleted_at"
     t.index ["match_id"], name: "index_conversations_on_match_id"
   end
 
@@ -123,6 +125,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_15_235102) do
     t.datetime "updated_at", null: false
     t.index ["gallery_id"], name: "index_photos_on_gallery_id"
     t.index ["order"], name: "index_photos_on_order"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "offense_id"
+    t.integer "reason"
+    t.uuid "conversation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_reports_on_conversation_id"
+    t.index ["offense_id"], name: "index_reports_on_offense_id"
+    t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
   create_table "user_animes", force: :cascade do |t|
@@ -191,6 +205,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_15_235102) do
   add_foreign_key "matches", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "photos", "galleries"
+  add_foreign_key "reports", "conversations"
+  add_foreign_key "reports", "users"
   add_foreign_key "user_conversations", "conversations"
   add_foreign_key "user_conversations", "users"
   add_foreign_key "user_likes", "likes"
