@@ -5,6 +5,7 @@ module Types
     field :sign_in, mutation: Mutations::SignIn
     field :validate_phone, mutation: Mutations::ValidatePhone
     field :add_favorite_anime, mutation: Mutations::AddFavoriteAnime
+    field :rank_favorite_anime, mutation: Mutations::RankFavoriteAnime
     field :upload_photo, mutation: Mutations::UploadPhoto
     field :like_user, mutation: Mutations::LikeUser
     field :send_message, mutation: Mutations::SendMessage
