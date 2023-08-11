@@ -13,5 +13,6 @@ module Types
     field :grant_user_premium, mutation: Mutations::GrantUserPremium
     field :reorder_photos, mutation: Mutations::ReorderPhotos
     field :report_user, mutation: Mutations::ReportUser
+    field :delete_user, mutation: Mutations::DeleteUser
   end
 end
