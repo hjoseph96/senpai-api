@@ -26,7 +26,7 @@ development:
   database: senpai_api_development
 
 
-development:
+staging:
   <<: *default
   database: senpai_api_staging
   # The specified database role being used to connect to postgres.
