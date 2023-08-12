@@ -86,4 +86,3 @@ test:
 production:
   <<: *default
   database: senpai_api_production
-  username: senpai_api
