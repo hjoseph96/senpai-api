@@ -4,6 +4,7 @@ set :repo_url, "https://github.com/hjoseph96/senpai-api.git"
 # at server machine
 set :passenger_restart_with_touch, true
 set :rails_env, :development
+set :linked_files, %w{config/master.key}
 set :puma_threads, [4, 16]
 # Don’t change these unless you know what you’re doing
 set :pty, true
@@ -58,7 +59,7 @@ namespace :deploy do
     end
   end
 
-  before :starting, :check_revision
+#   before :starting, :check_revision
   after :finishing, :compile_assets
   after :finishing, :cleanup
   after :finishing, :restart

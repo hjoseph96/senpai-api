@@ -48,7 +48,6 @@ gem 'pg_search', '~> 2.3', '>= 2.3.6'
 gem 'kaminari'
 gem 'appsignal'
 gem "apollo_upload_server", ">= 2.1.0"
-gem 'graphlient'
 gem 'ruby-vips'
 gem 'acts_as_paranoid'
 gem 'faker'
@@ -77,5 +76,8 @@ group :development do
   gem 'capistrano-rails', '~> 1.2'
   gem 'capistrano-yarn'
   gem 'capistrano3-puma'
+  gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
+  gem 'ed25519'
+  gem 'bcrypt_pbkdf'
 end
 
