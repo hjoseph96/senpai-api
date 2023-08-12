@@ -99,6 +99,8 @@ class AnilistSeeder
         attributes = {}
 
         attributes[:title] = anime['title']['english']
+        next if Anime.exists?(title: attributes[:title])
+        
         attributes[:year] = anime['seasonYear']
         attributes[:genres] = anime['genres']
         attributes[:popularity] = anime['popularity']

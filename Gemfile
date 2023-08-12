@@ -72,5 +72,10 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   gem "spring"
+
+  gem 'capistrano', '~> 3.7'
+  gem 'capistrano-rails', '~> 1.2'
+  gem 'capistrano-yarn'
+  gem 'capistrano3-puma'
 end
 
