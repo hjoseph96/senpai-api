@@ -1,0 +1,4 @@
+destroy_users_job:
+  cron: "0 0 * * *"
+  class: "DestroyUsersJob"
+  queue: destroy_users_job

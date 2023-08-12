@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_29_154505) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_11_200840) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -156,7 +156,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_29_154505) do
     t.integer "anime_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "order"
     t.index ["anime_id"], name: "index_user_animes_on_anime_id"
+    t.index ["order"], name: "index_user_animes_on_order"
     t.index ["user_id"], name: "index_user_animes_on_user_id"
   end
 
@@ -184,7 +186,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_29_154505) do
     t.integer "gender"
     t.integer "desired_gender"
     t.boolean "premium", default: false, null: false
-    t.boolean "admin", default: false, null: false
+    t.string "role", default: "user", null: false
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
@@ -195,6 +197,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_29_154505) do
     t.string "school", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["phone"], name: "index_users_on_phone", unique: true
     t.index ["premium"], name: "index_users_on_premium"
   end

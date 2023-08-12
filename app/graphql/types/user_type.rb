@@ -25,7 +25,7 @@ module Types
     field :favorite_music, [Types::FavoriteMusicType]
 
     def animes
-      object.animes
+      UserAnime.where(user_id: object.id).order(:order).map(&:anime)
     end
 
     def matches
