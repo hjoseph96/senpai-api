@@ -119,10 +119,17 @@ class AnilistSeeder
         tmp_folder = File.dirname(__FILE__), '/tmp_imgs'
         filename = "#{anime['title']['english']}-#{i}"
         cover_dest = "#{tmp_folder.join}/#{anime['title']['english'].gsub(/^.*(\\|\/)/, '').gsub(/[^0-9A-Za-z.\-]/, '_')}-#{i}.png"
-        File.open(cover_dest, 'wb') do |fo|
-          fo.write URI.open(anime['coverImage']['large']).read
+        
+        begin
+          File.open(cover_dest, 'wb') do |fo|
+            fo.write URI.open(anime['coverImage']['large']).read
+          end
+        rescue
+          Anime.destroy_all
+          FileUtils.rm_rf("#{Rails.root}/db/seeds/tmp_imgs/.", secure: true)
+          AnilistSeeder.create_animes
         end
-        cover = File.open(cover_dest)
+          cover = File.open(cover_dest)
         saved_anime.cover_image.attach(io: cover, filename:  filename)
       end
     end

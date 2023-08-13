@@ -76,6 +76,22 @@ GEM
       graphql (>= 1.8)
     appsignal (3.4.10)
       rack
+    aws-eventstream (1.2.0)
+    aws-partitions (1.803.0)
+    aws-sdk-core (3.180.3)
+      aws-eventstream (~> 1, >= 1.0.2)
+      aws-partitions (~> 1, >= 1.651.0)
+      aws-sigv4 (~> 1.5)
+      jmespath (~> 1, >= 1.6.1)
+    aws-sdk-kms (1.71.0)
+      aws-sdk-core (~> 3, >= 3.177.0)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-s3 (1.132.1)
+      aws-sdk-core (~> 3, >= 3.179.0)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.6)
+    aws-sigv4 (1.6.0)
+      aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.19)
     bindex (0.8.1)
     bootsnap (1.16.0)
@@ -137,6 +153,7 @@ GEM
     io-console (0.6.0)
     irb (1.7.4)
       reline (>= 0.3.6)
+    jmespath (1.6.2)
     jwt (2.7.1)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
@@ -321,6 +338,7 @@ DEPENDENCIES
   acts_as_paranoid
   apollo_upload_server (>= 2.1.0)
   appsignal
+  aws-sdk-s3
   bcrypt
   bootsnap
   bullet

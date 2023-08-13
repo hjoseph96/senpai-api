@@ -54,6 +54,7 @@ gem 'acts_as_paranoid'
 gem 'faker'
 gem 'faraday'
 gem 'sidekiq-cron'
+gem 'aws-sdk-s3'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

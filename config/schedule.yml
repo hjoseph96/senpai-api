@@ -2,3 +2,8 @@ destroy_users_job:
   cron: "0 0 * * *"
   class: "DestroyUsersJob"
   queue: destroy_users_job
+
+sync_anime_job:
+  cron: "0 0 * * *"
+  class: "SyncAnimeJob"
+  queue: sync_anime_job
