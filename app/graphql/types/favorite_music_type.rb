@@ -2,6 +2,8 @@
 
 module Types
   class FavoriteMusicType < Types::BaseObject
+    include ApplicationHelper
+
     field :id, ID, null: false
     field :music_type, Integer
     field :cover_url, String
@@ -12,7 +14,7 @@ module Types
     field :cover, String
 
     def cover
-      rails_blob_path(object.cover, only_path: true)
+      cdn_for(object.cover)
     end
   end
 end

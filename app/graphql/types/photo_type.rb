@@ -2,6 +2,8 @@
 
 module Types
   class PhotoType < Types::BaseObject
+    include ApplicationHelper
+    
     field :id, ID, null: false
     field :gallery_id, Integer, null: false
     field :order, Integer
@@ -11,7 +13,7 @@ module Types
     field :url, String, null: false
 
     def url
-      Rails.application.routes.url_helpers.rails_blob_path(object.image)
+      cdn_for(object.image)
     end
   end
 end

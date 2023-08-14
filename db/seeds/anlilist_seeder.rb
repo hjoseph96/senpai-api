@@ -124,10 +124,11 @@ class AnilistSeeder
           File.open(cover_dest, 'wb') do |fo|
             fo.write URI.open(anime['coverImage']['large']).read
           end
-        rescue
+        rescue Errno::ENOENT
           Anime.destroy_all
           FileUtils.rm_rf("#{Rails.root}/db/seeds/tmp_imgs/.", secure: true)
           AnilistSeeder.create_animes
+          break
         end
           cover = File.open(cover_dest)
         saved_anime.cover_image.attach(io: cover, filename:  filename)
