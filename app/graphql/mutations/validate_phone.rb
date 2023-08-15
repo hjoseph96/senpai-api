@@ -11,8 +11,6 @@ module Mutations
           user = User.find(user_id)
 
           if user.valid_password?(code)
-            Rails.cache.write('user_id', user.id)
-
             token = JsonWebToken.encode(user_id: user.id)
             { user: user, token: token }
           else
