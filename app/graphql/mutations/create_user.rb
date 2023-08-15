@@ -6,6 +6,7 @@ module Mutations
   
       def resolve(params:)
         user_params = Hash params
+        user_params[:role] = 'user'
   
         begin
           user = User.new(user_params)
@@ -21,7 +22,7 @@ module Mutations
           @client.messages
             .create(
               body: "Your Senpai verification code: #{verify_token}",
-              from: '+1-(866) 671-1046"              ',
+              from: '+1 (855) 648-7497',
               to: user.phone
             )
 
