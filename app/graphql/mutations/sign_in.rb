@@ -15,7 +15,6 @@ module Mutations
         @current_user = User.find(@decoded[:user_id])
 
         if @current_user.present?
-          context[:current_user] = @current_user
           @current_user.update_devise_fields!(context[:ip])
 
           MutationResult.call(obj: { user: @current_user }, success: true)

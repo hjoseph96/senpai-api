@@ -13,6 +13,8 @@ class ProfileSeeder
     end
 
     def create_females
+        puts 'Seeding women...'
+
         ai_female_gallery_path = "#{Rails.root}/db/seeds/profile_seeds/female"
         Dir.foreach(ai_female_gallery_path) do |filename|
             next if filename == '.' or filename == '..'
@@ -26,7 +28,9 @@ class ProfileSeeder
                 desired_gender: :desires_men,
                 bio: Faker::Lorem.paragraphs,
                 school: Faker::University.name,
-                occupation: Faker::Job.position
+                occupation: Faker::Job.position,
+                current_sign_in_ip: '173.52.91.160',
+                current_sign_in_at: DateTime.now
             )
 
             g = Gallery.create
@@ -46,6 +50,8 @@ class ProfileSeeder
         end
 
         def create_males
+            puts 'Seeding men...'
+
             ai_male_gallery_path = "#{Rails.root}/db/seeds/profile_seeds/male"
             Dir.foreach(ai_male_gallery_path) do |filename|
                 next if filename == '.' or filename == '..'
@@ -59,7 +65,9 @@ class ProfileSeeder
                     desired_gender: :desires_women,
                     bio: Faker::Lorem.paragraphs,
                     school: Faker::University.name,
-                    occupation: Faker::Job.position
+                    occupation: Faker::Job.position,
+                    current_sign_in_ip: '173.52.91.160',
+                    current_sign_in_at: DateTime.now
                 )
 
                 g = Gallery.create
