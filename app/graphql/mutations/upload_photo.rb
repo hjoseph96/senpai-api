@@ -13,11 +13,16 @@ module Mutations
       def resolve(user_id:, image:, order:)
         @current_user = User.find(user_id)
 
+        if @current_user.gallery.nil?
+          g = Galley.create
+          @current_user.gallery = g
+          @current_user.save!
+        end
+
         file = image
         blob = ActiveStorage::Blob.create_and_upload!(
             io: file.tempfile,
-            filename: file.original_filename,
-            content_type: file.content_type
+            filename: file.original_filename
         )
         photo = Photo.new(order: order)
         photo.image.attach(blob)
