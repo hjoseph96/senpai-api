@@ -19,6 +19,8 @@ module Mutations
               conversation_id: @conversation.id
           )
 
+          @message.attachment = params[:attachment] if params[:attachment].present?
+
           @conversation.messages << @message
           @conversation.save!
 

@@ -4,6 +4,8 @@ class Message < ApplicationRecord
   
     validates_presence_of :content
 
+    has_one_attached :attachment
+
     enum :reaction, %w(funny like heart vomit angry demon)
   
     after_create_commit { MessageBroadcastJob.perform_async(self.id) }

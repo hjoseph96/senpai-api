@@ -1,5 +1,6 @@
 class MessageBroadcastJob
   include Sidekiq::Job
+  include ApplicationHelper
 
   def perform(message_id)
     message = Message.find(message_id)
@@ -10,6 +11,9 @@ class MessageBroadcastJob
       sender: message.sender,
       participants: message.conversation.users.pluck(:id)
     }
+
+    payload.merge({attachment: cdn_for(message.attachment)}) if message.attachment.present?
+    
     ActionCable.server.broadcast(build_room_id(message.conversation.id), payload)
   end
   

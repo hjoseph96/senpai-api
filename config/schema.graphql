@@ -190,6 +190,7 @@ type Match {
 }
 
 type Message {
+  attachment: String!
   content: String
   conversationId: String
   createdAt: ISO8601DateTime!
@@ -200,6 +201,7 @@ type Message {
 }
 
 input MessageInput {
+  attachment: Upload
   content: String!
   conversationId: String!
   matchId: Int!
@@ -563,9 +565,11 @@ input UserInput {
 
 input UserUpdateInput {
   admin: Boolean
-  bio: String
-  desiredGender: Int
-  gender: Int
+  bio: String!
+  desiredGender: Int!
+  firstName: String!
+  gender: Int!
+  occupation: String
   phone: String
   school: String
   userId: ID!
