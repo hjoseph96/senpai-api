@@ -537,23 +537,28 @@ type UploadPhotoPayload {
 }
 
 type User {
-  admin: Boolean!
   animes: [Anime!]
   bio: String
   createdAt: ISO8601DateTime!
   currentSignInAt: ISO8601DateTime
   currentSignInIp: String
   desiredGender: Int
+  displayCity: String
+  displayState: String
   encryptedPassword: String!
   favoriteMusic: [FavoriteMusic!]
+  firstName: String!
   gallery: Gallery
   gender: Int
   id: ID!
   lastSignInAt: ISO8601DateTime
   lastSignInIp: String
   matches: [Match!]
+  occupation: String
   phone: String!
   premium: Boolean!
+  role: String!
+  school: String
   signInCount: Int!
   updatedAt: ISO8601DateTime!
   verified: Boolean!
@@ -567,6 +572,8 @@ input UserUpdateInput {
   admin: Boolean
   bio: String!
   desiredGender: Int!
+  displayCity: String
+  displayState: String
   firstName: String!
   gender: Int!
   occupation: String
