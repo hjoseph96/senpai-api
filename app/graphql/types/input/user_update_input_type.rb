@@ -11,6 +11,8 @@ module Types
         argument :verified, Boolean, required: false
         argument :school, String, required: false
         argument :occupation, String, required: false
+        argument :display_city, String, required: false
+        argument :display_state, String, required: false
       end
     end
 end

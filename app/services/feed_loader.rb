@@ -50,6 +50,8 @@ class FeedLoader
         match_genre_list = potential_match.animes.pluck(:genres).flatten.uniq
         same_genre_score = (user_genre_list & match_genre_list).count * 0.4
 
-        same_genre_score + same_taste_score
+        score = same_genre_score + same_taste_score
+        
+        score *= 1.5 if potential_match.premium?
     end
 end

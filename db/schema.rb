@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_15_212610) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_16_214036) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -201,6 +201,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_15_212610) do
     t.string "spotify_email"
     t.string "first_name"
     t.string "occupation"
+    t.string "display_city"
+    t.string "display_state"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["phone"], name: "index_users_on_phone", unique: true
     t.index ["premium"], name: "index_users_on_premium"

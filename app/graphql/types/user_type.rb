@@ -4,6 +4,7 @@ module Types
   class UserType < Types::BaseObject
     field :id, ID, null: false
     field :phone, String, null: false
+    field :first_name, String, null: false
     field :encrypted_password, String, null: false
     field :sign_in_count, Integer, null: false
     field :current_sign_in_at, GraphQL::Types::ISO8601DateTime
@@ -15,9 +16,13 @@ module Types
     field :gender, Integer
     field :desired_gender, Integer
     field :bio, String
+    field :school, String
+    field :occupation, String
     field :premium, Boolean, null: false
     field :verified, Boolean, null: false
-    field :admin, Boolean, null: false
+    field :role, String, null: false
+    field :display_city, String
+    field :display_state, String
 
     field :animes, [Types::AnimeType]
     field :matches, [Types::MatchType]
