@@ -28,7 +28,7 @@ class FeedLoader
         user_pool.find_in_batches do |group|
             group.each do |u|
                 location = Geocoder.search(u.current_sign_in_ip)[0].data['loc'].split(',')
-                distance = Geocoder::Calculations.distance_between(user_latlong, location[0], units: :mi)
+                distance = Geocoder::Calculations.distance_between(user_latlong, location, units: :mi)
                 
                 ranks[u.id] = {
                     distance: distance / location_weight,
@@ -51,7 +51,7 @@ class FeedLoader
         same_genre_score = (user_genre_list & match_genre_list).count * 0.4
 
         score = same_genre_score + same_taste_score
-        
+
         score *= 1.5 if potential_match.premium?
     end
 end

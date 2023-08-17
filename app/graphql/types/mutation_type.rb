@@ -15,5 +15,6 @@ module Types
     field :reorder_photos, mutation: Mutations::ReorderPhotos
     field :report_user, mutation: Mutations::ReportUser
     field :delete_user, mutation: Mutations::DeleteUser
+    field :get_distance_between_users, mutation: Mutations::GetDistanceBetweenUsers
   end
 end
