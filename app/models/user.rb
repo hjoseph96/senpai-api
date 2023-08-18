@@ -66,7 +66,7 @@ class User < ApplicationRecord
 
   def appear(on: nil)
     online!
-    on.nil? ? self.touch(:updated_at) self.update(updated_at: on)
+    on.nil? ? self.touch(:updated_at) : self.update(updated_at: on)
   end
 
   def disappear

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_18_120122) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_18_200738) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -125,6 +125,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_18_120122) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "conversation_id", null: false
+    t.integer "sticker_id"
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
@@ -149,6 +150,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_18_120122) do
     t.index ["offense_id"], name: "index_reports_on_offense_id"
     t.index ["reason"], name: "index_reports_on_reason"
     t.index ["user_id"], name: "index_reports_on_user_id"
+  end
+
+  create_table "stickers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "user_animes", force: :cascade do |t|
