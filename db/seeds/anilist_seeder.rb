@@ -94,12 +94,14 @@ class AnilistSeeder
       anime_data.each do |anime|
         next unless anime['title']['english'].present?
 
-        puts "Page #{page}: Creating #{anime['title']['english']}... \n"
 
         attributes = {}
 
         attributes[:title] = anime['title']['english']
         next if Anime.exists?(title: attributes[:title])
+
+        puts "Page #{page}: Creating #{anime['title']['english']}... \n"
+
         
         attributes[:year] = anime['seasonYear']
         attributes[:genres] = anime['genres']
