@@ -6,5 +6,11 @@ module Types
     field :match_id, Integer, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+
+    field :messages, [Types::MessageType]
+
+    def messages
+      object.messages.order(created_at: :desc)
+    end
   end
 end

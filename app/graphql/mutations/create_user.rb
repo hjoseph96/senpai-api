@@ -6,7 +6,7 @@ module Mutations
   
       def resolve(params:)
         user_params = Hash params
-        user_params[:role] = 'user'
+        user_params[:role] = :user
   
         begin
           user = User.new(user_params)
