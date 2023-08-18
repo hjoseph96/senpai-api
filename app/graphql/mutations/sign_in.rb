@@ -16,6 +16,7 @@ module Mutations
 
         if @current_user.present?
           @current_user.update_devise_fields!(context[:ip])
+          @current_user.appear
 
           MutationResult.call(obj: { user: @current_user }, success: true)
         else

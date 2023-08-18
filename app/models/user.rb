@@ -22,6 +22,7 @@ class User < ApplicationRecord
   has_many :reports
   has_many :blocks, foreign_key: :blocker_id
 
+  enum :online_status, [ :online, :offline ]
   enum :role, [ :user, :mod, :admin ]
   enum :gender, [ :male, :female ]
   enum :desired_gender, [ :desires_men, :desires_women ]
@@ -61,5 +62,14 @@ class User < ApplicationRecord
       last_sign_in_at: self.current_sign_in_at,
       last_sign_in_ip: self.current_sign_in_ip
     )
+  end
+
+  def appear(on: nil)
+    online!
+    on.nil? ? self.touch(:updated_at) self.update(updated_at: on)
+  end
+
+  def disappear
+    offline!
   end
 end

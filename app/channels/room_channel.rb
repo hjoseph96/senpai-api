@@ -16,7 +16,7 @@ class ApplicationCable::RoomChannel < ApplicationCable::Channel
     
     # calls when a client broadcasts data
     def speak(data)
-      sender    = User.find(data['user_id'])
+      sender    = current_user
       room_id   = data['room_id']
       message   = data['message']
   

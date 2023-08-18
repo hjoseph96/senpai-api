@@ -19,7 +19,14 @@ module Mutations
               conversation_id: @conversation.id
           )
 
-          @message.attachment = params[:attachment] if params[:attachment].present?
+          if params[:attachment].present?
+            file = params[:attachment]
+            blob = ActiveStorage::Blob.create_and_upload!(
+                io: file.tempfile,
+                filename: file.original_filename
+            )
+            @message.attachment.attach(blob)
+          end
 
           @conversation.messages << @message
           @conversation.save!
