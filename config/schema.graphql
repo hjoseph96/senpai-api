@@ -221,6 +221,7 @@ type Message {
   id: ID!
   reaction: Int
   senderId: Int
+  sticker: String!
   updatedAt: ISO8601DateTime!
 }
 
@@ -230,6 +231,7 @@ input MessageInput {
   conversationId: String!
   matchId: Int!
   senderId: Int!
+  stickerId: Int
 }
 
 type Mutation {
@@ -644,6 +646,7 @@ type User {
   lastSignInIp: String
   matches: [Match!]
   occupation: String
+  onlineStatus: Int
   phone: String!
   premium: Boolean!
   role: String!
