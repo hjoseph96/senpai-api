@@ -9,6 +9,7 @@ module Types
     field :rank_favorite_anime, mutation: Mutations::RankFavoriteAnime
     field :upload_photo, mutation: Mutations::UploadPhoto
     field :like_user, mutation: Mutations::LikeUser
+    field :undo_like, mutation: Mutations::UndoLike
     field :send_message, mutation: Mutations::SendMessage
     field :submit_verify_request, mutation: Mutations::SubmitVerifyRequest
     field :grant_user_premium, mutation: Mutations::GrantUserPremium

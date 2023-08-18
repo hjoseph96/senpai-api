@@ -9,7 +9,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.integer :gender
       t.integer :desired_gender
       t.boolean :premium, null: false, default: false
-      t.string :role, null: false, default: 'user'
+      t.integer :role, null: false, default: 0
 
       # Trackable
       t.integer  :sign_in_count, default: 0, null: false

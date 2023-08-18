@@ -27,6 +27,13 @@ class User < ApplicationRecord
   enum :desired_gender, [ :desires_men, :desires_women ]
 
   validates :phone, presence: true, uniqueness: true
+  validate :validate_age
+
+  def validate_age
+    if birthday.present? && birthday > 18.years.ago.to_d
+      errors.add(:birthday, 'You should be over 18 years old.')
+    end
+  end
 
   def email_required?
     false
@@ -38,6 +45,12 @@ class User < ApplicationRecord
 
   def will_save_change_to_email?
     false
+  end
+
+  def current_sign_in_ip
+    ip = read_attribute(:current_sign_in_ip)
+
+    ip == '127.0.0.1' ? '173.52.91.160' : ip
   end
 
   def update_devise_fields!(ip)
