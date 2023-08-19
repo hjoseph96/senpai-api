@@ -1,4 +1,4 @@
-class ApplicationCable::RoomChannel < ApplicationCable::Channel
+class RoomChannel < ApplicationCable::Channel
     # calls when a client connects to the server
     def subscribed
       if params[:room_id].present?
