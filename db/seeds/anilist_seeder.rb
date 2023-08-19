@@ -132,6 +132,7 @@ class AnilistSeeder
     end
 
     FileUtils.rm_rf("#{Rails.root}/db/seeds/tmp_imgs/.", secure: true)
+    FileUtils.touch("#{Rails.root}/db/seeds/tmp_imgs/.keep")
   end
 
   def extract_studios(data)
