@@ -7,7 +7,7 @@ module Mutations
       argument :params, Types::Input::LikeInputType, required: true
 
       field :like, Types::LikeType, null: false
-      field :match, Types::MatchType, null: false
+      field :match, Types::MatchType
 
       def resolve(params:)
         @current_user = User.find(params[:user_id])

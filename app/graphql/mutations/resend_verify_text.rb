@@ -21,7 +21,7 @@ module Mutations
         .create(
             body: "Your Senpai verification code: #{verify_token}",
             from: '+1 (855) 648-7497',
-            to: user.phone
+            to: @user.phone
         )
 
         { user: @user }

@@ -8,8 +8,8 @@ module Queries
       def resolve(page:)
         p = page || 1
 
-        results = Sticker.all.page(p).per(30)
-
+        results = Sticker.all.order(created_at: :desc).page(p).per(30)
+        
         results
       end
     end

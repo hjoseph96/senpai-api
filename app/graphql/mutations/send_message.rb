@@ -12,7 +12,7 @@ module Mutations
         @current_user = User.find(params[:sender_id])
 
         begin
-          @conversation = Conversation.where(match_id: params[:match_id])[0]
+          @conversation = Conversation.find(params[:conversation_id])
           @message = Message.new(
               sender_id: params[:sender_id],
               content: params[:content],
@@ -26,6 +26,10 @@ module Mutations
                 filename: file.original_filename
             )
             @message.attachment.attach(blob)
+          end
+
+          if params[:sticker_id].present?
+            @message.sticker = Sticker.find(params[:sticker_id])
           end
 
           @conversation.messages << @message
