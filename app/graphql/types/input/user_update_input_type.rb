@@ -5,6 +5,7 @@ module Types
         argument :first_name, String, required: false
         argument :birthday, GraphQL::Types::ISO8601DateTime, required: false
         argument :bio, String, required: true
+        argument :lonlat, String, required: true
         argument :phone, String, required: false
         argument :gender, Integer, required: false
         argument :desired_gender, Integer, required: false

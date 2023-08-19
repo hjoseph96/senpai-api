@@ -1,27 +1,37 @@
 class FeedLoader
-    def self.create_feed(user_id:)
-        new.create_feed(user_id: user_id)
+    def self.create_feed(user_id:, distance_in_miles: 40)
+        new.create_feed(user_id: user_id, distance_in_miles: distance_in_miles)
     end
 
-    def create_feed(user_id:)
+    def create_feed(user_id:, distance_in_miles:)
         @user = User.find(user_id)
+        @miles = distance_in_miles
 
         rejects = @user.likes.where(like_type: :rejection).pluck(:likee_id)
 
-        user_pool = User.where(current_sign_in_at: 1.month.ago..DateTime.now)
+        pool = User.within(@user.lonlat.latitude, @user.lonlat.longitude, 40)
+                        .where(current_sign_in_at: 1.month.ago..DateTime.now)
 
         if @user.desires_women?
-            user_pool = user_pool.where(gender: :female)
+            pool = pool.where(gender: :female)
         else
-            user_pool = user_pool.where(gender: :male)
+            pool = pool.where(gender: :male)
         end
 
-        user_location = Geocoder.search(@user.current_sign_in_ip)[0].data['loc'].split(',')
+        user_pool =  randomize_users(pool)
 
-        order_by_similarity(user_pool, user_location)
+        order_by_similarity(user_pool)
     end
 
-    def order_by_similarity(user_pool, user_latlong)
+    def randomize_users(pool)
+        user_pool = []
+
+        50.times { user_pool << pool.sample }
+
+        User.where(id: user_pool.map(&:id))
+    end
+
+    def order_by_similarity(user_pool)
         location_weight = 0.7
 
         ranks = {}
@@ -29,12 +39,11 @@ class FeedLoader
             group.each do |u|
                 next if @user.has_liked?(u) || @user.matched_with?(u)
                 
-                location = Geocoder.search(u.current_sign_in_ip)[0].data['loc'].split(',')
-                distance = Geocoder::Calculations.distance_between(user_latlong, location, units: :mi)
+                distance = calculate_distance(u)
                 
                 ranks[u.id] = {
                     distance: distance / location_weight,
-                    anime_similarity_score: anime_similarity_score(@user, u)
+                    anime_similarity_score: anime_similarity_score(u)
                 }
             end
         end
@@ -45,10 +54,18 @@ class FeedLoader
         User.where(id: feed.keys)
     end
 
-    def anime_similarity_score(current_user, potential_match)
-        same_taste_score = (current_user.anime_ids & potential_match.anime_ids).count * 0.7
+    def calculate_distance(other_user)
+        p1 = RGeo::Geographic.spherical_factory.point(@user.lonlat.longitude, @user.lonlat.latitude)
 
-        user_genre_list = current_user.animes.pluck(:genres).flatten.uniq
+        p2 = RGeo::Geographic.spherical_factory.point(other_user.lonlat.longitude, other_user.lonlat.latitude)
+
+        p1.distance(p2) / 1609.34
+    end
+
+    def anime_similarity_score(potential_match)
+        same_taste_score = (@user.anime_ids & potential_match.anime_ids).count * 0.7
+
+        user_genre_list = @user.animes.pluck(:genres).flatten.uniq
         match_genre_list = potential_match.animes.pluck(:genres).flatten.uniq
         same_genre_score = (user_genre_list & match_genre_list).count * 0.4
 

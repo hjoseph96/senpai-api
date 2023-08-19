@@ -17,6 +17,7 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :gender, Integer
     field :desired_gender, Integer
+    field :lonlat, String
     field :bio, String
     field :school, String
     field :occupation, String

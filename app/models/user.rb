@@ -27,6 +27,13 @@ class User < ApplicationRecord
   enum :gender, [ :male, :female ]
   enum :desired_gender, [ :desires_men, :desires_women ]
 
+  scope :within, -> (latitude, longitude, distance_in_mile = 1) {
+    where(%{
+     ST_Distance(lonlat, 'POINT(%f %f)') < %d
+    } % [longitude, latitude, distance_in_mile * 1609.34]) # approx
+  }
+
+
   validates :phone, presence: true, uniqueness: true
   validate :validate_age
 

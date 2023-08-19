@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_18_200738) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_19_142824) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+  enable_extension "postgis"
   enable_extension "uuid-ossp"
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -211,6 +212,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_18_200738) do
     t.string "display_state"
     t.datetime "birthday"
     t.integer "online_status", default: 1
+    t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
     t.index ["birthday"], name: "index_users_on_birthday"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["online_status"], name: "index_users_on_online_status"
