@@ -221,7 +221,7 @@ type Message {
   id: ID!
   reaction: Int
   senderId: Int
-  sticker: String!
+  sticker: Sticker!
   updatedAt: ISO8601DateTime!
 }
 
@@ -358,6 +358,7 @@ type Query {
   fetchAnime(params: AnimeInput!): [Anime!]!
   fetchConversations(userId: ID!): [Conversation!]!
   fetchFeed(page: Int, userId: ID!): [User!]!
+  fetchStickers(page: Int): [Sticker!]!
   fetchUser(userId: ID!): User!
 }
 
@@ -526,6 +527,13 @@ type SignInPayload {
   """
   clientMutationId: String
   user: User!
+}
+
+type Sticker {
+  createdAt: ISO8601DateTime!
+  id: ID!
+  updatedAt: ISO8601DateTime!
+  url: String!
 }
 
 """

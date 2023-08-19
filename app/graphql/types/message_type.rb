@@ -11,14 +11,14 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
     field :attachment, String, null: false
-    field :sticker, String, null: false
+    field :sticker, Types::StickerType, null: false
 
     def attachment
       cdn_for(object.attachment)
     end
 
     def sticker
-      cdn_for(object.sticker)
+      object.sticker
     end
   end
 end

@@ -210,7 +210,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_18_200738) do
     t.string "display_city"
     t.string "display_state"
     t.datetime "birthday"
-    t.integer "online_status"
+    t.integer "online_status", default: 1
     t.index ["birthday"], name: "index_users_on_birthday"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["online_status"], name: "index_users_on_online_status"
