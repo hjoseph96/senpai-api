@@ -4,15 +4,15 @@ module Mutations
     class UndoLike < Mutations::BaseMutation
       graphql_name "UndoLike"
   
-      argument :user_id, Integer, required: true
+      argument :user_id, ID, required: true
 
       field :status, String, null: false
       field :undid_user, Types::UserType
 
-      def resolve(params:)
-        @current_user = User.find(params[:user_id])
+      def resolve(user_id:)
+        @current_user = User.find(user_id)
 
-        @like = current_user.likes.last
+        @like = @current_user.likes.last
 
         return { status: 'failed' } unless @like.present?
         @likee = User.find(@like.likee_id)
