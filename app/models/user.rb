@@ -72,4 +72,12 @@ class User < ApplicationRecord
   def disappear
     offline!
   end
+
+  def has_liked?(user)
+    self.likes.where(likee_id: user.id).present?
+  end
+
+  def matched_with?(user)
+    self.matches.where(matchee_id: user.id).count > 0
+  end
 end

@@ -27,6 +27,8 @@ class FeedLoader
         ranks = {}
         user_pool.find_in_batches do |group|
             group.each do |u|
+                next if @user.has_liked?(u) || @user.matched_with?(u)
+                
                 location = Geocoder.search(u.current_sign_in_ip)[0].data['loc'].split(',')
                 distance = Geocoder::Calculations.distance_between(user_latlong, location, units: :mi)
                 

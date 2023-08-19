@@ -32,6 +32,11 @@ module Mutations
                 matched = true
             end
 
+            feed = Rails.cache.read("#{@current_user.id}-FEED")
+            feed.delete params[:likee_id]
+            Rails.cache.write("#{@current_user.id}-FEED", feed)
+
+
             { like: @like, match: match }
         rescue ActiveRecord::RecordInvalid => e
             GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}: #{e.record.errors.full_messages.join(', ')}")
