@@ -5,7 +5,7 @@ module Types
     field :id, ID, null: false
     field :phone, String, null: false
     field :first_name, String, null: false
-    field :birthday, GraphQL::Types::ISO8601DateTime, null: false
+    field :birthday, GraphQL::Types::ISO8601DateTime
     field :encrypted_password, String, null: false
     field :sign_in_count, Integer, null: false
     field :current_sign_in_at, GraphQL::Types::ISO8601DateTime
