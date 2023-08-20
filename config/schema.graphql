@@ -201,7 +201,7 @@ type LikeUserPayload {
   """
   clientMutationId: String
   like: Like!
-  match: Match!
+  match: Match
 }
 
 type Match {
@@ -229,7 +229,6 @@ input MessageInput {
   attachment: Upload
   content: String!
   conversationId: String!
-  matchId: Int!
   senderId: Int!
   stickerId: Int
 }
@@ -356,8 +355,8 @@ type Photo {
 
 type Query {
   fetchAnime(params: AnimeInput!): [Anime!]!
-  fetchConversations(userId: ID!): [Conversation!]!
-  fetchFeed(page: Int, userId: ID!): [User!]!
+  fetchConversations(page: Int, userId: ID!): [Conversation!]!
+  fetchFeed(milesAway: Int!, page: Int, userId: ID!): [User!]!
   fetchStickers(page: Int): [Sticker!]!
   fetchUser(userId: ID!): User!
 }
@@ -571,7 +570,7 @@ input UndoLikeInput {
   A unique identifier for the client performing the mutation.
   """
   clientMutationId: String
-  userId: Int!
+  userId: ID!
 }
 
 """
@@ -637,7 +636,7 @@ type UploadPhotoPayload {
 type User {
   animes: [Anime!]
   bio: String
-  birthday: ISO8601DateTime!
+  birthday: ISO8601DateTime
   createdAt: ISO8601DateTime!
   currentSignInAt: ISO8601DateTime
   currentSignInIp: String
@@ -652,6 +651,7 @@ type User {
   id: ID!
   lastSignInAt: ISO8601DateTime
   lastSignInIp: String
+  lonlat: String
   matches: [Match!]
   occupation: String
   onlineStatus: Int
@@ -677,6 +677,7 @@ input UserUpdateInput {
   displayState: String
   firstName: String
   gender: Int
+  lonlat: String!
   occupation: String
   phone: String
   school: String

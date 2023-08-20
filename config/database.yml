@@ -29,7 +29,9 @@ development:
 staging:
   <<: *default
   database: senpai_api_staging
-  url: <%= ENV['DATABASE_URL'].sub(/^postgres/, "postgis") %>
+  <% if ENV['DATABASE_URL'].present? %>
+    url: <%= ENV['DATABASE_URL'].sub(/^postgres/, "postgis") %>
+  <% end %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -88,5 +90,7 @@ test:
 production:
   <<: *default
   database: senpai_api_production
-  url: <%= ENV['DATABASE_URL'].sub(/^postgres/, "postgis") %>
+  <% if ENV['DATABASE_URL'].present? %>
+    url: <%= ENV['DATABASE_URL'].sub(/^postgres/, "postgis") %>
+  <% end %>
 
