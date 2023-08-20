@@ -11,6 +11,7 @@ module Mutations
       def resolve(params:)
         update_params = Hash params
 
+        binding.pry
         @current_user = User.find(update_params[:user_id])
 
         begin

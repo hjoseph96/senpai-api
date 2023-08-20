@@ -8,6 +8,7 @@ module Types
     field :add_favorite_anime, mutation: Mutations::AddFavoriteAnime
     field :rank_favorite_anime, mutation: Mutations::RankFavoriteAnime
     field :set_spotify_email, mutation: Mutations::SetSpotifyEmail
+    field :set_user_location, mutation: Mutations::SetUserLocation
     field :submit_verify_request, mutation: Mutations::SubmitVerifyRequest
     field :upload_photo, mutation: Mutations::UploadPhoto
     field :reorder_photos, mutation: Mutations::ReorderPhotos

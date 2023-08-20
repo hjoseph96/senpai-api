@@ -3,12 +3,16 @@ module Mutations
       argument :user_id, Integer, required: true
       argument :email, String, required: true
   
-      field :updated, Boolean, null: false
+      field :user, Types::UserType, null: false
   
       def resolve(user_id:, email:)
         @user = User.find(user_id)
  
-        { updated: @user.update(spotify_email: email) }
+        if @user.update(spotify_email: email)
+          { user: @user }
+        else
+          GraphQL::ExecutionError.new("Update failed: #{@user.errors.join(', ')}")
+        end
       end
     end
   end

@@ -7,6 +7,7 @@ Geocoder.configure(
       api_key: {
         access_key_id: Rails.application.credentials.aws_access_token,
         secret_access_key: Rails.application.credentials.aws_secret,
-      }
+        region: 'us-east-2'
+      },
     }
   )

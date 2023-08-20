@@ -26,7 +26,7 @@ class ProfileSeeder
                 role: :user,
                 gender: :female,
                 desired_gender: :desires_men,
-                lonlat: "#{-73.744070}, #{40.720430}",
+                lonlat: "POINT(#{-73.744070} #{40.720430})",
                 bio: Faker::Lorem.paragraphs,
                 school: Faker::University.name,
                 occupation: Faker::Job.position,
@@ -70,7 +70,7 @@ class ProfileSeeder
                 bio: Faker::Lorem.paragraphs,
                 school: Faker::University.name,
                 occupation: Faker::Job.position,
-                lonlat: "#{-73.744070}, #{40.720430}",
+                lonlat: "POINT(#{-73.744070} #{40.720430})",
                 current_sign_in_ip: '173.52.91.160',
                 current_sign_in_at: DateTime.now
             )

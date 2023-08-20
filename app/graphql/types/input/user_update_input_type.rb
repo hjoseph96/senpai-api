@@ -5,16 +5,12 @@ module Types
         argument :first_name, String, required: false
         argument :birthday, GraphQL::Types::ISO8601DateTime, required: false
         argument :bio, String, required: true
-        argument :lonlat, String, required: true
         argument :phone, String, required: false
         argument :gender, Integer, required: false
         argument :desired_gender, Integer, required: false
         argument :verified, Boolean, required: false
         argument :school, String, required: false
         argument :occupation, String, required: false
-        argument :display_city, String, required: false
-        argument :display_state, String, required: false
-        argument :spotify_email, String, required: false
       end
     end
 end
