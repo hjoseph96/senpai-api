@@ -26,7 +26,18 @@ class FeedLoader
     def randomize_users(pool)
         user_pool = []
 
-        50.times { user_pool << pool.sample }
+        # Show super likers fists
+        super_likers = User.where(likes: { like_type: :super, likee_id: @user.id })
+        if super_likers.present?
+            
+            super_likers.each do |s|
+                next if @user.has_liked?(s) || @user.matched_with?(s)
+
+                user_pool << s.id
+            end
+        end
+
+        (50 - user_pool.count).times { user_pool << pool.sample }
 
         User.where(id: user_pool.map(&:id))
     end
