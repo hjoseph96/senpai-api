@@ -369,6 +369,7 @@ DEPENDENCIES
   importmap-rails
   jwt
   kaminari
+  nokogiri
   pg (~> 1.1)
   pg_search (~> 2.3, >= 2.3.6)
   pry-rails

@@ -53,6 +53,8 @@ gem 'faker'
 gem 'faraday'
 gem 'sidekiq-cron'
 gem 'aws-sdk-s3'
+gem 'nokogiri'
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
