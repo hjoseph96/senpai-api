@@ -32,16 +32,18 @@ class RoomChannel < ApplicationCable::Channel
       raise 'No conversation found!' if convo.blank?
       raise 'No message!' if message.blank?
   
-      # adds the message sender to the conversation if not already included
-      convo.users << sender unless convo.users.include?(sender)
       # saves the message and its data to the DB
-      
-      # Note: this does not broadcast to the clients yet!
-      Message.create!(
+      m = Message.new(
         conversation: convo,
         sender: sender,
         content: message
       )
+
+      m.sticker_id = data['sticker_id'] if data['sticker_id'].present?
+      m.reaction = data['reaction'] if data['reaction'].present?
+
+      # Message gets broadcast after successful DB creation
+      m.save!
     end
     
     # Helpers

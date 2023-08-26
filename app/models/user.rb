@@ -16,11 +16,11 @@ class User < ApplicationRecord
   has_one :gallery, dependent: :destroy
   has_many :photos, through: :gallery
 
-  has_many :matches
-  has_many :favorite_music
-  has_many :verify_requests
-  has_many :reports
-  has_many :blocks, foreign_key: :blocker_id
+  has_many :matches, dependent: :destroy
+  has_many :favorite_music, dependent: :destroy
+  has_many :verify_requests, dependent: :destroy
+  has_many :reports, dependent: :destroy
+  has_many :blocks, foreign_key: :blocker_id, dependent: :destroy
 
   enum :online_status, [ :online, :offline ]
   enum :role, [ :user, :mod, :admin ]
