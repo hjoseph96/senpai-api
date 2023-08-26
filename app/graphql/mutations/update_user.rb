@@ -11,7 +11,6 @@ module Mutations
       def resolve(params:)
         update_params = Hash params
 
-        binding.pry
         @current_user = User.find(update_params[:user_id])
 
         begin
@@ -21,7 +20,7 @@ module Mutations
 
             { user: @current_user }
         rescue ActiveRecord::RecordInvalid => e
-            GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}: #{e.record.errors.full_messages.join(', ')}")
+            GraphQL::ExecutionError.new("#{e.record.errors.full_messages.join(', ')}")
         end
       end
     end

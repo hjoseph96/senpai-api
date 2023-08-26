@@ -2,12 +2,7 @@ class RoomChannel < ApplicationCable::Channel
     # calls when a client connects to the server
     def subscribed
       if params[:room_id].present?
-        c = get_convo(params[:room_id])
-
-        # creates a private chat room with a unique name
         stream_from("ChatRoom-#{(params[:room_id])}")
-
-        c.messages.order(created_at: :desc)
       end
     end
 
