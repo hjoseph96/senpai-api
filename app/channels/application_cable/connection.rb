@@ -12,7 +12,7 @@ module ApplicationCable
     def find_verified_user
       @decoded = JsonWebToken.decode(request.params[:token])
 
-      if current_user = User.find(@decoded[:user_id])
+      if (current_user = User.find(@decoded[:user_id]))
         current_user
       else
         reject_unauthorized_connection

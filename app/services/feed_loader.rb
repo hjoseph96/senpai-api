@@ -26,7 +26,7 @@ class FeedLoader
     def randomize_users(pool)
         user_pool = []
 
-        # Show super likers fists
+        # Show super likers first
         super_likers = User.where(likes: { like_type: :super, likee_id: @user.id })
         if super_likers.present?
             

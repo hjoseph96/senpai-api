@@ -7,6 +7,7 @@ module Types
     field :content, String
     field :conversation_id, String
     field :reaction, Integer
+    field :read, Boolean
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 

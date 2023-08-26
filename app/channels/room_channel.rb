@@ -13,6 +13,13 @@ class RoomChannel < ApplicationCable::Channel
 
     def unsubscribed
     end
+
+    def enter(data)
+      room_id   = data['room_id']
+      convo = get_convo(room_id) # A conversation is a room
+
+      convo.messages.where.not(sender_id: current_user.id).update(read: true)
+    end
     
     # calls when a client broadcasts data
     def speak(data)
