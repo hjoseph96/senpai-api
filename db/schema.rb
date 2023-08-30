@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_26_060012) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_30_070435) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -141,6 +141,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_26_060012) do
     t.index ["order"], name: "index_photos_on_order"
   end
 
+  create_table "recommendations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "recommendee_id", null: false
+    t.bigint "anime_id", null: false
+    t.bigint "message_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["anime_id"], name: "index_recommendations_on_anime_id"
+    t.index ["message_id"], name: "index_recommendations_on_message_id"
+    t.index ["recommendee_id"], name: "index_recommendations_on_recommendee_id"
+    t.index ["user_id"], name: "index_recommendations_on_user_id"
+  end
+
   create_table "reports", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "offense_id"
@@ -241,6 +254,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_26_060012) do
   add_foreign_key "matches", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "photos", "galleries"
+  add_foreign_key "recommendations", "animes"
+  add_foreign_key "recommendations", "messages"
+  add_foreign_key "recommendations", "users"
   add_foreign_key "reports", "conversations"
   add_foreign_key "reports", "users"
   add_foreign_key "user_conversations", "conversations"

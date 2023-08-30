@@ -32,6 +32,16 @@ module Mutations
             @message.sticker = Sticker.find(params[:sticker_id])
           end
 
+          if params[:recommended_anime_id].present?
+            recommendee_id = @conversation.user_ids.reject{|i| i == @current_user.id}[0]
+
+            @message.recommendation = Recommendation.new(
+                user_id: @current_user.id,
+                recommendee_id: recommendee_id,
+                anime_id: params[:recommended_anime_id],
+                )
+          end
+
           @conversation.messages << @message
           @conversation.save!
 

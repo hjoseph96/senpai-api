@@ -21,6 +21,7 @@ class User < ApplicationRecord
   has_many :verify_requests, dependent: :destroy
   has_many :reports, dependent: :destroy
   has_many :blocks, foreign_key: :blocker_id, dependent: :destroy
+  has_many :recommendations
 
   enum :online_status, [ :online, :offline ]
   enum :role, [ :user, :mod, :admin ]
@@ -87,4 +88,5 @@ class User < ApplicationRecord
   def matched_with?(user)
     self.matches.where(matchee_id: user.id).count > 0
   end
+
 end
