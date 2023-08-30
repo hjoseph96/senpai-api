@@ -56,6 +56,10 @@ class User < ApplicationRecord
     false
   end
 
+  def on_the_team?
+    self.admin? || self.mod?
+  end
+
   def current_sign_in_ip
     ip = read_attribute(:current_sign_in_ip)
 

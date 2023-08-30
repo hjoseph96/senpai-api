@@ -5,15 +5,15 @@ class VerifyRequest < ApplicationRecord
 
   enum :status, [ :pending, :approved, :denied ]
 
-  def approve
+  def approve!
     self.approved!
 
-    # TODO: puah notification
+    # TODO: push notification
   end
 
-  def deny
-    seld.denied!
+  def deny!
+    self.denied!
 
-    # TODO: puah notification
+    # TODO: push notification
   end
 end
