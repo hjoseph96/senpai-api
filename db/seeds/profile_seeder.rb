@@ -1,12 +1,18 @@
 require 'faker'
 
 class ProfileSeeder
-    def self.create_profiles
-        new.create_profiles
+    def self.create_profiles(location:)
+        new.create_profiles(location: location)
     end
 
-    def create_profiles
+    def create_profiles(location:)
         Faker::Config.locale = 'en-US'
+
+        case location
+        when 'NYC' then @location = "POINT(#{-73.744070} #{40.720430})"
+        when 'KIEV' then @location = "POINT(#{30.5071277} #{50.4571249})"
+        when 'KAMPALA' then @location = "POINT(#{32.603056} #{0.284559})"
+        end
 
         create_females
         create_males
@@ -26,7 +32,7 @@ class ProfileSeeder
                 role: :user,
                 gender: :female,
                 desired_gender: :desires_men,
-                lonlat: "POINT(#{-73.744070} #{40.720430})",
+                lonlat: @location,
                 bio: Faker::Lorem.paragraphs,
                 school: Faker::University.name,
                 occupation: Faker::Job.position,
@@ -70,7 +76,7 @@ class ProfileSeeder
                 bio: Faker::Lorem.paragraphs,
                 school: Faker::University.name,
                 occupation: Faker::Job.position,
-                lonlat: "POINT(#{-73.744070} #{40.720430})",
+                lonlat: @location,
                 current_sign_in_ip: '173.52.91.160',
                 current_sign_in_at: DateTime.now
             )
