@@ -19,6 +19,7 @@ module Types
     field :report_user, mutation: Mutations::ReportUser
     field :grant_user_premium, mutation: Mutations::GrantUserPremium
     field :delete_user, mutation: Mutations::DeleteUser
+    field :delete_photo, mutation: Mutations::DeletePhoto
 
     # admin mutations
     field :admin_sign_in, mutation: Mutations::AdminSignIn

@@ -14,6 +14,7 @@ module Types
     field :attachment, String
     field :sticker, Types::StickerType
     field :recommendation, Types::RecommendationType
+    field :attachment_type, String
 
     def attachment
       cdn_for(object.attachment)
@@ -25,6 +26,10 @@ module Types
 
     def recommendation
       object.recommendation
+    end
+
+    def attachment_type
+      object.attachment.content_type
     end
   end
 end

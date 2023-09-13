@@ -12,6 +12,7 @@ module Types
     field :fetch_conversations, resolver: Queries::FetchConversations
     field :fetch_user, resolver: Queries::FetchUser
     field :fetch_stickers, resolver: Queries::FetchStickers
+    field :fetch_sticker, resolver: Queries::FetchSticker
 
     #  admin queries
     field :fetch_reports, resolver: Queries::FetchReports

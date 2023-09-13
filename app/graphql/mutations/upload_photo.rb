@@ -14,7 +14,7 @@ module Mutations
         @current_user = User.find(user_id)
 
         if @current_user.gallery.nil?
-          g = Galley.create
+          g = Gallery.create
           @current_user.gallery = g
           @current_user.save!
         end
@@ -28,10 +28,10 @@ module Mutations
         photo.image.attach(blob)
         @current_user.gallery.photos << photo
 
-        if @current_user.save 
-            { user: @current_user } 
-        else 
-            { errors: @current_user.errors.full_messages }
+        if @current_user.save
+          { user: @current_user }
+        else
+          { errors: @current_user.errors.full_messages }
         end
       end
     end

@@ -5,7 +5,7 @@ module Types
     include ApplicationHelper
     
     field :id, ID, null: false
-    field :gallery_id, Integer, null: false
+    field :gallery_id, ID, null: false
     field :order, Integer
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
