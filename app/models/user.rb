@@ -60,6 +60,10 @@ class User < ApplicationRecord
     self.admin? || self.mod?
   end
 
+  def profile_filled?
+    self.animes.count > 0
+  end
+
   def current_sign_in_ip
     ip = read_attribute(:current_sign_in_ip)
 
