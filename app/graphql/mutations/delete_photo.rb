@@ -4,13 +4,16 @@ module Mutations
     argument :photo_id, ID, required: true
 
     field :deleted, Boolean, null: false
+    field :gallery, Types::GalleryType
 
     def resolve(user_id:, photo_id:)
       @user = User.find(user_id)
 
       @photo = @user.gallery.photos.find(photo_id)
 
-      { deleted: @photo.destroy }
+      @user.gallery.update_photo_order!
+
+      { deleted: @photo.destroy, gallery: @user.gallery.reload }
     end
   end
 end
