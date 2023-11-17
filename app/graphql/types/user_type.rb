@@ -15,8 +15,8 @@ module Types
     field :online_status, Integer
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
-    field :gender, Integer
-    field :desired_gender, Integer
+    field :gender, String
+    field :desired_gender, String
     field :lonlat, String
     field :bio, String
     field :school, String
@@ -27,6 +27,7 @@ module Types
     field :role, String, null: false
     field :display_city, String
     field :display_state, String
+    field :online_status, String
 
     field :animes, [Types::AnimeType]
     field :matches, [Types::MatchType]

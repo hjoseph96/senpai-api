@@ -29,7 +29,7 @@ module Mutations
               @current_user.desires_both! if update_params[:desires_gender] == 2
             end
 
-            { user: @current_user }
+            { user: @current_user.reload }
         rescue ActiveRecord::RecordInvalid => e
             GraphQL::ExecutionError.new("#{e.record.errors.full_messages.join(', ')}")
         end

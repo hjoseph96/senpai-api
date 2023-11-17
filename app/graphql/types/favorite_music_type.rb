@@ -5,7 +5,7 @@ module Types
     include ApplicationHelper
 
     field :id, ID, null: false
-    field :music_type, Integer
+    field :music_type, String
     field :cover_url, String
     field :name, String
     field :user_id, Integer, null: false
