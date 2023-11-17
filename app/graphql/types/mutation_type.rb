@@ -6,6 +6,7 @@ module Types
     field :resend_verify_text, mutation: Mutations::ResendVerifyText
     field :validate_phone, mutation: Mutations::ValidatePhone
     field :add_favorite_anime, mutation: Mutations::AddFavoriteAnime
+    field :delete_favorite_anime, mutation: Mutations::DeleteFavoriteAnime
     field :rank_favorite_anime, mutation: Mutations::RankFavoriteAnime
     field :set_spotify_email, mutation: Mutations::SetSpotifyEmail
     field :set_user_location, mutation: Mutations::SetUserLocation
