@@ -12,7 +12,7 @@ module Types
     field :last_sign_in_at, GraphQL::Types::ISO8601DateTime
     field :current_sign_in_ip, String
     field :last_sign_in_ip, String
-    field :online_status, Integer
+    field :online_status, String
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :gender, String
@@ -27,7 +27,6 @@ module Types
     field :role, String, null: false
     field :display_city, String
     field :display_state, String
-    field :online_status, String
 
     field :animes, [Types::AnimeType]
     field :matches, [Types::MatchType]
