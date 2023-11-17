@@ -25,8 +25,12 @@ class User < ApplicationRecord
 
   enum :online_status, [ :online, :offline ]
   enum :role, [ :user, :mod, :admin ]
-  enum :gender, [ :male, :female ]
-  enum :desired_gender, [ :desires_men, :desires_women ]
+  enum :gender, { male: 0, female: 1 }
+  enum :desired_gender, {
+    desires_men: 0,
+    desires_women: 1,
+    desires_both: 2
+  }
 
   scope :within, -> (latitude, longitude, distance_in_mile = 1) {
     where(%{

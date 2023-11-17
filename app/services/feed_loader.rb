@@ -14,8 +14,10 @@ class FeedLoader
 
         if @user.desires_women?
             pool = pool.where(gender: :female)
-        else
+        elsif @user.desires_men?
             pool = pool.where(gender: :male)
+        elsif @user.desires_men?
+            pool = pool.where(gender: [:male, :female])
         end
 
         user_pool =  randomize_users(pool)
@@ -33,13 +35,25 @@ class FeedLoader
             super_likers.each do |s|
                 next if @user.has_liked?(s) || @user.matched_with?(s)
 
+                next unless s.desires_men? || s.desires_both? if @user.male?
+                next unless s.desires_women? || s.desires_both? if @user.female?
+
                 user_pool << s.id
             end
         end
 
-        (50 - user_pool.count).times { user_pool << pool.sample }
+        (50 - user_pool.count).times do
+            u = pool.sample
 
-        User.where(id: user_pool.map(&:id))
+            next if @user.has_liked?(u) || @user.matched_with?(u)
+
+            next unless u.desires_men? || u.desires_both? if @user.male?
+            next unless u.desires_women? || u.desires_both? if @user.female?
+
+            user_pool << pool.sample
+        end
+
+        User.where(id: user_pool.map(&:id).uniq)
     end
 
     def order_by_similarity(user_pool)
