@@ -63,6 +63,7 @@ type Anime {
 }
 
 input AnimeInput {
+  genre: String
   page: Int!
   title: String
 }
@@ -142,6 +143,7 @@ type DeletePhotoPayload {
   """
   clientMutationId: String
   deleted: Boolean!
+  gallery: Gallery
 }
 
 """
@@ -233,7 +235,7 @@ type GrantUserPremiumPayload {
 """
 An ISO 8601-encoded datetime
 """
-scalar ISO8601DateTime
+scalar ISO8601DateTime @specifiedBy(url: "https://tools.ietf.org/html/rfc3339")
 
 type Like {
   createdAt: ISO8601DateTime!
@@ -516,6 +518,7 @@ type ReorderPhotosPayload {
   A unique identifier for the client performing the mutation.
   """
   clientMutationId: String
+  gallery: Gallery
   photo: Photo!
 }
 
@@ -850,6 +853,7 @@ type ValidatePhonePayload {
   A unique identifier for the client performing the mutation.
   """
   clientMutationId: String
+  profileFilled: Boolean!
   token: String!
   user: User!
 }

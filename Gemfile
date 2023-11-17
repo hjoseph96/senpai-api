@@ -46,6 +46,7 @@ gem 'pg_search', '~> 2.3', '>= 2.3.6'
 gem 'kaminari'
 gem 'appsignal'
 gem "apollo_upload_server", ">= 2.1.0"
+gem "graphql-client", github: "rmosolgo/graphql-client", ref: "27ef61f"
 gem 'graphlient'
 gem 'ruby-vips'
 gem 'acts_as_paranoid'
