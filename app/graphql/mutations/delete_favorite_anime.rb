@@ -7,6 +7,7 @@ module Mutations
     field :user, Types::UserType
 
     def resolve(user_id:, anime_id:)
+      @user = User.find(user_id)
       @anime = UserAnime.find_by(user_id: user_id, anime_id: anime_id)
 
       { deleted: @anime.destroy, user: @user.reload }
