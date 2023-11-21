@@ -9,7 +9,7 @@ module Mutations
     def resolve(user_id:, anime_id:)
       @anime = UserAnime.find_by(user_id: user_id, anime_id: anime_id)
 
-      { deleted: @anime.destroy, gallery: @user.reload }
+      { deleted: @anime.destroy, user: @user.reload }
     end
   end
 end
