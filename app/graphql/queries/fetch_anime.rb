@@ -11,8 +11,13 @@ module Queries
         page = anime_params[:page] || 1
 
         results = Anime.order(popularity: :desc).page(page)
-        results = Anime.search_by_title(anime_params[:title]).order(popularity: :desc).page(page) if anime_params[:title].present?
-        results = Anime.search_by_genre(anime_params[:genres]).order(popularity: :desc).page(page) if anime_params[:genres].present?
+        if anime_params[:genres].present?
+          results = results.search_by_genre(anime_params[:genres]).order(popularity: :desc).page(page)
+        end
+
+        if anime_params[:title].present?
+          results = results.where("title ILIKE ?", "%#{anime_params[:title]}%").order(popularity: :desc).page(page)
+        end
 
         results
       end

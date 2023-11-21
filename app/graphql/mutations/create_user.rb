@@ -22,7 +22,7 @@ module Mutations
           @client.messages
             .create(
               body: "Your Senpai verification code: #{verify_token}",
-              from: '+1 (855) 648-7497',
+              from: '+1 (718) 307-2924',
               to: user.phone
             )
 
