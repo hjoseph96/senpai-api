@@ -29,9 +29,9 @@ class FeedLoader
         user_pool = []
 
         # Show super likers first
-        super_likers = User.where(likes: { like_type: :super, likee_id: @user.id })
+
+        super_likers = User.joins(:likes).where(likes: { like_type: :super, likee_id: @user.id })
         if super_likers.present?
-            
             super_likers.each do |s|
                 next if @user.has_liked?(s) || @user.matched_with?(s)
 
