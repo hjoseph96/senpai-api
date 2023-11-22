@@ -16,20 +16,19 @@ class FeedLoader
             pool = pool.where(gender: :female)
         elsif @user.desires_men?
             pool = pool.where(gender: :male)
-        elsif @user.desires_men?
+        elsif @user.desires_both?
             pool = pool.where(gender: [:male, :female])
         end
 
-        user_pool =  randomize_users(pool)
+        user_pool = randomize_users(pool, rejects)
 
         order_by_similarity(user_pool)
     end
 
-    def randomize_users(pool)
+    def randomize_users(pool, reject_ids)
         user_pool = []
 
         # Show super likers first
-
         super_likers = User.joins(:likes).where(likes: { like_type: :super, likee_id: @user.id })
         if super_likers.present?
             super_likers.each do |s|
@@ -53,7 +52,9 @@ class FeedLoader
             user_pool << pool.sample
         end
 
-        User.where(id: user_pool.map(&:id).uniq)
+        ids = user_pool.map(&:id).uniq - reject_ids
+
+        User.where(id: ids)
     end
 
     def order_by_similarity(user_pool)
@@ -97,5 +98,7 @@ class FeedLoader
         score = same_genre_score + same_taste_score
 
         score *= 1.5 if potential_match.premium?
+
+        score
     end
 end
