@@ -15,13 +15,13 @@ module Queries
           else
             results = FeedLoader.create_feed(user_id: feed_params[:user_id], distance_in_miles: feed_params[:miles_away])
 
-            Rails.cache.write("#{feed_paramss[:user_id]}-FEED", results.pluck(:id))
+            Rails.cache.write("#{feed_params[:user_id]}-FEED", results.pluck(:id))
           end
 
           if feed_params[:min_age].present? && feed_params[:max_age].present?
-            min_date = feed_params[:min_age].years.ago
-            max_date = feed_params[:max_age].years.ago
-            results = results.where(birthday: min_date..max_date )
+            min_date = feed_params[:min_age].years.ago.to_date
+            max_date = feed_params[:max_age].years.ago.to_date
+            results = results.where(birthday: max_date..min_date)
           end
 
           results = results.where.not(bio: '') if feed_params[:bio].present?
