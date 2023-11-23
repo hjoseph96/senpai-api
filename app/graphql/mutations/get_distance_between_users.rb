@@ -14,6 +14,8 @@ module Mutations
 
         distance = p1.distance(p2) / 1609.34
 
+        distance = 1 if distance == 0
+
         { mi: distance }
       end
     end
