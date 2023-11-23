@@ -10,7 +10,6 @@ module Mutations
         @viewee = User.find(viewee_id)
 
         p1 = RGeo::Geographic.spherical_factory.point(@user.lonlat.longitude, @user.lonlat.latitude)
-
         p2 = RGeo::Geographic.spherical_factory.point(@viewee.lonlat.longitude, @viewee.lonlat.latitude)
 
         distance = p1.distance(p2) / 1609.34
