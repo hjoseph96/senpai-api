@@ -2,22 +2,36 @@ module Queries
     class FetchFeed < Queries::BaseQuery
         graphql_name "FetchFeed"
 
-        argument :user_id, ID, required: true
-        argument :miles_away, Integer, required: true
-        argument :page, Integer, required: false
+        argument :params, Types::Input::FetchFeedInput, required: true
 
         type [Types::UserType], null: false
 
-        def resolve(user_id:, miles_away:, page: 1)
-          feed = Rails.cache.read("#{user_id}-FEED")
+        def resolve(params:)
+          feed_params = Hash  params
+          feed = Rails.cache.read("#{feed_params[:user_id]}-FEED")
 
           if feed.present?
             results = User.where(id: feed)
           else
-            results = FeedLoader.create_feed(user_id: user_id, distance_in_miles: miles_away)
+            results = FeedLoader.create_feed(user_id: feed_params[:user_id], distance_in_miles: feed_params[:miles_away])
 
-            Rails.cache.write("#{user_id}-FEED", results.pluck(:id))
+            Rails.cache.write("#{feed_paramss[:user_id]}-FEED", results.pluck(:id))
           end
+
+          if feed_params[:min_age].present? && feed_params[:max_age].present?
+            min_date = feed_params[:min_age].years.ago
+            max_date = feed_params[:max_age].years.ago
+            results = results.where(birthday: min_date..max_date )
+          end
+
+          results = results.where.not(bio: '') if feed_params[:bio].present?
+          results = results.where(verified: feed_params[:verified]) if feed_params[:verified].present?
+
+          if feed_params[:anime_ids].present?
+            results = results.joins(:animes).where({ animes: { id: feed_params[:anime_ids] } })
+          end
+
+          page = feed_params[:page] || 1
 
           results.page(page).per(25)
         end
