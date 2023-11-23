@@ -9,10 +9,11 @@ module Mutations
         @user = User.find(user_id)
         @viewee = User.find(viewee_id)
 
-        user_latlong = Geocoder.search(@user.current_sign_in_ip)[0].data['loc'].split(',')
-        viewee_latlong = Geocoder.search(@viewee.current_sign_in_ip)[0].data['loc'].split(',')
+        p1 = RGeo::Geographic.spherical_factory.point(@user.lonlat.longitude, @user.lonlat.latitude)
 
-        distance = Geocoder::Calculations.distance_between(user_latlong, viewee_latlong, units: :mi)
+        p2 = RGeo::Geographic.spherical_factory.point(@viewee.lonlat.longitude, @viewee.lonlat.latitude)
+
+        distance = p1.distance(p2) / 1609.34
 
         { mi: distance }
       end
