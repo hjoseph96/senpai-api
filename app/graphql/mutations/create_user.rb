@@ -25,6 +25,7 @@ module Mutations
               from: '+1 (718) 307-2924',
               to: user.phone
             )
+          end
 
           { user: user }
         rescue ActiveRecord::RecordInvalid => e

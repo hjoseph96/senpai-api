@@ -19,6 +19,7 @@ module Types
     field :send_message, mutation: Mutations::SendMessage
     field :report_user, mutation: Mutations::ReportUser
     field :grant_user_premium, mutation: Mutations::GrantUserPremium
+    field :add_super_likes, mutation: Mutations::AddSuperLikes
     field :delete_user, mutation: Mutations::DeleteUser
     field :delete_photo, mutation: Mutations::DeletePhoto
 

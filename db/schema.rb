@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_30_070435) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_23_221423) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -227,12 +227,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_070435) do
     t.datetime "birthday"
     t.integer "online_status", default: 1
     t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
+    t.integer "super_like_count", default: 5
     t.index ["birthday"], name: "index_users_on_birthday"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["online_status"], name: "index_users_on_online_status"
     t.index ["phone"], name: "index_users_on_phone", unique: true
     t.index ["premium"], name: "index_users_on_premium"
     t.index ["spotify_email"], name: "index_users_on_spotify_email"
+    t.index ["super_like_count"], name: "index_users_on_super_like_count"
   end
 
   create_table "verify_requests", force: :cascade do |t|
