@@ -11,6 +11,12 @@ Rails.application.routes.draw do
   get '/auth/spotify/', to: 'spotify#test'
 
   root 'hello#hi_senpai'
+
+  namespace :v1 do
+    namespace :admin do
+      resources :users
+    end
+  end
   
   devise_for :users, skip: :sessions
 end

@@ -30,7 +30,6 @@ module Mutations
           { user: user }
         rescue ActiveRecord::RecordInvalid => e
           GraphQL::ExecutionError.new("#{e.record.errors.full_messages.join(', ')}")
-        end
       end
     end
   end
