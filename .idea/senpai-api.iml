@@ -91,7 +91,6 @@
     <orderEntry type="library" scope="PROVIDED" name="io-console (v0.6.0, rbenv: 3.2.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="irb (v1.9.1, rbenv: 3.2.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jmespath (v1.6.2, rbenv: 3.2.2) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="jsbundling-rails (v1.2.1, rbenv: 3.2.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jsonapi-renderer (v0.2.2, rbenv: 3.2.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jwt (v2.7.1, rbenv: 3.2.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="kaminari (v1.2.2, rbenv: 3.2.2) [gem]" level="application" />

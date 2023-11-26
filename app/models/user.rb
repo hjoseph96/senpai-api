@@ -101,4 +101,8 @@ class User < ApplicationRecord
     self.matches.where(matchee_id: user.id).count > 0
   end
 
+  def blocked?(user_id)
+    self.blocks.where(blockee_id: user_id).present?
+  end
+
 end

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :users do
         collection do
-          get '/map_data', to: 'users#map_data'
+          get '/all_users', to: 'users#all_users'
         end
       end
     end

@@ -7,6 +7,7 @@ module Mutations
       argument :params, Types::Input::ReportInputType, required: true
 
       field :blocked, Boolean, null: false
+      field :report, Types::ReportType, null: false
 
       def resolve(params:)
         report_params = Hash params
@@ -29,7 +30,7 @@ module Mutations
 
             Match.where(user_id: @current_user.id, matchee_id: report_params[:offense_id]).destroy_all
 
-            { blocked: true }
+            { blocked: true, report: r }
         rescue ActiveRecord::RecordInvalid => e
             GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}: #{e.record.errors.full_messages.join(', ')}")
         end

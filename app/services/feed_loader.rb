@@ -32,7 +32,7 @@ class FeedLoader
         super_likers = User.joins(:likes).where(likes: { like_type: :super, likee_id: @user.id })
         if super_likers.present?
             super_likers.each do |s|
-                next if @user.has_liked?(s) || @user.matched_with?(s)
+                next if @user.has_liked?(s) || @user.matched_with?(s) || @user.blocked?(s)
 
                 next unless s.desires_men? || s.desires_both? if @user.male?
                 next unless s.desires_women? || s.desires_both? if @user.female?
@@ -44,7 +44,7 @@ class FeedLoader
         (50 - user_pool.count).times do
             u = pool.sample
 
-            next if @user.has_liked?(u) || @user.matched_with?(u)
+            next if @user.has_liked?(u) || @user.matched_with?(u) || @user.blocked?(u)
 
             next unless u.desires_men? || u.desires_both? if @user.male?
             next unless u.desires_women? || u.desires_both? if @user.female?

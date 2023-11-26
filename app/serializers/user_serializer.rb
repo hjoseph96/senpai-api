@@ -5,7 +5,8 @@ class UserSerializer < ActiveModel::Serializer
 
   attributes :id , :phone, :first_name, :gender, :verified,
     :display_city, :display_state, :latlong, :age,
-    :occupation, :created_at, :premium, :cover_photo_url
+    :occupation, :created_at, :premium, :cover_photo_url,
+     :orientation
 
   def age
     now = Time.now.utc.to_date
@@ -19,5 +20,24 @@ class UserSerializer < ActiveModel::Serializer
 
   def cover_photo_url
     cdn_for object.photos.order(order: :desc).first.image
+  end
+
+  def orientation
+    case
+    when is_straight? then 'straight'
+    when is_bisexual? then 'bisexual'
+    when is_gay? then 'gay'
+    end
+  end
+  def is_straight?
+    (object.male? && object.desires_women?) || (object.female? && object.desires_men?)
+  end
+
+  def is_bisexual?
+    object.desires_both?
+  end
+
+  def is_gay?
+    (object.female? && object.desires_women?) || (object.male? && object.desires_men?)
   end
 end
