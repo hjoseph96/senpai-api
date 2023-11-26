@@ -8,15 +8,30 @@ class ProfileSeeder
     def create_profiles(location:)
         Faker::Config.locale = 'en-US'
 
-        case location
-        when 'NYC' then @location = "POINT(#{-73.744070} #{40.720430})"
-        when 'KIEV' then @location = "POINT(#{30.5071277} #{50.4571249})"
-        when 'KAMPALA' then @location = "POINT(#{32.603056} #{0.284559})"
-        end
+        @location = location
 
         create_females
         create_males
     end
+
+    def nyc_point
+        nyc_long_points = (-73.744070..-72.744070).step(0.05).to_a
+        nyc_lat_points = (40.720430..41.4332).step(0.05).to_a
+        { long: nyc_long_points.sample, lat: nyc_lat_points.sample }
+    end
+
+    def kiev_points
+        kiev_long_points = (24.5071277..25.15071277).step(0.0005).to_a
+        kiev_lat_points = (40.720430..41.1571249).step(0.0005).to_a
+        { long: kiev_long_points.sample, lat: kiev_lat_points.sample }
+    end
+
+    def kampala_points
+        kampala_long_points = (24.5071277..25.5071277).step(0.005).to_a
+        kampala_lat_points = (31.603056..32103056).step(0.005).to_a
+        { long: kampala_long_points.sample, lat: kampala_lat_points.sample }
+    end
+
 
     def create_females
         puts 'Seeding women...'
@@ -25,6 +40,13 @@ class ProfileSeeder
         Dir.foreach(ai_female_gallery_path) do |filename|
             next if filename == '.' or filename == '..'
 
+            point = nil
+            case @location
+            when 'NYC' then point = nyc_point
+            when 'KIEV' then point = kiev_points
+            when 'KAMPALA' then point = kampala_points
+            end
+
             u = User.create(
                 phone: Faker::PhoneNumber.cell_phone,
                 password: (SecureRandom.random_number(9e5) + 1e5).to_i,
@@ -32,15 +54,14 @@ class ProfileSeeder
                 role: :user,
                 gender: :female,
                 desired_gender: :desires_men,
-                lonlat: @location,
-                birthday: (50.years.ago.to_date..16.years.ago.to_date).to_a.sample,
+                lonlat: RGeo::Cartesian.factory(:srid => 4326).point(point[:long], point[:lat]),
+                birthday: (50.years.ago.to_date..18.years.ago.to_date).to_a.sample,
                 bio: Faker::Lorem.paragraphs,
                 school: Faker::University.name,
                 occupation: Faker::Job.position,
                 current_sign_in_ip: '173.52.91.160',
                 current_sign_in_at: DateTime.now
             )
-
             g = Gallery.create
             u.gallery = g
             u.save!
@@ -67,6 +88,13 @@ class ProfileSeeder
         Dir.foreach(ai_male_gallery_path) do |filename|
             next if filename == '.' or filename == '..'
 
+            point = nil
+            case @location
+            when 'NYC' then point = nyc_point
+            when 'KIEV' then point = kiev_points
+            when 'KAMPALA' then point = kampala_points
+            end
+
             u = User.create(
                 phone: Faker::PhoneNumber.cell_phone,
                 password: (SecureRandom.random_number(9e5) + 1e5).to_i,
@@ -75,10 +103,10 @@ class ProfileSeeder
                 gender: :male,
                 desired_gender: :desires_women,
                 bio: Faker::Lorem.paragraphs,
-                birthday: (50.years.ago.to_date..16.years.ago.to_date).to_a.sample,
+                birthday: (50.years.ago.to_date..18.years.ago.to_date).to_a.sample,
                 school: Faker::University.name,
                 occupation: Faker::Job.position,
-                lonlat: @location,
+                lonlat: RGeo::Cartesian.factory(srid: 4326).point(point[:long], point[:lat]),
                 current_sign_in_ip: '173.52.91.160',
                 current_sign_in_at: DateTime.now
             )

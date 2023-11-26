@@ -1,15 +1,19 @@
-class Admin::UsersController < ApplicationController
+class V1::Admin::UsersController < ApplicationController
   protect_from_forgery with: :null_session
 
   def index
-    page = strong_params[:page] ? strong_params[:page] : 1
+    page = strong_params[:page]
 
-    User.all.page(page).per_page(50)
+    render json: User.page(page).per(50)
+  end
+
+  def map_data
+    render json: User.all
   end
 
   protected
 
   def strong_params
-    params.require(:page)
+    params.permit(:page)
   end
 end

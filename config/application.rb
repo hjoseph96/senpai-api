@@ -8,6 +8,7 @@ require "active_record/railtie"
 require "active_storage/engine"
 require "action_controller/railtie"
 require "action_mailer/railtie"
+require 'active_model/serialization'
 # require "action_mailbox/engine"
 # require "action_text/engine"
 require "action_view/railtie"

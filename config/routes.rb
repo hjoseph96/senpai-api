@@ -14,7 +14,11 @@ Rails.application.routes.draw do
 
   namespace :v1 do
     namespace :admin do
-      resources :users
+      resources :users do
+        collection do
+          get '/map_data', to: 'users#map_data'
+        end
+      end
     end
   end
   

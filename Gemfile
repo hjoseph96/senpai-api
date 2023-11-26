@@ -31,6 +31,8 @@ gem 'tzinfo-data', platforms: %i[ mingw mswin x64_mingw jruby ]
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 
+gem 'rack-cors'
+
 gem 'devise'
 gem 'graphql'
 gem 'batch-loader'
@@ -56,6 +58,8 @@ gem 'sidekiq-cron'
 gem 'aws-sdk-s3'
 gem 'nokogiri'
 gem 'bulma-rails', '~> 0.9.4'
+gem 'active_model_serializers', '~> 0.10.0'
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -75,3 +79,5 @@ group :development do
   gem "spring"
 end
 
+
+gem "jsbundling-rails", "~> 1.2"
