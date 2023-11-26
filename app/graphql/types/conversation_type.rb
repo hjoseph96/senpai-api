@@ -8,9 +8,14 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
     field :messages, [Types::MessageType]
+    field :match, Types::MatchType
 
     def messages
       object.messages.order(created_at: :desc)
+    end
+
+    def match
+      object.match
     end
   end
 end

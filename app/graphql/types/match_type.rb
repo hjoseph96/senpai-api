@@ -12,5 +12,11 @@ module Types
     def conversation
       object.conversation
     end
+    def user
+      object.user
+    end
+    def matchee
+      object.matchee
+    end
   end
 end
