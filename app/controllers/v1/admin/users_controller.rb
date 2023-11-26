@@ -7,13 +7,32 @@ class V1::Admin::UsersController < ApplicationController
     render json: User.page(page).per(50)
   end
 
+  def show
+    @user = User.find(strong_params[:id])
+    render json: @user
+  end
+
   def all_users
     render json: User.all
+  end
+
+  def ban_user
+    @user = User.find(strong_params['user_id'])
+    @user.update!(banned: true)
+
+    render json:  @user
+  end
+
+  def warn_user
+    @user = User.find(strong_params['user_id'])
+    @user.update!(warning_count: @user.warning_count + 1)
+
+    render json:  @user
   end
 
   protected
 
   def strong_params
-    params.permit(:page)
+    params.permit(:page, :id, :user_id)
   end
 end

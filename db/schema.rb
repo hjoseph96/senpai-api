@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_23_221423) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_26_170116) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -98,6 +98,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_221423) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_galleries_on_user_id"
+  end
+
+  create_table "influencers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "referral_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["referral_count"], name: "index_influencers_on_referral_count"
+    t.index ["user_id"], name: "index_influencers_on_user_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -228,6 +237,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_221423) do
     t.integer "online_status", default: 1
     t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
     t.integer "super_like_count", default: 5
+    t.boolean "banned", default: false
+    t.integer "warning_count", default: 0
     t.index ["birthday"], name: "index_users_on_birthday"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["online_status"], name: "index_users_on_online_status"
@@ -252,6 +263,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_221423) do
   add_foreign_key "conversations", "matches"
   add_foreign_key "favorite_musics", "users"
   add_foreign_key "galleries", "users"
+  add_foreign_key "influencers", "users"
   add_foreign_key "likes", "users"
   add_foreign_key "matches", "users"
   add_foreign_key "messages", "conversations"

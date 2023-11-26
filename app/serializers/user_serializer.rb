@@ -5,8 +5,9 @@ class UserSerializer < ActiveModel::Serializer
 
   attributes :id , :phone, :first_name, :gender, :verified,
     :display_city, :display_state, :latlong, :age,
-    :occupation, :created_at, :premium, :cover_photo_url,
-     :orientation
+    :occupation, :created_at, :premium, :banned, :warning_count,
+    :cover_photo_url, :orientation, :photos
+
 
   def age
     now = Time.now.utc.to_date
@@ -20,6 +21,10 @@ class UserSerializer < ActiveModel::Serializer
 
   def cover_photo_url
     cdn_for object.photos.order(order: :desc).first.image
+  end
+
+  def photos
+    object.photos.order(order: :desc).map { |p| cdn_for p.image }
   end
 
   def orientation
