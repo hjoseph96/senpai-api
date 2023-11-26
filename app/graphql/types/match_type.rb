@@ -8,6 +8,8 @@ module Types
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :conversation, Types::ConversationType, null: false
+    field :user, Types::UserType, null: false
+    field :matchee, Types::UserType, null: false
 
     def conversation
       object.conversation
