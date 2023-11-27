@@ -18,21 +18,21 @@ class V1::Admin::UsersController < ApplicationController
 
   def ban_user
     @user = User.find(strong_params['user_id'])
-    @user.update!(banned: true)
+    @user.update!(banned: !@user.banned)
 
-    render json:  @user
+    render json:  @user.reload
   end
 
   def warn_user
     @user = User.find(strong_params['user_id'])
     @user.update!(warning_count: @user.warning_count + 1)
 
-    render json:  @user
+    render json:  @user.reload
   end
 
   protected
 
   def strong_params
-    params.permit(:page, :id, :user_id)
+    params.permit(:page, :id, :user_id, :ban)
   end
 end

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   namespace :v1 do
     namespace :admin do
+
       resources :users do
         collection do
           get '/all_users', to: 'users#all_users'
@@ -22,6 +23,11 @@ Rails.application.routes.draw do
         post '/ban_user', to: 'users#ban_user', as: :ban_user
         post '/warn_user', to: 'users#warn_user', as: :warn_user
       end
+
+      post 'verify_request', to: 'verify_requests#index'
+      post 'verify_request/:id', to: 'verify_requests#show'
+      post 'verify_request/:id/approve', to: 'verify_requests#approve'
+      post 'verify_request/:id/deny', to: 'verify_requests#deny'
     end
   end
   
