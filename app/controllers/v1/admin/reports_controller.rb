@@ -1,19 +1,31 @@
+# frozen_string_literal: true
+
 class V1::Admin::ReportsController < ApplicationController
-  protect_from_forgery with: :null_session
-
   def index
-    page = strong_params[:page]
+    page = strong_params[:page].nil? ? 1 : strong_params[:page]
 
-    render json: Report.page(page).per(50)
+    @reports  = Report.order(created_at: :desc).page(page).per(50)
+
+    render json: @reports
   end
 
-  def all_reports
-    render json: Report.all
+  def show
+    @report = Report.find(strong_params['id'])
+
+    render json: @report
+  end
+
+  def resolve
+    @report = Report.find(strong_params['id'])
+    @report.resolve!
+
+    render json: @report
   end
 
   protected
 
   def strong_params
-    params.permit(:page)
+    params.permit(:page, :id)
   end
 end
+

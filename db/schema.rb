@@ -128,7 +128,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_26_170116) do
     t.index ["user_id"], name: "index_matches_on_user_id"
   end
 
-  create_table "messages", force: :cascade do |t|
+  create_table "messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "sender_id", null: false
     t.text "content", null: false
     t.integer "reaction"
@@ -141,7 +141,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_26_170116) do
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
-  create_table "photos", force: :cascade do |t|
+  create_table "photos", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.bigint "gallery_id", null: false
     t.integer "order"
     t.datetime "created_at", null: false
@@ -154,7 +154,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_26_170116) do
     t.bigint "user_id", null: false
     t.integer "recommendee_id", null: false
     t.bigint "anime_id", null: false
-    t.bigint "message_id", null: false
+    t.uuid "message_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["anime_id"], name: "index_recommendations_on_anime_id"
@@ -165,6 +165,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_26_170116) do
 
   create_table "reports", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.integer "status", default: 0, null: false
     t.integer "offense_id"
     t.integer "reason"
     t.uuid "conversation_id", null: false

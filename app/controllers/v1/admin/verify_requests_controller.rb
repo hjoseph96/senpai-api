@@ -4,7 +4,7 @@ class V1::Admin::VerifyRequestsController < ApplicationController
   def index
     page = strong_params[:page].nil? ? 1 : strong_params[:page]
 
-    @requests  = VerifyRequest.order(created_at: :desc).page(page).per(50)
+    @requests  = VerifyRequest.where(status: :pending).order(created_at: :desc).page(page).per(50)
 
     render json: @requests
   end

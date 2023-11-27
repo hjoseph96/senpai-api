@@ -3,7 +3,7 @@ class VerifyRequest < ApplicationRecord
 
   has_one_attached :submitted_photo
 
-  enum :status, [ :pending, :approved, :denied ]
+  enum :status, [ :pending, :approved, :denied, :closed ]
 
   def approve!
     self.approved!

@@ -28,6 +28,10 @@ Rails.application.routes.draw do
       post 'verify_request/:id', to: 'verify_requests#show'
       post 'verify_request/:id/approve', to: 'verify_requests#approve'
       post 'verify_request/:id/deny', to: 'verify_requests#deny'
+
+      get 'reports', to: 'reports#index'
+      get 'reports/:id', to: 'reports#show'
+      post 'reports/:id', to: 'reports#resolve', as: 'resolve_report'
     end
   end
   

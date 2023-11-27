@@ -40,8 +40,11 @@ module Mutations
           end
 
           feed = Rails.cache.read("#{@current_user.id}-FEED")
-          feed.delete params[:likee_id]
-          Rails.cache.write("#{@current_user.id}-FEED", feed)
+
+          if feed.present?
+            feed.delete params[:likee_id]
+            Rails.cache.write("#{@current_user.id}-FEED", feed)
+          end
 
           { like: @like, match: match }
         rescue ActiveRecord::RecordInvalid => e
