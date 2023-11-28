@@ -1,5 +1,5 @@
 class ReportSerializer < ActiveModel::Serializer
-  attributes :id,  :reason, :created_at,
+  attributes :id,  :status, :reason, :created_at,
              :conversation, :reporter, :offender
 
   def conversation

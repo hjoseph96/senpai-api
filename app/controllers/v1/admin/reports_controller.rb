@@ -17,9 +17,9 @@ class V1::Admin::ReportsController < ApplicationController
 
   def resolve
     @report = Report.find(strong_params['id'])
-    @report.resolve!
+    @report.resolved!
 
-    render json: @report
+    render json: @report.reload
   end
 
   protected

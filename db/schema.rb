@@ -141,7 +141,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_26_170116) do
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
-  create_table "photos", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "photos", force: :cascade do |t|
     t.bigint "gallery_id", null: false
     t.integer "order"
     t.datetime "created_at", null: false

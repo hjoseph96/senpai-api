@@ -26,8 +26,6 @@ class InfobipService
                    }]
       }.to_json
     end
-    binding.pry
-
   end
 
 

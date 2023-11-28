@@ -31,7 +31,7 @@ Rails.application.routes.draw do
 
       get 'reports', to: 'reports#index'
       get 'reports/:id', to: 'reports#show'
-      post 'reports/:id', to: 'reports#resolve', as: 'resolve_report'
+      post 'reports/:id/resolve', to: 'reports#resolve', as: 'resolve_report'
     end
   end
   
