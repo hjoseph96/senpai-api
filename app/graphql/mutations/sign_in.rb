@@ -11,7 +11,16 @@ module Mutations
       field :user, Types::UserType, null: false
   
       def resolve(token:)
-        @decoded = JsonWebToken.decode(token)
+        begin
+          @decoded = JsonWebToken.decode(token)
+        rescue JWT::VerificationError
+          return GraphQL::ExecutionError.new("Invalid token")
+        end
+
+        if @decoded[:exp] < DateTime.now
+          return GraphQL::ExecutionError.new("Token expired")
+        end
+
         @current_user = User.find(@decoded[:user_id])
 
         if @current_user.present?

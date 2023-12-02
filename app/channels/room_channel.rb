@@ -4,6 +4,7 @@ class RoomChannel < ApplicationCable::Channel
       if params[:room_id].present?
         stream_from("ChatRoom-#{(params[:room_id])}")
       end
+
     end
 
     def unsubscribed
@@ -24,7 +25,7 @@ class RoomChannel < ApplicationCable::Channel
   
       raise 'No room_id!' if room_id.blank?
       convo = get_convo(room_id) # A conversation is a room
-      raise 'No conversation found!' if convo.blank?
+      raise 'No conversation found!' if convo.nil?
       raise 'No message!' if message.blank?
   
       # saves the message and its data to the DB
