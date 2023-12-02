@@ -20,7 +20,7 @@ class UserSerializer < ActiveModel::Serializer
   end
 
   def cover_photo_url
-    cdn_for object.photos.order(order: :desc).first.image
+    cdn_for object.photos.order(order: :desc).first.try(:image)
   end
 
   def photos

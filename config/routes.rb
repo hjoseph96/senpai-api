@@ -19,7 +19,7 @@ Rails.application.routes.draw do
           get '/all_users', to: 'users#all_users'
         end
 
-        post '/ba2n_user', to: 'users#ban_user', as: :ban_user
+        post '/ban_user', to: 'users#ban_user', as: :ban_user
         post '/warn_user', to: 'users#warn_user', as: :warn_user
       end
 

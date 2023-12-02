@@ -22,9 +22,6 @@ module Types
     field :add_super_likes, mutation: Mutations::AddSuperLikes
     field :delete_user, mutation: Mutations::DeleteUser
     field :delete_photo, mutation: Mutations::DeletePhoto
-
-    # admin mutations
-    field :admin_sign_in, mutation: Mutations::AdminSignIn
-    field :answer_verify_request, mutation: Mutations::AnswerVerifyRequest
+    field :add_favorite_music, mutation: Mutations::AddFavoriteAnime
   end
 end
