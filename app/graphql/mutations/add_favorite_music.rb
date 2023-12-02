@@ -5,7 +5,7 @@ module Mutations
     graphql_name "AddFavoriteMusic"
 
     argument :user_id, ID, required: true
-    argument :favorite_music, [Types::FavoriteMusicInputType], required: true
+    argument :favorite_music, [Types::Input::FavoriteMusicInputType], required: true
 
     field :user, Types::UserType, null: false
     def resolve(user_id:, favorite_music:)
