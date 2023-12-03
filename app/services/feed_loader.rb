@@ -3,7 +3,7 @@ class FeedLoader
         new.create_feed(user_id: user_id, distance_in_miles: distance_in_miles)
     end
 
-    def create_feed(user_id: 191, distance_in_miles: 50000)
+    def create_feed(user_id:, distance_in_miles:)
         @user = User.find(user_id)
         @miles = distance_in_miles
 
