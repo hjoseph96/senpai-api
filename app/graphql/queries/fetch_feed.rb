@@ -8,7 +8,7 @@ module Queries
 
         def resolve(params:)
           feed_params = Hash  params
-          feed = Rails.cache.read("#{feed_params[:user_id]}-FEED")
+          feed  = Rails.cache.read("#{feed_params[:user_id]}-FEED")
 
           if feed.present?
             results = User.where(id: feed)
@@ -30,6 +30,8 @@ module Queries
           if feed_params[:anime_ids].present?
             results = results.joins(:animes).where({ animes: { id: feed_params[:anime_ids] } })
           end
+
+          @user = User.find(feed_params[:user_id]).appear
 
           page = feed_params[:page] || 1
 

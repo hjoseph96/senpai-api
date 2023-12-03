@@ -46,6 +46,8 @@ module Mutations
             Rails.cache.write("#{@current_user.id}-FEED", feed)
           end
 
+          @current_user.appear
+
           { like: @like, match: match }
         rescue ActiveRecord::RecordInvalid => e
             GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}: #{e.record.errors.full_messages.join(', ')}")

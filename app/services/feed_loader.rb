@@ -46,8 +46,8 @@ class FeedLoader
 
             next if @user.has_liked?(u) || @user.matched_with?(u) || @user.blocked?(u)
 
-            next unless u.desires_men? || u.desires_both? if @user.male?
-            next unless u.desires_women? || u.desires_both? if @user.female?
+            next unless @user.desires_men? || @user.desires_both? if u.male?
+            next unless @user.desires_women? || @user.desires_both? if u.female?
 
             user_pool << pool.sample
         end
@@ -63,13 +63,11 @@ class FeedLoader
         ranks = {}
         user_pool.find_in_batches do |group|
             group.each do |u|
-                next if @user.has_liked?(u) || @user.matched_with?(u)
-                
                 distance = calculate_distance(u)
-                
+
                 ranks[u.id] = {
-                    distance: distance / location_weight,
-                    anime_similarity_score: anime_similarity_score(u)
+                  distance: distance / location_weight,
+                  anime_similarity_score: anime_similarity_score(u)
                 }
             end
         end
