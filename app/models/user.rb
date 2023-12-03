@@ -86,7 +86,7 @@ class User < ApplicationRecord
   end
 
   def appear(on: nil)
-    online!
+    binding.pry
     on.nil? ? self.touch(:updated_at) : self.update(updated_at: on)
   end
 

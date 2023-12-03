@@ -17,7 +17,7 @@ module Mutations
           return GraphQL::ExecutionError.new("Invalid token")
         end
 
-        if @decoded[:exp] < DateTime.now
+        if Time.at(@decoded[:exp]) < Time.now
           return GraphQL::ExecutionError.new("Token expired")
         end
 

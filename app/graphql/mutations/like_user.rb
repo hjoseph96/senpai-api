@@ -41,6 +41,7 @@ module Mutations
 
           feed = Rails.cache.read("#{@current_user.id}-FEED")
 
+          # Remove liked user from swipe feed
           if feed.present?
             feed.delete params[:likee_id]
             Rails.cache.write("#{@current_user.id}-FEED", feed)
