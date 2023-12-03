@@ -2,7 +2,7 @@ class Message < ApplicationRecord
     belongs_to :conversation
     belongs_to :sender, class_name: :User, foreign_key: 'sender_id'
     belongs_to :sticker, required: false
-    has_one :recommendation
+    has_one :recommendation, required: false
   
     validates_presence_of :content
 
