@@ -33,9 +33,7 @@ class FeedLoader
         if super_likers.present?
             super_likers.each do |s|
                 next if @user.has_liked?(s) || @user.matched_with?(s) || @user.blocked?(s)
-
-                next unless s.desires_men? || s.desires_both? if @user.male?
-                next unless s.desires_women? || s.desires_both? if @user.female?
+                next unless want_each_other?(@user, s)
 
                 user_pool << s.id
             end
@@ -45,9 +43,7 @@ class FeedLoader
             u = pool.sample
 
             next if @user.has_liked?(u) || @user.matched_with?(u) || @user.blocked?(u)
-
-            next unless @user.desires_men? || @user.desires_both? if u.male?
-            next unless @user.desires_women? || @user.desires_both? if u.female?
+            next unless want_each_other?(@user, u)
 
             user_pool << pool.sample
         end
@@ -55,6 +51,34 @@ class FeedLoader
         ids = user_pool.map(&:id).uniq - reject_ids
 
         User.where(id: ids)
+    end
+
+    def want_each_other?(user, other_user)
+        if user.male?
+            if other_user.female?
+                likes_girls = user.desires_women? || user.desires_both?
+                she_likes_men = other_user.desires_men? || other_user.desires_both?
+                return likes_girls && she_likes_men
+            end
+
+            if other_user.male?
+                likes_men = user.desires_men? || user.desires_both?
+                he_likes_men = other_user.desires_men? || other_user.desires_both?
+                return  likes_men && he_likes_men
+            end
+        elsif user.female?
+            if other_user.female?
+                likes_girls = user.desires_women? || user.desires_both?
+                she_likes_women = other_user.desires_women? || other_user.desires_both?
+                return likes_girls && she_likes_women
+            end
+
+            if other_user.male?
+                likes_men = user.desires_women? || user.desires_both?
+                he_likes_men = other_user.desires_women? || other_user.desires_both?
+                return  likes_men && he_likes_men
+            end
+        end
     end
 
     def order_by_similarity(user_pool)
