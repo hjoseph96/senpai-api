@@ -74,9 +74,9 @@ class FeedLoader
             end
 
             if other_user.male?
-                likes_men = user.desires_women? || user.desires_both?
-                he_likes_men = other_user.desires_women? || other_user.desires_both?
-                return  likes_men && he_likes_men
+                likes_men = user.desires_men? || user.desires_both?
+                he_likes_women = other_user.desires_women? || other_user.desires_both?
+                return  likes_men && he_likes_women
             end
         end
     end
@@ -97,7 +97,7 @@ class FeedLoader
         end
 
         feed = ranks.sort_by {|k, v| v[:distance] }.reverse.to_h
-        feed = feed.sort_by {|k, v| v[:anime_similarity_score] }.to_h
+        feed = feed.sort_by {|k, v| v[:anime_similarity_score] }.reverse.to_h
 
         User.where(id: feed.keys)
     end
