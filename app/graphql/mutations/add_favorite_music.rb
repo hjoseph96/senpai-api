@@ -4,12 +4,12 @@ module Mutations
   class AddFavoriteMusic < Mutations::BaseMutation
     graphql_name "AddFavoriteMusic"
 
-    argument :user_id, ID, required: true
-    argument :favorite_music, [Types::Input::FavoriteMusicInputType], required: true
+    argument :params, [Types::Input::FavoriteMusicInputType], required: true
 
     field :user, Types::UserType, null: false
-    def resolve(user_id:, favorite_music:)
-      @current_user = User.find(user_id)
+    def resolve(params:)
+      music_params = Hash params
+      @current_user = User.find(music_params[0][:user_id])
 
       begin
         favorite_music.each do |m|

@@ -8,7 +8,7 @@ module Types
     field :add_favorite_anime, mutation: Mutations::AddFavoriteAnime
     field :delete_favorite_anime, mutation: Mutations::DeleteFavoriteAnime
     field :rank_favorite_anime, mutation: Mutations::RankFavoriteAnime
-    field :add_favorite_music, mutation: Mutations::AddFavoriteAnime
+    field :add_favorite_music, mutation: Mutations::AddFavoriteMusic
     field :set_user_location, mutation: Mutations::SetUserLocation
     field :submit_verify_request, mutation: Mutations::SubmitVerifyRequest
     field :upload_photo, mutation: Mutations::UploadPhoto
