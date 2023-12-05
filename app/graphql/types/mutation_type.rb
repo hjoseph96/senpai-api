@@ -8,7 +8,7 @@ module Types
     field :add_favorite_anime, mutation: Mutations::AddFavoriteAnime
     field :delete_favorite_anime, mutation: Mutations::DeleteFavoriteAnime
     field :rank_favorite_anime, mutation: Mutations::RankFavoriteAnime
-    field :set_spotify_email, mutation: Mutations::SetSpotifyEmail
+    field :add_favorite_music, mutation: Mutations::AddFavoriteAnime
     field :set_user_location, mutation: Mutations::SetUserLocation
     field :submit_verify_request, mutation: Mutations::SubmitVerifyRequest
     field :upload_photo, mutation: Mutations::UploadPhoto
@@ -22,6 +22,5 @@ module Types
     field :add_super_likes, mutation: Mutations::AddSuperLikes
     field :delete_user, mutation: Mutations::DeleteUser
     field :delete_photo, mutation: Mutations::DeletePhoto
-    field :add_favorite_music, mutation: Mutations::AddFavoriteAnime
   end
 end
