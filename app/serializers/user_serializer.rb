@@ -11,13 +11,7 @@ class UserSerializer < ActiveModel::Serializer
 
   def age
     now = Time.now.utc.to_date
-    dob = object.birthday
-
-    if dob.nil?
-      object.update(birthday: (50.years.ago.to_date..18.years.ago.to_date).to_a.sample)
-      dob = object.reload.birthday
-    end
-    
+    dob = object.birthday.to_date
     now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
   end
 
@@ -35,9 +29,9 @@ class UserSerializer < ActiveModel::Serializer
 
   def orientation
     case
-    when is_straight? then 'straight'
-    when is_bisexual? then 'bisexual'
-    when is_gay? then 'gay'
+      when is_straight? then 'straight'
+      when is_bisexual? then 'bisexual'
+      when is_gay? then 'gay'
     end
   end
 

@@ -13,7 +13,7 @@ class V1::Admin::UsersController < ApplicationController
   end
 
   def all_users
-    render json: User.all
+    render json: User.profile_filled
   end
 
   def ban_user

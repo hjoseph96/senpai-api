@@ -39,6 +39,10 @@ class User < ApplicationRecord
     } % [longitude, latitude, distance_in_mile * 1609.34]) # approx
   }
 
+  scope :profile_filled, -> { joins(:user_animes)
+                                .group("users.id")
+                                .having("count('animes.id') > 0") }
+
 
   validates :phone, presence: true, uniqueness: true
   validate :validate_age
