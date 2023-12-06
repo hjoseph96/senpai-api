@@ -28,7 +28,7 @@ class ProfileSeeder
 
     def kampala_points
         kampala_long_points = (24.5071277..25.5071277).step(0.005).to_a
-        kampala_lat_points = (31.603056..32103056).step(0.005).to_a
+        kampala_lat_points = (31.603056..32.103056).step(0.005).to_a
         { long: kampala_long_points.sample, lat: kampala_lat_points.sample }
     end
 
