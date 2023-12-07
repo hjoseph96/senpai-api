@@ -21,14 +21,14 @@ class ProfileSeeder
     end
 
     def kiev_points
-        kiev_long_points = (24.5071277..25.15071277).step(0.0005).to_a
+        kiev_long_points = (50.474027..50.574027).step(0.0005).to_a
         kiev_lat_points = (40.720430..41.1571249).step(0.0005).to_a
         { long: kiev_long_points.sample, lat: kiev_lat_points.sample }
     end
 
     def kampala_points
-        kampala_long_points = (24.5071277..25.5071277).step(0.005).to_a
-        kampala_lat_points = (31.603056..32.103056).step(0.005).to_a
+        kampala_long_points = (32.594288..32.994288).step(0.0005).to_a
+        kampala_lat_points = (0.293116..0.295).step(0.0005).to_a
         { long: kampala_long_points.sample, lat: kampala_lat_points.sample }
     end
 
