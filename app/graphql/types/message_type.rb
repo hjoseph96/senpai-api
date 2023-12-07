@@ -17,7 +17,7 @@ module Types
     field :attachment_type, String
 
     def attachment
-      cdn_for(object.attachment)
+      object.attachment.present? ? cdn_for(object.attachment) : nil
     end
 
     def sticker

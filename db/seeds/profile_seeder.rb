@@ -15,8 +15,8 @@ class ProfileSeeder
     end
 
     def nyc_point
-        nyc_long_points = (-73.744070..-72.744070).step(0.05).to_a
-        nyc_lat_points = (40.720430..41.4332).step(0.05).to_a
+        nyc_long_points = (-73.744070..-72.744070).step(0.005).to_a
+        nyc_lat_points = (40.720430..41.4332).step(0.005).to_a
         { long: nyc_long_points.sample, lat: nyc_lat_points.sample }
     end
 
