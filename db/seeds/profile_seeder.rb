@@ -21,8 +21,8 @@ class ProfileSeeder
     end
 
     def kiev_points
-        kiev_long_points = (50.474027..50.574027).step(0.0005).to_a
-        kiev_lat_points = (40.720430..41.1571249).step(0.0005).to_a
+        kiev_long_points = (50.458433..50.514027).step(0.0005).to_a
+        kiev_lat_points = (30.480461..30.5171249).step(0.0005).to_a
         { long: kiev_long_points.sample, lat: kiev_lat_points.sample }
     end
 
