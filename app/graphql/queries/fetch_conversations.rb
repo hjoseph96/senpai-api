@@ -7,7 +7,11 @@ module Queries
       type [Types::ConversationType], null: false
   
       def resolve(user_id:, page: 1)
-        @user = User.find(user_id)
+        begin
+          @user = User.find(user_id)
+        rescue ActiveRecord::RecordNotFound
+          return GraphQL::ExecutionError.new('User with that ID not found')
+        end
 
         @user.conversations.order(created_at: :desc).page(page).per(10)
       end
