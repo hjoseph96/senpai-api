@@ -6,7 +6,7 @@ module Mutations
     field :deleted, Boolean, null: false
     field :user, Types::UserType
 
-    def resolve(user_id:, anime_id:)
+    def resolve(user_id:, anime_ids:)
       @user = User.find(user_id)
       @anime = UserAnime.where(user_id: user_id, anime_id: anime_ids)
 
