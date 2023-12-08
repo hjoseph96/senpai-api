@@ -1,5 +1,5 @@
 class Gallery < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, dependent: :destroy
   has_many :photos, dependent: :destroy
 
   def update_photo_order!
