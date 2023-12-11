@@ -219,19 +219,21 @@ type DeleteUserPayload {
 }
 
 type FavoriteMusic {
+  artistName: String
   coverUrl: String
   createdAt: ISO8601DateTime!
   id: ID!
   musicType: String
-  name: String
+  trackName: String
   updatedAt: ISO8601DateTime!
   userId: Int!
 }
 
 input FavoriteMusicInput {
+  artistName: String
   coverUrl: String!
   musicType: String!
-  name: ID!
+  trackName: String
   userId: Int!
 }
 
