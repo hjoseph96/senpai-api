@@ -4,7 +4,7 @@ module Mutations
   class AddFavoriteMusic < Mutations::BaseMutation
     graphql_name "AddFavoriteMusic"
 
-    argument :params, [Types::Input::FavoriteMusicInputType], required: true
+    argument :params, Types::Input::FavoriteMusicInputType, required: true
 
     field :user, Types::UserType, null: false
     def resolve(params:)
