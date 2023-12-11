@@ -7,7 +7,8 @@ module Types
     field :id, ID, null: false
     field :music_type, String
     field :cover_url, String
-    field :name, String
+    field :artist_name, String
+    field :track_name, String
     field :user_id, Integer, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false

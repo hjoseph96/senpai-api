@@ -12,12 +12,15 @@ module Mutations
 
       begin
         params.each do |p|
-          FavoriteMusic.create!(
+          attrs = {
             user_id: @current_user.id,
             music_type: p[:music_type],
             cover_url: p[:cover_url],
-            name: p[:name]
-          )
+          }
+          attrs.merge!(track_name: p[:track_name]) if p[:track_name].present?
+          attrs.merge!(artist_name: p[:artist_name]) if p[:artist_name].present?
+          
+          FavoriteMusic.create!(attrs)
         end
 
         { user: @current_user.reload }
