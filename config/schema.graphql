@@ -219,7 +219,6 @@ type DeleteUserPayload {
 }
 
 type FavoriteMusic {
-  cover: String
   coverUrl: String
   createdAt: ISO8601DateTime!
   id: ID!
