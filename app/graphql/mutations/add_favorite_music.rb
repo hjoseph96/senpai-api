@@ -8,18 +8,15 @@ module Mutations
 
     field :user, Types::UserType, null: false
     def resolve(params:)
-      music_params = Hash params
-      @current_user = User.find(music_params[0][:user_id])
+      @current_user = User.find(params[:user_id])
 
       begin
-        favorite_music.each do |m|
-          FavoriteMusic.create!(
-            user_id: @current_user.id,
-            music_type: r[:music_type],
-            cover_url: r[:cover_url],
-            name: r[:name]
-          )
-        end
+        FavoriteMusic.create!(
+          user_id: @current_user.id,
+          music_type: params[:music_type],
+          cover_url: params[:cover_url],
+          name: params[:name]
+        )
 
         { user: @current_user.reload }
       rescue ActiveRecord::RecordInvalid => e
