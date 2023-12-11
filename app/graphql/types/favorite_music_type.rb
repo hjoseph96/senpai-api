@@ -11,10 +11,6 @@ module Types
     field :user_id, Integer, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
-    field :cover, String
-
-    def cover
-      cdn_for(object.cover)
-    end
+    field :cover_url, String
   end
 end
