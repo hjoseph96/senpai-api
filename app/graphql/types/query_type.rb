@@ -11,6 +11,7 @@ module Types
     field :fetch_feed, resolver: Queries::FetchFeed
     field :fetch_conversations, resolver: Queries::FetchConversations
     field :fetch_user, resolver: Queries::FetchUser
+    field :fetch_messages, resolver: Queries::FetchMessages
     field :fetch_stickers, resolver: Queries::FetchStickers
     field :fetch_sticker, resolver: Queries::FetchSticker
 
