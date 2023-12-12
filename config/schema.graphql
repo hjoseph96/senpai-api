@@ -533,8 +533,9 @@ type Query {
   fetchAnime(params: AnimeInput!): [Anime!]!
   fetchConversations(page: Int, search: String, userId: ID!): [Conversation!]!
   fetchFeed(params: FetchFeedInput!): [User!]!
+  fetchMessages(conversationId: ID!, page: Int): [Message!]!
   fetchReports(page: Int, perPage: Int, reason: Int, userId: ID!): [Report!]!
-  fetchSticker(stickerId: ID): Sticker!
+  fetchSticker(stickerId: ID!): Sticker!
   fetchStickers(page: Int): [Sticker!]!
   fetchUser(userId: ID!): User!
   fetchVerifyRequests(page: Int, perPage: Int, userId: ID!): [VerifyRequest!]!

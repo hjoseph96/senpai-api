@@ -1,5 +1,5 @@
 module Queries
-  class FetchMessages< Queries::BaseQuery
+  class FetchMessages < Queries::BaseQuery
     graphql_name "FetchMessages"
 
     argument :conversation_id, ID, required: true
