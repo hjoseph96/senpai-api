@@ -19,7 +19,7 @@ module Mutations
           }
           attrs.merge!(track_name: p[:track_name]) if p[:track_name].present?
           attrs.merge!(artist_name: p[:artist_name]) if p[:artist_name].present?
-          
+
           FavoriteMusic.create!(attrs)
         end
 
