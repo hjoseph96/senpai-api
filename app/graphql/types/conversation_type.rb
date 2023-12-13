@@ -10,6 +10,7 @@ module Types
     field :messages, [Types::MessageType]
     field :match, Types::MatchType
     field :last_message, Types::MessageType
+    field :unread_count, Integer
 
 
     def messages
@@ -22,6 +23,10 @@ module Types
 
     def last_message
       object.messages.order(created_at: :desc).first
+    end
+
+    def unread_count
+      object.messages.where(read: false).count
     end
   end
 end
