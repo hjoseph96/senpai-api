@@ -40,16 +40,26 @@ class User < ApplicationRecord
   }
 
   scope :profile_filled, -> { joins(:user_animes)
-                                .group("users.id")
+                                .group('users.id')
                                 .having("count('animes.id') > 0") }
 
 
   validates :phone, presence: true, uniqueness: true
   validate :validate_age
 
+  after_commit :clear_feed
+
   def validate_age
     if birthday.present? && birthday > 18.years.ago
       errors.add(:birthday, 'You should be over 18 years old.')
+    end
+  end
+
+  def clear_feed
+    if %w(gender desired_gender).any? {|c| previous_changes.keys.include?(c) }
+      cache_key = "#{self.id}-FEED"
+      feed = Rails.cache.read(cache_key)
+      Rails.cache.delete(cache_key) if feed.present?
     end
   end
 
