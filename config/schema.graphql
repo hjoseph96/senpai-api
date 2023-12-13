@@ -95,6 +95,7 @@ input AnimeInput {
 type Conversation {
   createdAt: ISO8601DateTime!
   id: ID!
+  lastMessage: Message
   match: Match
   matchId: Int!
   messages: [Message!]

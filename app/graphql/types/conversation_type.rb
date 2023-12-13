@@ -9,6 +9,8 @@ module Types
 
     field :messages, [Types::MessageType]
     field :match, Types::MatchType
+    field :last_message, Types::MessageType
+
 
     def messages
       object.messages.order(created_at: :desc)
@@ -16,6 +18,10 @@ module Types
 
     def match
       object.match
+    end
+
+    def last_message
+      object.messages.order(created_at: :desc).first
     end
   end
 end
