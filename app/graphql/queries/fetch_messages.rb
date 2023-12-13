@@ -13,9 +13,9 @@ module Queries
         return GraphQL::ExecutionError.new('Conversation with that ID not found')
       end
 
-      @messages = Message.where(conversation_id: conversation_id).order(created_at: :desc)
+      @messages = Message.where(conversation_id: conversation_id)
 
-      @messages.page(page).per(50)
+      @messages.order(created_at: :desc).page(page).per(50)
     end
   end
 end

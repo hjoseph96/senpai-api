@@ -35,7 +35,7 @@ class FeedLoader
                 next if @user.has_liked?(s) || @user.matched_with?(s) || @user.blocked?(s)
                 next unless want_each_other?(@user, s)
 
-                user_pool << s.id
+                user_pool << s
             end
         end
 
