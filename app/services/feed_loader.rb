@@ -99,7 +99,7 @@ class FeedLoader
         feed = ranks.sort_by {|k, v| v[:distance] }.reverse.to_h
         feed = feed.sort_by {|k, v| v[:anime_similarity_score] }.reverse.to_h
 
-        User.where(id: feed.keys)
+        User.where(id: feed.keys).in_order_of(:id, feed.keys)
     end
 
     def calculate_distance(other_user)
