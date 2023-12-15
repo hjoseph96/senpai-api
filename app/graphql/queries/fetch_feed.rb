@@ -18,7 +18,7 @@ module Queries
             Rails.cache.write("#{feed_params[:user_id]}-FEED", results.pluck(:id))
           end
 
-          return [] unless pool.count > 0
+          return [] unless results.count > 0
 
           if feed_params[:min_age].present? && feed_params[:max_age].present?
             min_date = feed_params[:min_age].years.ago.to_date
