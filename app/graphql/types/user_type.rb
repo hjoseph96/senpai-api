@@ -27,6 +27,7 @@ module Types
     field :role, String, null: false
     field :display_city, String
     field :display_state, String
+    field :super_like_count, Integer
 
     field :animes, [Types::AnimeType]
     field :matches, [Types::MatchType]

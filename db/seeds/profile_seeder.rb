@@ -32,6 +32,12 @@ class ProfileSeeder
         { long: kampala_long_points.sample, lat: kampala_lat_points.sample }
     end
 
+    def mandi_points
+        mandi_lat_points = (31.591976..31.60023).step(0.0005).to_a
+        mandi_long_points = (76.953942..76.98000).step(0.0005).to_a
+        { long: mandi_long_points.sample, lat: mandi_lat_points.sample }
+    end
+
 
     def create_females
         puts 'Seeding women...'
@@ -93,6 +99,7 @@ class ProfileSeeder
             when 'NYC' then point = nyc_point
             when 'KIEV' then point = kiev_points
             when 'KAMPALA' then point = kampala_points
+            when 'MANDI' then point = mandi_points
             end
 
             u = User.create(
