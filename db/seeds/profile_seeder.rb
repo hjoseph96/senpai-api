@@ -51,6 +51,7 @@ class ProfileSeeder
             when 'NYC' then point = nyc_point
             when 'KIEV' then point = kiev_points
             when 'KAMPALA' then point = kampala_points
+            when 'MANDI' then point = mandi_points
             end
 
             u = User.create(
