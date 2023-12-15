@@ -20,6 +20,8 @@ class FeedLoader
             pool = pool.where(gender: [:male, :female])
         end
 
+        return [] unless pool.present?
+        
         user_pool = randomize_users(pool, rejects)
 
         order_by_similarity(user_pool)
