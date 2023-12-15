@@ -9,7 +9,7 @@ class FeedLoader
 
         rejects = @user.likes.where(like_type: :rejection).pluck(:likee_id)
 
-        pool = User.within(@user.lonlat.latitude, @user.lonlat.longitude, 40)
+        pool = User.within(@user.lonlat.latitude, @user.lonlat.longitude, @miles)
                         .where(current_sign_in_at: 1.month.ago..DateTime.now)
 
         if @user.desires_women?
