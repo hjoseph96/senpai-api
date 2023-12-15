@@ -18,11 +18,15 @@ module Queries
             Rails.cache.write("#{feed_params[:user_id]}-FEED", results.pluck(:id))
           end
 
+          return [] unless pool.count > 0
+
           if feed_params[:min_age].present? && feed_params[:max_age].present?
             min_date = feed_params[:min_age].years.ago.to_date
             max_date = feed_params[:max_age].years.ago.to_date
             results = results.where(birthday: max_date..min_date)
           end
+
+          return  [] unless results.present?
 
           results = results.where.not(bio: '') if feed_params[:bio].present?
           results = results.where(verified: feed_params[:verified]) if feed_params[:verified].present?
