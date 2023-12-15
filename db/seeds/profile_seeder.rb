@@ -44,6 +44,12 @@ class ProfileSeeder
         { long: palo_alto_long_points.sample, lat: palo_alto_lat_points.sample }
     end
 
+    def chandigarh_points
+        chandigarh_lat_points = (30.744648..30.90343).step(0.0005).to_a
+        chandigarh_long_points = (76.751141..77.0).step(0.0005).to_a
+        { long: chandigarh_long_points.sample, lat: chandigarh_lat_points.sample }
+    end
+
     def create_females
         puts 'Seeding women...'
 
@@ -56,7 +62,7 @@ class ProfileSeeder
                 when 'NYC' then point = nyc_point
                 when 'KIEV' then point = kiev_points
                 when 'KAMPALA' then point = kampala_points
-                when 'MANDI' then point = mandi_points
+                when 'CHANDIGARH' then point = chandigarh_points
                 when 'PALO ALTO' then point = palo_alto_points
             end
 
@@ -107,6 +113,7 @@ class ProfileSeeder
                 when 'KIEV' then point = kiev_points
                 when 'KAMPALA' then point = kampala_points
                 when 'MANDI' then point = mandi_points
+                when 'CHANDIGARH' then point = chandigarh_points
                 when 'PALO ALTO' then point = palo_alto_points
             end
 
