@@ -38,6 +38,11 @@ class ProfileSeeder
         { long: mandi_long_points.sample, lat: mandi_lat_points.sample }
     end
 
+    def palo_alto_points
+        palo_alto_lat_points = (37.407263..37.90343).step(0.0005).to_a
+        palo_alto_long_points = (-122.124556..-122).step(0.0005).to_a
+        { long: palo_alto_long_points.sample, lat: palo_alto_lat_points.sample }
+    end
 
     def create_females
         puts 'Seeding women...'
@@ -48,10 +53,11 @@ class ProfileSeeder
 
             point = nil
             case @location
-            when 'NYC' then point = nyc_point
-            when 'KIEV' then point = kiev_points
-            when 'KAMPALA' then point = kampala_points
-            when 'MANDI' then point = mandi_points
+                when 'NYC' then point = nyc_point
+                when 'KIEV' then point = kiev_points
+                when 'KAMPALA' then point = kampala_points
+                when 'MANDI' then point = mandi_points
+                when 'PALO ALTO' then point = palo_alto_points
             end
 
             u = User.create(
@@ -97,10 +103,11 @@ class ProfileSeeder
 
             point = nil
             case @location
-            when 'NYC' then point = nyc_point
-            when 'KIEV' then point = kiev_points
-            when 'KAMPALA' then point = kampala_points
-            when 'MANDI' then point = mandi_points
+                when 'NYC' then point = nyc_point
+                when 'KIEV' then point = kiev_points
+                when 'KAMPALA' then point = kampala_points
+                when 'MANDI' then point = mandi_points
+                when 'PALO ALTO' then point = palo_alto_points
             end
 
             u = User.create(
