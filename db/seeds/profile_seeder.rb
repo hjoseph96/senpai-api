@@ -14,10 +14,16 @@ class ProfileSeeder
         create_males
     end
 
-    def nyc_point
+    def nyc_points
         nyc_long_points = (-73.744070..-72.744070).step(0.005).to_a
         nyc_lat_points = (40.720430..41.4332).step(0.005).to_a
         { long: nyc_long_points.sample, lat: nyc_lat_points.sample }
+    end
+
+    def atlantic_city_points
+        ac_lat_points = (39.362782..39.6).step(0.005).to_a
+        ac_long_points = (-74.426904..-74).step(0.005).to_a
+        { long: ac_long_points.sample, lat: ac_lat_points.sample }
     end
 
     def kiev_points
@@ -59,7 +65,8 @@ class ProfileSeeder
 
             point = nil
             case @location
-                when 'NYC' then point = nyc_point
+                when 'NYC' then point = nyc_points
+                when 'ATLANTIC CITY' then point = atlantic_city_points
                 when 'KIEV' then point = kiev_points
                 when 'KAMPALA' then point = kampala_points
                 when 'MANDI' then point = mandi_points
@@ -110,7 +117,8 @@ class ProfileSeeder
 
             point = nil
             case @location
-                when 'NYC' then point = nyc_point
+                when 'NYC' then point = nyc_points
+                when 'ATLANTIC CITY' then point = atlantic_city_points
                 when 'KIEV' then point = kiev_points
                 when 'KAMPALA' then point = kampala_points
                 when 'MANDI' then point = mandi_points

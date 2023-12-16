@@ -5,6 +5,7 @@ require_relative './seeds/sticker_seeder'
 AnilistSeeder.create_animes
 
 ProfileSeeder.create_profiles(location: 'NYC')
+ProfileSeeder.create_profiles(location: 'ATLANTIC CITY')
 ProfileSeeder.create_profiles(location: 'KIEV')
 ProfileSeeder.create_profiles(location: 'KAMPALA')
 ProfileSeeder.create_profiles(location: 'MANDI')
