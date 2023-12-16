@@ -62,6 +62,7 @@ class ProfileSeeder
                 when 'NYC' then point = nyc_point
                 when 'KIEV' then point = kiev_points
                 when 'KAMPALA' then point = kampala_points
+                when 'MANDI' then point = mandi_points
                 when 'CHANDIGARH' then point = chandigarh_points
                 when 'PALO ALTO' then point = palo_alto_points
             end

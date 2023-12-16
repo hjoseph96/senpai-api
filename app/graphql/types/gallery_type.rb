@@ -11,7 +11,7 @@ module Types
     field :photos, [Types::PhotoType]
 
     def photos
-      object.photos.order(order: :desc)
+      object.photos.order(order: :asc)
     end
   end
 end
