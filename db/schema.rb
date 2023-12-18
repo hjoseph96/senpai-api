@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_26_170116) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_18_172945) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -84,12 +84,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_26_170116) do
   create_table "favorite_musics", force: :cascade do |t|
     t.integer "music_type"
     t.string "cover_url"
-    t.string "name"
+    t.string "track_name"
+    t.string "artist_name"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "spotify_id"
+    t.index ["artist_name"], name: "index_favorite_musics_on_artist_name"
     t.index ["music_type"], name: "index_favorite_musics_on_music_type"
-    t.index ["name"], name: "index_favorite_musics_on_name"
+    t.index ["track_name"], name: "index_favorite_musics_on_track_name"
     t.index ["user_id"], name: "index_favorite_musics_on_user_id"
   end
 
