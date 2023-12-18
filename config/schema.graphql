@@ -226,6 +226,7 @@ type FavoriteMusic {
   createdAt: ISO8601DateTime!
   id: ID!
   musicType: String
+  spotifyId: String
   trackName: String
   updatedAt: ISO8601DateTime!
   userId: Int!
@@ -235,6 +236,7 @@ input FavoriteMusicInput {
   artistName: String
   coverUrl: String!
   musicType: String!
+  spotifyId: String!
   trackName: String
   userId: Int!
 }
@@ -870,6 +872,7 @@ type User {
   school: String
   signInCount: Int!
   spotifyEmail: String
+  superLikeCount: Int
   updatedAt: ISO8601DateTime!
   verified: Boolean!
 }
