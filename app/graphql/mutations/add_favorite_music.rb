@@ -16,6 +16,7 @@ module Mutations
             user_id: @current_user.id,
             music_type: p[:music_type],
             cover_url: p[:cover_url],
+            spotify_id: p[:spotify_id]
           }
           attrs.merge!(track_name: p[:track_name]) if p[:track_name].present?
           attrs.merge!(artist_name: p[:artist_name]) if p[:artist_name].present?

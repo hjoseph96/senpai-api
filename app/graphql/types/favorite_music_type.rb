@@ -9,6 +9,7 @@ module Types
     field :cover_url, String
     field :artist_name, String
     field :track_name, String
+    field :spotify_id, String
     field :user_id, Integer, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
