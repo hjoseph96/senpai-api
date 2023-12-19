@@ -18,6 +18,7 @@ module Types
     field :like_user, mutation: Mutations::LikeUser
     field :undo_like, mutation: Mutations::UndoLike
     field :send_message, mutation: Mutations::SendMessage
+    field :update_message, mutation: Mutations::UpdateMessage
     field :report_user, mutation: Mutations::ReportUser
     field :grant_user_premium, mutation: Mutations::GrantUserPremium
     field :add_super_likes, mutation: Mutations::AddSuperLikes

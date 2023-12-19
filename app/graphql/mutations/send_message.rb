@@ -28,6 +28,8 @@ module Mutations
             @message.attachment.attach(blob)
           end
 
+          @message.reaction = params[:reaction] if params[:reaction].present?
+
           if params[:sticker_id].present?
             @message.sticker = Sticker.find(params[:sticker_id])
           end
