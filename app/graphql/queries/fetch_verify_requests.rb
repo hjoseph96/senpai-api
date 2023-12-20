@@ -11,12 +11,12 @@ module Queries
     def resolve(user_id:, page: 1, per_page: 50)
       @current_user = User.find(user_id)
 
-      if @current_user.present? && @current_user.on_the_team?
+      if @current_user.present?
         results = VerifyRequest.all.order(created_at: :desc)
 
         results.page(page).per(per_page)
       else
-        GraphQL::ExecutionError.new("No admin or mod found")
+        GraphQL::ExecutionError.new("No user found")
       end
 
     end

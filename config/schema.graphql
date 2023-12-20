@@ -217,7 +217,7 @@ type DeleteUserPayload {
   A unique identifier for the client performing the mutation.
   """
   clientMutationId: String
-  softDeleted: Boolean!
+  softDeletedUser: User!
 }
 
 type FavoriteMusic {
