@@ -11,7 +11,7 @@ module Types
     field :match, Types::MatchType
     field :last_message, Types::MessageType
     field :unread_count, Integer do
-      argument :user_id, Integer
+      argument :user_id, ID
     end
 
 
