@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_18_172945) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_20_134440) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -153,6 +153,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_172945) do
     t.index ["order"], name: "index_photos_on_order"
   end
 
+  create_table "push_notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "content"
+    t.string "event_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_push_notifications_on_user_id"
+  end
+
   create_table "recommendations", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "recommendee_id", null: false
@@ -272,6 +281,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_172945) do
   add_foreign_key "matches", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "photos", "galleries"
+  add_foreign_key "push_notifications", "users"
   add_foreign_key "recommendations", "animes"
   add_foreign_key "recommendations", "messages"
   add_foreign_key "recommendations", "users"
