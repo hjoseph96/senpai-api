@@ -47,6 +47,13 @@ module Mutations
           @conversation.messages << @message
           @conversation.save!
 
+          receiver = @conversation.users.where.not(id: @message.sender_id).first
+          PushNotification.create(
+            user_id: receiver.id,
+            event_name: 'new_message',
+            content: "#{receiver.first_name} sent you a new message."
+          )
+
           @message.sender.appear
 
           { message: @message.reload }
