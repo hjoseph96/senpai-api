@@ -8,6 +8,16 @@ module Mutations
       def resolve(phone:)
         @user = User.find_by(phone: phone)
 
+        unless @user.present?
+          @user = User.with_deleted.find_by(phone: phone)
+
+          if @user.nil?
+            return GraphQL::ExecutionError.new("No user found")
+          else
+            @user.restore
+          end
+        end
+
         return { status: 404 } unless @user.present?
   
         verify_token = (SecureRandom.random_number(9e5) + 1e5).to_i
