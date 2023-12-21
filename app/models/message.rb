@@ -8,7 +8,7 @@ class Message < ApplicationRecord
 
     has_one_attached :attachment
 
-    validates :attachment, attached: true,  size: { less_than: 50.megabytes , message: 'is too large' }
+    validates :attachment, size: { less_than: 50.megabytes , message: 'is too large' }
     validates_presence_of :content
 
 
