@@ -58,7 +58,7 @@ module Mutations
 
           { message: @message.reload }
         rescue ActiveRecord::RecordInvalid => e
-            GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}: #{e.record.errors.full_messages.join(', ')}")
+            GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}: #{e.record.errors.full_messages.join(', ')} and #{@message.errors.full_messages.join(', ')}")
         end
       end
     end
