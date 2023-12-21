@@ -14,7 +14,7 @@ module Mutations
           if @user.nil?
             return GraphQL::ExecutionError.new("No user found")
           else
-            @user.restore
+            @user.recover
           end
         end
 
