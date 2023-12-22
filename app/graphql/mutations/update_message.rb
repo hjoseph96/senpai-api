@@ -15,7 +15,7 @@ module Mutations
         update_params = Hash params
         update_params.delete(:message_id)
 
-        message.update!(update_params)
+        @message.update!(update_params)
 
         { message: @message.reload }
       rescue ActiveRecord::RecordInvalid => e
