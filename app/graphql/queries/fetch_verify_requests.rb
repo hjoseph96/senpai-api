@@ -12,7 +12,7 @@ module Queries
       @current_user = User.find(user_id)
 
       if @current_user.present?
-        results = VerifyRequest.all.order(created_at: :desc)
+        results = VerifyRequest.where(user_id: user_id).order(created_at: :desc)
 
         results.page(page).per(per_page)
       else

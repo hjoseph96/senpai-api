@@ -1,3 +1,5 @@
+require "#{Rails.root}/db/seeds/anilist_seeder"
+
 class SyncAnimeJob
     include Sidekiq::Job
 
