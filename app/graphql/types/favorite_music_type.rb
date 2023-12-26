@@ -11,6 +11,7 @@ module Types
     field :track_name, String
     field :spotify_id, String
     field :user_id, Integer, null: false
+    field :hidden, Boolean
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
   end

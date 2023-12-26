@@ -12,7 +12,6 @@ module Types
         argument :school, String, required: false
         argument :occupation, String, required: false
         argument :has_location_hidden, Boolean, required: false
-        argument :has_music_hidden, Boolean, required: false
       end
     end
 end

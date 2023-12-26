@@ -90,7 +90,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_010749) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "spotify_id"
+    t.boolean "hidden"
     t.index ["artist_name"], name: "index_favorite_musics_on_artist_name"
+    t.index ["hidden"], name: "index_favorite_musics_on_hidden"
     t.index ["music_type"], name: "index_favorite_musics_on_music_type"
     t.index ["track_name"], name: "index_favorite_musics_on_track_name"
     t.index ["user_id"], name: "index_favorite_musics_on_user_id"
@@ -253,11 +255,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_010749) do
     t.boolean "banned", default: false
     t.integer "warning_count", default: 0
     t.boolean "has_location_hidden"
-    t.boolean "has_music_hidden"
     t.index ["birthday"], name: "index_users_on_birthday"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["has_location_hidden"], name: "index_users_on_has_location_hidden"
-    t.index ["has_music_hidden"], name: "index_users_on_has_music_hidden"
     t.index ["online_status"], name: "index_users_on_online_status"
     t.index ["phone"], name: "index_users_on_phone", unique: true
     t.index ["premium"], name: "index_users_on_premium"

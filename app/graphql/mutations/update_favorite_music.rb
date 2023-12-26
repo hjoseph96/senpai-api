@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module Mutations
-  class AddFavoriteMusic < Mutations::BaseMutation
-    graphql_name "AddFavoriteMusic"
+  class UpdateFavoriteMusic < Mutations::BaseMutation
+    graphql_name "UpdateFavoriteMusic"
 
-    argument :params, [Types::Input::FavoriteMusicInputType], required: true
+    argument :params, [Types::Input::FavoriteMusicUpdateType], required: true
 
     field :user, Types::UserType, null: false
     def resolve(params:)
@@ -12,8 +12,9 @@ module Mutations
 
       begin
         params.each do |p|
+          m = @current_user.favorite_music.where(id: p[:favorite_music_id])[0]
+
           attrs = {
-            user_id: @current_user.id,
             music_type: p[:music_type],
             cover_url: p[:cover_url],
             spotify_id: p[:spotify_id]
@@ -22,8 +23,7 @@ module Mutations
           attrs.merge!(artist_name: p[:artist_name]) if p[:artist_name].present?
           attrs.merge!(hidden: p[:hidden]) if p[:hidden].present?
 
-
-          FavoriteMusic.create!(attrs)
+          m.update(attrs)
         end
 
         { user: @current_user.reload }
