@@ -85,7 +85,12 @@ class AnilistSeeder
     total_pages.times do |i|
       page = i + 1
 
-      response = @client.query @anime_query, { page: page, perPage: 100 }
+      begin
+        response = @client.query @anime_query, { page: page, perPage: 100 }
+      rescue Graphlient::Errors::FaradayServerError
+        sleep(60)
+        response = @client.query @anime_query, { page: page, perPage: 100 }
+      end
 
       break unless response.original_hash['data']['Page']['pageInfo']['hasNextPage']
 
@@ -100,7 +105,6 @@ class AnilistSeeder
         next if Anime.exists?(title: attributes[:title])
 
         puts "Page #{page}: Creating #{anime['title']['english']}... \n"
-
         
         attributes[:year] = anime['seasonYear']
         attributes[:genres] = anime['genres']
