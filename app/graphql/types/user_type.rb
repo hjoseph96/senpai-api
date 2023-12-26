@@ -28,6 +28,8 @@ module Types
     field :display_city, String
     field :display_state, String
     field :super_like_count, Integer
+    field :has_location_hidden, Boolean
+    field :has_music_hidden, Boolean
 
     field :animes, [Types::AnimeType]
     field :matches, [Types::MatchType]

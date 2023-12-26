@@ -1,9 +1,9 @@
 class FeedLoader
-    def self.create_feed(user_id:, distance_in_miles: 40)
-        new.create_feed(user_id: user_id, distance_in_miles: distance_in_miles)
+    def self.create_feed(user_id:, distance_in_miles: 40, anime_ids: [])
+        new.create_feed(user_id: user_id, distance_in_miles: distance_in_miles, anime_ids: [])
     end
 
-    def create_feed(user_id:, distance_in_miles:)
+    def create_feed(user_id:, distance_in_miles:, anime_ids:)
         @user = User.find(user_id)
         @miles = distance_in_miles
 
@@ -19,6 +19,8 @@ class FeedLoader
         elsif @user.desires_both?
             pool = pool.where(gender: [:male, :female])
         end
+
+        pool = pool.joins(:animes).where(animes: { id: anime_ids }) if anime_ids.present?
 
         return [] unless pool.count > 0
 

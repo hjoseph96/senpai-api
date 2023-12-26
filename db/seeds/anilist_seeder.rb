@@ -94,7 +94,6 @@ class AnilistSeeder
       anime_data.each do |anime|
         next unless anime['title']['english'].present?
 
-
         attributes = {}
 
         attributes[:title] = anime['title']['english']

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_20_134440) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_26_010749) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -252,8 +252,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_20_134440) do
     t.integer "super_like_count", default: 5
     t.boolean "banned", default: false
     t.integer "warning_count", default: 0
+    t.boolean "has_location_hidden"
+    t.boolean "has_music_hidden"
     t.index ["birthday"], name: "index_users_on_birthday"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
+    t.index ["has_location_hidden"], name: "index_users_on_has_location_hidden"
+    t.index ["has_music_hidden"], name: "index_users_on_has_music_hidden"
     t.index ["online_status"], name: "index_users_on_online_status"
     t.index ["phone"], name: "index_users_on_phone", unique: true
     t.index ["premium"], name: "index_users_on_premium"
