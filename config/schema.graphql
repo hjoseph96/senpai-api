@@ -88,7 +88,7 @@ type Anime {
 
 input AnimeInput {
   genres: [String!]
-  page: Int!
+  page: Int
   title: String
 }
 
