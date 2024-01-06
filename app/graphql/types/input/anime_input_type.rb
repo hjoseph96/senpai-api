@@ -3,7 +3,7 @@ module Types
       class AnimeInputType < Types::BaseInputObject
         argument :title, String, required: false
         argument :genres, [String], required: false
-        argument :page, Integer
+        argument :page, Integer, required: false
       end
     end
 end
