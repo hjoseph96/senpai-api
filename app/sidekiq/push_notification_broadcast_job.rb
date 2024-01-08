@@ -8,7 +8,8 @@ class PushNotificationBroadcastJob
     payload = {
       id: notification.id,
       user_id: notification.user.id,
-      content: notification.content,
+      event_name: notification.event_name,
+      content: notification.content
     }
 
     ActionCable.server.broadcast(build_channel_id(notification.user.id), payload)

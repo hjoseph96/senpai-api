@@ -32,6 +32,18 @@ module Mutations
               match = Match.create(user_id: @current_user.id, matchee_id: @likee.id)
               conversation = Conversation.create(match_id: match.id)
 
+              PushNotification.create(
+                user_id: @current_user.id,
+                event_name: 'new_match',
+                content: "You've matched with #{@likee.first_name}!"
+              )
+
+              PushNotification.create(
+                user_id: @likee.id,
+                event_name: 'new_match',
+                content: "You've matched with #{@current_user.first_name}!"
+              )
+
               @current_user.conversations << conversation
               @likee.conversations << conversation
 
