@@ -13,7 +13,7 @@ module Mutations
       def resolve(token:)
         begin
           @decoded = JsonWebToken.decode(token)
-        rescue JWT::VerificationError
+        rescue
           return GraphQL::ExecutionError.new("Invalid token")
         end
 

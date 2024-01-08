@@ -15,6 +15,10 @@ module Mutations
 
         begin
             update_params.delete(:user_id)
+
+            if update_params[:first_name].present?
+              update_params[:first_name] = update_params[:first_name].strip
+            end
             
             @current_user.update(update_params)
 
