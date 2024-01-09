@@ -28,7 +28,7 @@ module Mutations
           @like = Like.create(user_id: @current_user.id, likee_id: params[:likee_id], like_type: params[:like_type])
           UserLike.create(user_id: @current_user.id, like_id: @like.id)
 
-          if @likee.likes.where(likee_id: @current_user.id, like_type: [0, 1]).count > 0
+          if @likee.likes.where(likee_id: @current_user.id, like_type: [:standard, :super]).count > 0
               match = Match.create(user_id: @current_user.id, matchee_id: @likee.id)
               conversation = Conversation.create(match_id: match.id)
 
