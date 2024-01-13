@@ -29,27 +29,30 @@ module Mutations
           UserLike.create(user_id: @current_user.id, like_id: @like.id)
 
           rejected = params[:like_type] == 'rejection'
-          if @likee.likes.where(likee_id: @current_user.id, like_type: [:standard, :super]).count > 0 && !rejected
-              match = Match.create(user_id: @current_user.id, matchee_id: @likee.id)
-              conversation = Conversation.create(match_id: match.id)
 
-              PushNotification.create(
-                user_id: @current_user.id,
-                event_name: 'new_match',
-                content: "You've matched with #{@likee.first_name}!"
-              )
+          user_likes_other_user = @current_user.likes.where(likee_id: @likee.id, like_type: [:standard, :super]).count > 0
+          other_user_likes_user = @likee.likes.where(likee_id: @current_user.id, like_type: [:standard, :super]).count > 0
+          if user_likes_other_user && other_user_likes_user && !rejected
+            match = Match.create(user_id: @current_user.id, matchee_id: @likee.id)
+            conversation = Conversation.create(match_id: match.id)
 
-              PushNotification.create(
-                user_id: @likee.id,
-                event_name: 'new_match',
-                content: "You've matched with #{@current_user.first_name}!"
-              )
+            PushNotification.create(
+              user_id: @current_user.id,
+              event_name: 'new_match',
+              content: "You've matched with #{@likee.first_name}!"
+            )
 
-              @current_user.conversations << conversation
-              @likee.conversations << conversation
+            PushNotification.create(
+              user_id: @likee.id,
+              event_name: 'new_match',
+              content: "You've matched with #{@current_user.first_name}!"
+            )
 
-              @current_user.save!
-              @likee.save!
+            @current_user.conversations << conversation
+            @likee.conversations << conversation
+
+            @current_user.save!
+            @likee.save!
           end
 
           feed = Rails.cache.read("#{@current_user.id}-FEED")
