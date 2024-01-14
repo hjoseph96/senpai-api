@@ -6,10 +6,10 @@ class User < ApplicationRecord
 
   acts_as_paranoid
 
-  has_many :user_animes, dependent: :destroy
+  has_many :user_animes
   has_many :animes, through: :user_animes
-  has_many :user_likes, dependent: :destroy
-  has_many :likes, through: :user_likes, dependent: :destroy
+  has_many :user_likes
+  has_many :likes, through: :user_likes
   has_many :user_conversations
   has_many :conversations, through: :user_conversations
 
