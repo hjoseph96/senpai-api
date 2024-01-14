@@ -72,6 +72,8 @@ class ProfileSeeder
                 when 'MANDI' then point = mandi_points
                 when 'CHANDIGARH' then point = chandigarh_points
                 when 'PALO ALTO' then point = palo_alto_points
+                else
+                    throw StandardError("Unsupported seed location.")
             end
 
             u = User.create(
@@ -92,6 +94,8 @@ class ProfileSeeder
             g = Gallery.create
             u.gallery = g
             u.save!
+
+            set_display_location(u, point)
 
             photo = File.open("#{ai_female_gallery_path}/#{filename}")
             blob = ActiveStorage::Blob.create_and_upload!(
@@ -124,6 +128,8 @@ class ProfileSeeder
                 when 'MANDI' then point = mandi_points
                 when 'CHANDIGARH' then point = chandigarh_points
                 when 'PALO ALTO' then point = palo_alto_points
+                else
+                    throw StandardError("Unsupported seed location.")
             end
 
             u = User.create(
@@ -141,6 +147,8 @@ class ProfileSeeder
                 current_sign_in_ip: '173.52.91.160',
                 current_sign_in_at: DateTime.now
             )
+
+            set_display_location(u, point)
 
             g = Gallery.create
             u.gallery = g
@@ -174,6 +182,16 @@ class ProfileSeeder
 
         user.animes = chosen_anime
         user.save!
+    end
+
+    def set_display_location(user, point)
+        location =  Geocoder.search("#{point[:lat]}, #{point[:long]}")[0]
+        state = location.city == location.state ? location.country : location.state
+
+        user.update!(
+          display_city: location.city,
+          display_state: state,
+        )
     end
 
 end

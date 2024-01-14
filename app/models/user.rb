@@ -10,19 +10,19 @@ class User < ApplicationRecord
   has_many :animes, through: :user_animes
   has_many :user_likes, dependent: :destroy
   has_many :likes, through: :user_likes, dependent: :destroy
-  has_many :user_conversations, dependent: :destroy
+  has_many :user_conversations
   has_many :conversations, through: :user_conversations
 
   has_one :gallery, dependent: :destroy
   has_many :photos, through: :gallery, dependent: :destroy
 
-  has_many :matches, dependent: :destroy
+  has_many :matches
   has_many :favorite_music, dependent: :destroy
   has_many :verify_requests, dependent: :destroy
-  has_many :reports, dependent: :destroy
-  has_many :blocks, foreign_key: :blocker_id, dependent: :destroy
-  has_many :recommendations, dependent: :destroy
-  has_one :influencer, dependent: :destroy
+  has_many :reports
+  has_many :blocks, foreign_key: :blocker_id
+  has_many :recommendations
+  has_one :influencer
 
   enum :online_status, [ :online, :offline ]
   enum :role, [ :user, :mod, :admin ]
