@@ -51,6 +51,7 @@ module Mutations
               content: "You've matched with #{@current_user.first_name}!"
             )
 
+            conversation = Conversation.create(match_id: match.id)
             @current_user.conversations << conversation
             @likee.conversations << conversation
 
