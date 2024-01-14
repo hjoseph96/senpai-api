@@ -43,14 +43,14 @@ class FeedLoader
             end
         end
 
-        # Show likers nexr
+        # Show likers next
         likers = User.joins(:likes).where(likes: { like_type: :standard, likee_id: @user.id })
         if likers.present?
             likers.each do |u|
                 next if @user.has_liked?(u) || @user.matched_with?(u) || @user.blocked?(u)
                 next unless want_each_other?(@user, u)
 
-                user_pool << s
+                user_pool << u
             end
         end
 
