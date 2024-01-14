@@ -30,11 +30,21 @@ module Mutations
 
           rejected = params[:like_type] == 'rejection'
 
+          # Does the user like the other user?
           user_likes_other_user = @current_user.likes.where(likee_id: @likee.id, like_type: [:standard, :super]).count > 0
+
+          # Does the other user like the current user?
           other_user_likes_user = @likee.likes.where(likee_id: @current_user.id, like_type: [:standard, :super]).count > 0
           if user_likes_other_user && other_user_likes_user && !rejected
+            # Create a match for current user
             match = Match.create(user_id: @current_user.id, matchee_id: @likee.id)
+
+            # Create match for other user as well
+            other_match = Match.create(user_id: @likee.id, matchee_id: @current_user.id)
+
             conversation = Conversation.create(match_id: match.id)
+            other_match.conversation = conversation
+            other_match.save!
 
             PushNotification.create(
               user_id: @current_user.id,

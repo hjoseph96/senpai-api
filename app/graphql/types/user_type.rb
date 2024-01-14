@@ -34,6 +34,7 @@ module Types
     field :matches, [Types::MatchType]
     field :gallery, Types::GalleryType
     field :favorite_music, [Types::FavoriteMusicType]
+    field :blocks, [Types::BlockType]
 
     def animes
       UserAnime.where(user_id: object.id).order(:order).map(&:anime)
@@ -49,6 +50,10 @@ module Types
 
     def favorite_music
       object.favorite_music
+    end
+
+    def blocks
+      object.blocks
     end
   end
 end

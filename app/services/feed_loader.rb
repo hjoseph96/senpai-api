@@ -43,6 +43,17 @@ class FeedLoader
             end
         end
 
+        # Show likers nexr
+        likers = User.joins(:likes).where(likes: { like_type: :standard, likee_id: @user.id })
+        if likers.present?
+            likers.each do |u|
+                next if @user.has_liked?(u) || @user.matched_with?(u) || @user.blocked?(u)
+                next unless want_each_other?(@user, u)
+
+                user_pool << s
+            end
+        end
+
         (50 - user_pool.count).times do
             u = pool.sample
 
