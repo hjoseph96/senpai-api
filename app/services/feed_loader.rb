@@ -38,6 +38,7 @@ class FeedLoader
             super_likers.each do |s|
                 next if @user.has_liked?(s) || @user.matched_with?(s) || @user.blocked?(s)
                 next unless want_each_other?(@user, s)
+                next unless calculate_distance(u) <= @miles
 
                 user_pool << s
             end
@@ -49,6 +50,7 @@ class FeedLoader
             likers.each do |u|
                 next if @user.has_liked?(u) || @user.matched_with?(u) || @user.blocked?(u)
                 next unless want_each_other?(@user, u)
+                next unless calculate_distance(u) <= @miles
 
                 user_pool << u
             end
