@@ -12,6 +12,7 @@ module Types
       argument :verified, Boolean, required: false
       argument :anime_ids, [ID], required: false
       argument :page, Integer, required: false
+      argument :refresh, Boolean, required: false
     end
   end
 end

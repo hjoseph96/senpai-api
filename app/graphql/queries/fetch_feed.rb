@@ -10,7 +10,7 @@ module Queries
           feed_params = Hash  params
           feed  = Rails.cache.read("#{feed_params[:user_id]}-FEED")
 
-          if feed.present?
+          if feed.present? && !feed_params[:refresh].present?
             results = User.where(id: feed)
           else
             results = FeedLoader.create_feed(user_id: feed_params[:user_id], distance_in_miles: feed_params[:miles_away])
