@@ -39,13 +39,6 @@ module Mutations
             # Create a match for current user
             match = Match.create(user_id: @current_user.id, matchee_id: @likee.id)
 
-            # Create match for other user as well
-            other_match = Match.create(user_id: @likee.id, matchee_id: @current_user.id)
-
-            conversation = Conversation.create(match_id: match.id)
-            other_match.conversation = conversation
-            other_match.save!
-
             PushNotification.create(
               user_id: @current_user.id,
               event_name: 'new_match',
