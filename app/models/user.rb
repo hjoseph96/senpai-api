@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_many :conversations, through: :user_conversations, dependent: :delete_all
 
   has_one :gallery, dependent: :delete
-  has_many :photos, through: :gallery, dependent: :delete_all
+  has_many :photos, through: :gallery
 
   has_many :matches, dependent: :delete_all
   has_many :favorite_music, dependent: :delete_all
