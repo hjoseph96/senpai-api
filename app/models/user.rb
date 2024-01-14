@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :user_conversations, dependent: :delete_all
   has_many :conversations, through: :user_conversations, dependent: :delete_all
 
-  has_one :gallery, dependent: :delete_all
+  has_one :gallery, dependent: :delete
   has_many :photos, through: :gallery, dependent: :delete_all
 
   has_many :matches, dependent: :delete_all
@@ -22,7 +22,7 @@ class User < ApplicationRecord
   has_many :reports, dependent: :delete_all
   has_many :blocks, foreign_key: :blocker_id, dependent: :delete_all
   has_many :recommendations, dependent: :delete_all
-  has_one :influencer, dependent: :delete_all
+  has_one :influencer, dependent: :delete
 
   enum :online_status, [ :online, :offline ]
   enum :role, [ :user, :mod, :admin ]
