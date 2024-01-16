@@ -13,6 +13,13 @@ module Mutations
 
         begin
           @conversation = Conversation.find(params[:conversation_id])
+
+          params = {
+            sender_id: params[:sender_id],
+            conversation_id: @conversation.id
+          }
+          params.merge!(content: params[:content]) if params[:content].present?
+
           @message = Message.new(
               sender_id: params[:sender_id],
               content: params[:content],
@@ -40,8 +47,8 @@ module Mutations
             @message.recommendation = Recommendation.new(
                 user_id: @current_user.id,
                 recommendee_id: recommendee_id,
-                anime_id: params[:recommended_anime_id],
-                )
+                anime_id: params[:recommended_anime_id]
+            )
           end
 
           @conversation.messages << @message
