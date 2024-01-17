@@ -60,6 +60,7 @@ gem 'aws-sdk-s3'
 gem 'nokogiri'
 gem 'bulma-rails', '~> 0.9.4'
 gem 'active_model_serializers', '~> 0.10.0'
+gem 'pry-remote'
 
 
 group :development, :test do

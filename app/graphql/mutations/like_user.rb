@@ -35,6 +35,7 @@ module Mutations
 
           # Does the other user like the current user?
           other_user_likes_user = @likee.likes.where(likee_id: @current_user.id, like_type: [:standard, :super]).count > 0
+          binding.remote_pry
           if user_likes_other_user && other_user_likes_user && !rejected
             # Create a match for current user
             match = Match.create(user_id: @current_user.id, matchee_id: @likee.id)
