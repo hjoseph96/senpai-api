@@ -124,11 +124,9 @@ class AnilistSeeder
         tmp_folder = File.dirname(__FILE__), '/tmp_imgs'
         filename = "#{anime['title']['english']}-#{i}"
         cover_dest = "#{tmp_folder.join}/#{anime['title']['english'].gsub(/^.*(\\|\/)/, '').gsub(/[^0-9A-Za-z.\-]/, '_')}-#{i}.png"
-        
-        File.open(cover_dest, 'wb') do |fo|
-          sleep(60)
 
-          fo.write URI.open(anime['coverImage']['large']).read
+        File.open(cover_dest, 'wb') do |fo|
+          fo.write HTTParty.get(anime['coverImage']['large']).body
         end
         
         cover = File.open(cover_dest)
