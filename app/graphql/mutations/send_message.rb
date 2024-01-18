@@ -58,7 +58,7 @@ module Mutations
           PushNotification.create(
             user_id: receiver.id,
             event_name: 'new_message',
-            content: "#{receiver.first_name} sent you a new message."
+            content: "#{@current_user.first_name} sent you a new message."
           )
 
           @message.sender.appear
