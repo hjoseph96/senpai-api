@@ -129,7 +129,7 @@ class AnilistSeeder
           begin
             fo.write URI.open(anime['coverImage']['large']).read
           rescue => e
-            sleep(20)
+            sleep(60)
             fo.write URI.open(anime['coverImage']['large']).read
           end
         end
