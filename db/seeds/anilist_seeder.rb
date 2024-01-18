@@ -126,12 +126,9 @@ class AnilistSeeder
         cover_dest = "#{tmp_folder.join}/#{anime['title']['english'].gsub(/^.*(\\|\/)/, '').gsub(/[^0-9A-Za-z.\-]/, '_')}-#{i}.png"
         
         File.open(cover_dest, 'wb') do |fo|
-          begin
-            fo.write URI.open(anime['coverImage']['large']).read
-          rescue => e
-            sleep(60)
-            fo.write URI.open(anime['coverImage']['large']).read
-          end
+          sleep(60)
+
+          fo.write URI.open(anime['coverImage']['large']).read
         end
         
         cover = File.open(cover_dest)
