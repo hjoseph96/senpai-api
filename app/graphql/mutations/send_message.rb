@@ -16,9 +16,9 @@ module Mutations
 
           params = {
             sender_id: params[:sender_id],
-            conversation_id: @conversation.id
+            conversation_id: @conversation.id,
+            content: params[:content]
           }
-          params.merge!(content: params[:content]) if params[:content].present?
 
           @message = Message.new(
               sender_id: params[:sender_id],
