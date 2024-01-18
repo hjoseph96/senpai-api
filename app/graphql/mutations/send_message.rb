@@ -55,6 +55,10 @@ module Mutations
           @conversation.save!
 
           receiver = @conversation.users.where.not(id: @message.sender_id).first
+          puts "====================================="
+          puts "MESSAGE RECEIVER FOR #{receiver.id}"
+          puts '====================================='
+
           PushNotification.create(
             user_id: receiver.id,
             event_name: 'new_message',
