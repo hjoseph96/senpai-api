@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_19_044242) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_19_234648) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -104,7 +104,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_19_044242) do
     t.datetime "updated_at", null: false
     t.string "spotify_id"
     t.boolean "hidden"
+    t.datetime "deleted_at"
     t.index ["artist_name"], name: "index_favorite_musics_on_artist_name"
+    t.index ["deleted_at"], name: "index_favorite_musics_on_deleted_at"
     t.index ["hidden"], name: "index_favorite_musics_on_hidden"
     t.index ["music_type"], name: "index_favorite_musics_on_music_type"
     t.index ["track_name"], name: "index_favorite_musics_on_track_name"
@@ -115,6 +117,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_19_044242) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_galleries_on_deleted_at"
     t.index ["user_id"], name: "index_galleries_on_user_id"
   end
 
@@ -155,7 +159,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_19_044242) do
     t.uuid "conversation_id", null: false
     t.integer "sticker_id"
     t.boolean "read", default: false, null: false
+    t.datetime "deleted_at"
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["deleted_at"], name: "index_messages_on_deleted_at"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
@@ -164,6 +170,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_19_044242) do
     t.integer "order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_photos_on_deleted_at"
     t.index ["gallery_id"], name: "index_photos_on_gallery_id"
     t.index ["order"], name: "index_photos_on_order"
   end
@@ -184,7 +192,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_19_044242) do
     t.uuid "message_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["anime_id"], name: "index_recommendations_on_anime_id"
+    t.index ["deleted_at"], name: "index_recommendations_on_deleted_at"
     t.index ["message_id"], name: "index_recommendations_on_message_id"
     t.index ["recommendee_id"], name: "index_recommendations_on_recommendee_id"
     t.index ["user_id"], name: "index_recommendations_on_user_id"
@@ -215,7 +225,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_19_044242) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "order"
+    t.datetime "deleted_at"
     t.index ["anime_id"], name: "index_user_animes_on_anime_id"
+    t.index ["deleted_at"], name: "index_user_animes_on_deleted_at"
     t.index ["order"], name: "index_user_animes_on_order"
     t.index ["user_id"], name: "index_user_animes_on_user_id"
   end
@@ -225,7 +237,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_19_044242) do
     t.uuid "conversation_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["conversation_id"], name: "index_user_conversations_on_conversation_id"
+    t.index ["deleted_at"], name: "index_user_conversations_on_deleted_at"
     t.index ["user_id"], name: "index_user_conversations_on_user_id"
   end
 
@@ -234,6 +248,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_19_044242) do
     t.bigint "like_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_user_likes_on_deleted_at"
     t.index ["like_id"], name: "index_user_likes_on_like_id"
     t.index ["user_id"], name: "index_user_likes_on_user_id"
   end
@@ -283,6 +299,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_19_044242) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_verify_requests_on_deleted_at"
     t.index ["status"], name: "index_verify_requests_on_status"
     t.index ["user_id"], name: "index_verify_requests_on_user_id"
   end
