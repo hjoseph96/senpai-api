@@ -2,6 +2,8 @@
 
 module Types
   class MessageType < Types::BaseObject
+    include ApplicationHelper
+
     field :id, ID, null: false
     field :sender_id, Integer
     field :content, String

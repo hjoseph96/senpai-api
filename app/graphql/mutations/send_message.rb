@@ -14,17 +14,13 @@ module Mutations
         begin
           @conversation = Conversation.find(params[:conversation_id])
 
-          params = {
+          message_params = {
             sender_id: params[:sender_id],
             conversation_id: @conversation.id,
             content: params[:content]
           }
 
-          @message = Message.new(
-              sender_id: params[:sender_id],
-              content: params[:content],
-              conversation_id: @conversation.id
-          )
+          @message = Message.new(message_params)
 
           if params[:attachment].present?
             file = params[:attachment]
