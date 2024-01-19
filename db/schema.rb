@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_26_010749) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_19_044242) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -70,6 +70,19 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_010749) do
     t.index ["blockee_id"], name: "index_blocks_on_blockee_id"
     t.index ["blocker_id"], name: "index_blocks_on_blocker_id"
     t.index ["report_id"], name: "index_blocks_on_report_id"
+  end
+
+  create_table "characters", force: :cascade do |t|
+    t.bigint "anime_id", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "favorites"
+    t.string "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["anime_id"], name: "index_characters_on_anime_id"
+    t.index ["favorites"], name: "index_characters_on_favorites"
+    t.index ["role"], name: "index_characters_on_role"
   end
 
   create_table "conversations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -277,6 +290,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_26_010749) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "blocks", "reports"
+  add_foreign_key "characters", "animes"
   add_foreign_key "conversations", "matches"
   add_foreign_key "favorite_musics", "users"
   add_foreign_key "galleries", "users"

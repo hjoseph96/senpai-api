@@ -19,9 +19,14 @@ module Types
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :cover, String
+    field :characters, Types::CharacterType
 
     def cover
       cdn_for(object.cover_image)
+    end
+
+    def characters
+      object.characters
     end
   end
 end

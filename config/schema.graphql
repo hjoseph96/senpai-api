@@ -70,6 +70,7 @@ type AddSuperLikesPayload {
 
 type Anime {
   averageScore: Int
+  characters: Character
   cover: String
   createdAt: ISO8601DateTime!
   endDate: ISO8601DateTime
@@ -104,6 +105,17 @@ type Block {
 input BlockUserInput {
   blockedUserId: ID!
   userId: ID!
+}
+
+type Character {
+  animeId: Int!
+  createdAt: ISO8601DateTime!
+  favorites: Int
+  firstName: String
+  id: ID!
+  lastName: String
+  role: String
+  updatedAt: ISO8601DateTime!
 }
 
 type Conversation {
@@ -275,6 +287,7 @@ input FetchFeedInput {
   milesAway: Int!
   minAge: Int!
   page: Int
+  refresh: Boolean
   userId: ID!
   verified: Boolean
 }
@@ -403,7 +416,8 @@ type Message {
 
 input MessageInput {
   attachment: Upload
-  content: String!
+  attachmentType: String
+  content: String
   conversationId: String!
   recommendedAnimeId: ID
   senderId: Int!

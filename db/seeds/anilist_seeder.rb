@@ -2,6 +2,8 @@ require 'open-uri'
 require 'graphlient'
 
 class AnilistSeeder
+  include ActiveSupport::Inflector
+
   def self.create_animes
     new.parse_all_pages
   end
@@ -44,6 +46,20 @@ class AnilistSeeder
       			title {
       				english
       			}
+            characters(page: 1) {
+              edges { # Array of character edges
+                node { # Character node
+                  id
+                  image { large }
+                  name {
+                    first
+                    last
+                  }
+                  favourites
+                }
+                role
+              }
+            }
       			seasonYear
       			genres
       			popularity
@@ -96,6 +112,7 @@ class AnilistSeeder
 
       anime_data = response.original_hash['data']['Page']['media']
 
+
       anime_data.each do |anime|
         next unless anime['title']['english'].present?
 
@@ -118,6 +135,8 @@ class AnilistSeeder
         attributes[:end_date] = extract_date(anime['endDate'])
 
         saved_anime = Anime.create(attributes)
+
+        extract_characters(anime, saved_anime)
 
         next unless anime['coverImage']['large'].present?
 
@@ -148,5 +167,36 @@ class AnilistSeeder
 
   def extract_date(date)
     date['year'].present? ? Date.new(date['year']) : nil
+  end
+
+  def extract_characters(anime_data, created_anime)
+    lit_characters = anime_data['characters']['edges'].reject {|c| c['node']['favourites'] < 200 }
+
+    lit_characters.sort_by! {|h| h['node']['favourites'] }.reverse
+
+    lit_characters.each_with_index do |c, i|
+      character = c['node']
+
+      next if Character.exists?(first_name: character['name']['first'], last_name: character['name']['last'])
+
+      puts "Creating #{character['name']['first']} from #{created_anime.title}."
+
+      char = Character.create!(
+        anime_id: created_anime.id,
+        role: character['role'],
+        first_name: character['name']['first'],
+        last_name: character['name']['last'],
+        favorites: character['favourites'],
+      )
+
+      tmp_folder = File.dirname(__FILE__), '/tmp_imgs'
+      cover_dest = "#{tmp_folder.join}/#{parameterize(created_anime.title)}-#{char.first_name}-#{i}.png"
+      File.open(cover_dest, 'wb') do |fo|
+        fo.write HTTParty.get(c['node']['image']['large']).body
+      end
+
+      image = File.open(cover_dest)
+      char.image.attach(io: image, filename:  "#{char.first_name}_from_#{parameterize(created_anime.title)}-#{created_anime.id}")
+    end
   end
 end
