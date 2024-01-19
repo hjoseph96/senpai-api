@@ -6,23 +6,23 @@ class User < ApplicationRecord
 
   acts_as_paranoid
 
-  has_many :user_animes, dependent: :delete_all
-  has_many :animes, through: :user_animes, dependent: :delete_all
-  has_many :user_likes, dependent: :delete_all
-  has_many :likes, through: :user_likes, dependent: :delete_all
-  has_many :user_conversations, dependent: :delete_all
-  has_many :conversations, through: :user_conversations, dependent: :delete_all
+  has_many :user_animes, dependent: :destroy
+  has_many :animes, through: :user_animes
+  has_many :user_likes, dependent: :destroy
+  has_many :likes, through: :user_likes
+  has_many :user_conversations, dependent: :destroy
+  has_many :conversations, through: :user_conversations
 
   has_one :gallery, dependent: :destroy
-  has_many :photos, through: :gallery, dependent: :delete_all
+  has_many :photos, through: :gallery
 
-  has_many :matches, dependent: :delete_all
-  has_many :favorite_music, dependent: :delete_all
-  has_many :verify_requests, dependent: :delete_all
-  has_many :reports, dependent: :delete_all
-  has_many :blocks, foreign_key: :blocker_id, dependent: :delete_all
-  has_many :recommendations, dependent: :delete_all
-  has_one :influencer, dependent: :delete
+  has_many :matches, dependent: :destroy
+  has_many :favorite_music, dependent: :destroy
+  has_many :verify_requests, dependent: :destroy
+  has_many :reports, dependent: :destroy
+  has_many :blocks, foreign_key: :blocker_id, dependent: :destroy
+  has_many :recommendations, dependent: :destroy
+  has_one :influencer, dependent: :destroy
 
   enum :online_status, [ :online, :offline ]
   enum :role, [ :user, :mod, :admin ]
