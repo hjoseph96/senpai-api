@@ -183,7 +183,7 @@ class AnilistSeeder
 
       char = Character.create!(
         anime_id: created_anime.id,
-        role: character['role'],
+        role: c['role'],
         first_name: character['name']['first'],
         last_name: character['name']['last'],
         favorites: character['favourites'],
