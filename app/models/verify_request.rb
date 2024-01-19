@@ -1,4 +1,6 @@
 class VerifyRequest < ApplicationRecord
+  acts_as_paranoid
+
   belongs_to :user
 
   has_one_attached :submitted_photo
