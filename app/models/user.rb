@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_one :gallery, dependent: :destroy
   has_many :photos, through: :gallery
 
-  has_many :matches, dependent: :destroy
+  has_many :matches, dependent: :delete_all
   has_many :favorite_music, dependent: :destroy
   has_many :verify_requests, dependent: :destroy
   has_many :reports, dependent: :destroy
