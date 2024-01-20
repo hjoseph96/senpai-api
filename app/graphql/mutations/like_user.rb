@@ -26,8 +26,6 @@ module Mutations
           end
 
           @like = Like.create(user_id: @current_user.id, likee_id: params[:likee_id], like_type: params[:like_type])
-          UserLike.create(user_id: @current_user.id, like_id: @like.id)
-
           rejected = params[:like_type] == 'rejection'
 
           # Does the user like the other user?
