@@ -16,7 +16,7 @@ module Queries
         end
 
         if anime_params[:title].present?
-          results = results.where("title ILIKE ?", "%#{anime_params[:title]}%").order(popularity: :desc).page(page)
+          results = results.search_by_title(anime_params[:title]).order(popularity: :desc).page(page)
         end
 
         results
