@@ -35,6 +35,7 @@ module Types
     field :gallery, Types::GalleryType
     field :favorite_music, [Types::FavoriteMusicType]
     field :blocks, [Types::BlockType]
+    field :miles_away, Integer
 
     def animes
       UserAnime.where(user_id: object.id).order(:order).map(&:anime)
@@ -54,6 +55,16 @@ module Types
 
     def blocks
       object.blocks
+    end
+
+    def miles_away(other_user_id)
+      @other_user = User.find(other_user_id)
+
+      p1 = RGeo::Geographic.spherical_factory.point(object.lonlat.longitude, object.lonlat.latitude)
+
+      p2 = RGeo::Geographic.spherical_factory.point(@other_user.lonlat.longitude, @other_user.lonlat.latitude)
+
+      p1.distance(p2) / 1609.34
     end
   end
 end

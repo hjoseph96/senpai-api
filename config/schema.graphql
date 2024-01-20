@@ -997,6 +997,7 @@ type User {
   lastSignInIp: String
   lonlat: String
   matches: [Match!]
+  milesAway: Int
   occupation: String
   onlineStatus: String
   phone: String!

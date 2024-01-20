@@ -10,6 +10,8 @@ class VerifyRequest < ApplicationRecord
   def approve!
     self.approved!
 
+    user.update(verified: true)
+
     PushNotification.create(
       user_id: self.user_id,
       event_name: 'verify_request_approve',
