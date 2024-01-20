@@ -20,6 +20,6 @@ class AddDeletedAtToAssociations < ActiveRecord::Migration[7.1]
     add_index :messages, :deleted_at
     add_index :verify_requests, :deleted_at
     add_index :recommendations, :deleted_at
-    add_index :influencersx, :deleted_at
+    add_index :influencers, :deleted_at
   end
 end
