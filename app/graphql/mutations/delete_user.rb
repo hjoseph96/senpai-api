@@ -7,6 +7,7 @@ module Mutations
       def resolve(user_id:)
         @user = User.find(user_id)
 
+        @user.matches.map(:conversation).map(&:destroy!)
         @user.matches.destroy_all
         @user.destroy
 
