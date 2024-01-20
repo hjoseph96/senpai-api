@@ -1,7 +1,7 @@
 class AddDeletedAtToAssociations < ActiveRecord::Migration[7.1]
   def change
     add_column :user_animes, :deleted_at, :datetime
-    add_column :user_likes, :deleted_at, :datetime
+    add_column :likes, :deleted_at, :datetime
     add_column :user_conversations, :deleted_at, :datetime
     add_column :galleries, :deleted_at, :datetime
     add_column :photos, :deleted_at, :datetime
@@ -12,7 +12,7 @@ class AddDeletedAtToAssociations < ActiveRecord::Migration[7.1]
     add_column :influencers, :deleted_at, :datetime
 
     add_index :user_animes, :deleted_at
-    add_index :user_likes, :deleted_at
+    add_index :likes, :deleted_at
     add_index :user_conversations, :deleted_at
     add_index :galleries, :deleted_at
     add_index :photos, :deleted_at

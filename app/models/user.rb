@@ -8,8 +8,7 @@ class User < ApplicationRecord
 
   has_many :user_animes, dependent: :destroy
   has_many :animes, through: :user_animes
-  has_many :user_likes, dependent: :destroy
-  has_many :likes, through: :user_likes
+  has_many :likes, dependent: :destroy
   has_many :user_conversations, dependent: :destroy
   has_many :conversations, through: :user_conversations, dependent: :destroy
 

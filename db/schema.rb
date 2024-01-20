@@ -139,6 +139,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_040121) do
     t.integer "likee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_likes_on_deleted_at"
     t.index ["likee_id"], name: "index_likes_on_likee_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
@@ -247,17 +249,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_040121) do
     t.index ["user_id"], name: "index_user_conversations_on_user_id"
   end
 
-  create_table "user_likes", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "like_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_user_likes_on_deleted_at"
-    t.index ["like_id"], name: "index_user_likes_on_like_id"
-    t.index ["user_id"], name: "index_user_likes_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "phone", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -329,7 +320,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_040121) do
   add_foreign_key "reports", "users"
   add_foreign_key "user_conversations", "conversations"
   add_foreign_key "user_conversations", "users"
-  add_foreign_key "user_likes", "likes"
-  add_foreign_key "user_likes", "users"
   add_foreign_key "verify_requests", "users"
 end
