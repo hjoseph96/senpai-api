@@ -14,8 +14,8 @@ module Queries
 
       popular_character_ids = results.search_by_genre(char_params[:genre]).map(&:character_ids).flatten
       results = Character.where(id: popular_character_ids)
-                         .search_by_full_name(char_params[:character_name])
-                         .order(favorites: :desc)
+                          .order(favorites: :desc)
+                          .search_by_full_name(char_params[:character_name])
 
       results.page(page).per(30)
     end
