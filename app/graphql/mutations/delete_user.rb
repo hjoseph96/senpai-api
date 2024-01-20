@@ -7,9 +7,11 @@ module Mutations
       def resolve(user_id:)
         @user = User.find(user_id)
 
-        @user.matches.map(&:conversation).map(&:destroy)
-        @user.matches.destroy_all
-        @user.destroy
+        if @user.matches > 0
+          @user.matches.map(&:conversation).map(&:destroy)
+          @user.matches.destroy_all
+          @user.destroy
+        end
 
         { soft_deleted_user: @user }
       end
