@@ -9,6 +9,7 @@ class AddDeletedAtToAssociations < ActiveRecord::Migration[7.1]
     add_column :messages, :deleted_at, :datetime
     add_column :verify_requests, :deleted_at, :datetime
     add_column :recommendations, :deleted_at, :datetime
+    add_column :influencers, :deleted_at, :datetime
 
     add_index :user_animes, :deleted_at
     add_index :user_likes, :deleted_at
@@ -19,5 +20,6 @@ class AddDeletedAtToAssociations < ActiveRecord::Migration[7.1]
     add_index :messages, :deleted_at
     add_index :verify_requests, :deleted_at
     add_index :recommendations, :deleted_at
+    add_index :influencersx, :deleted_at
   end
 end
