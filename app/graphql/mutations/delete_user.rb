@@ -7,15 +7,7 @@ module Mutations
       def resolve(user_id:)
         @user = User.find(user_id)
 
-        if @user.matches.count > 0
-          @user.matches.map do |m|
-            convo = m.conversation
-            convo.destroy if convo.present?
-          end
-          
-          @user.matches.destroy_all
-          @user.destroy
-        end
+        @user.destroy
 
         { soft_deleted_user: @user }
       end
