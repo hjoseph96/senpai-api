@@ -7,6 +7,7 @@ module Mutations
       def resolve(user_id:)
         @user = User.find(user_id)
 
+        @user.matches.destroy!
         @user.destroy
 
         { soft_deleted_user: @user }
