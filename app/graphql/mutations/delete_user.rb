@@ -8,7 +8,11 @@ module Mutations
         @user = User.find(user_id)
 
         if @user.matches.count > 0
-          @user.matches.map(&:conversation).map(&:destroy)
+          @user.matches.map do |m|
+            convo = m.conversation
+            convo.destroy if convo.present?
+          end
+          
           @user.matches.destroy_all
           @user.destroy
         end
