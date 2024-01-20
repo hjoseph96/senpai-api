@@ -127,6 +127,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_040121) do
     t.integer "referral_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_influencers_on_deleted_at"
     t.index ["referral_count"], name: "index_influencers_on_referral_count"
     t.index ["user_id"], name: "index_influencers_on_user_id"
   end

@@ -22,6 +22,7 @@ class User < ApplicationRecord
   has_many :reports, dependent: :destroy
   has_many :blocks, foreign_key: :blocker_id, dependent: :destroy
   has_many :recommendations, dependent: :destroy
+  has_many :push_notifications, dependent: :delete_all
   has_one :influencer, dependent: :destroy
 
   enum :online_status, [ :online, :offline ]

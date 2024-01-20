@@ -5,7 +5,7 @@ class CreateFavoriteMusics < ActiveRecord::Migration[7.0]
       t.string :cover_url
       t.string :track_name
       t.string :artist_name
-      t.references :user, null: false, foreign_key: true
+      t.references :user, null: false, foreign_key: true, on_delete: :cascade
 
       t.timestamps
     end
