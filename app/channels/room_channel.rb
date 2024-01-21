@@ -14,6 +14,12 @@ class RoomChannel < ApplicationCable::Channel
       convo = get_convo(room_id) # A conversation is a room
 
       convo.messages.where.not(sender_id: current_user.id).update(read: true)
+
+      PushNotification.create(
+        user_id: current_user.id,
+        event_name: 'reset_message',
+        content: "Unread messages marked as read."
+      )
     end
     
     # calls when a client broadcasts data
