@@ -59,7 +59,7 @@ module Types
       object.blocks
     end
 
-    def miles_away(other_user_id)
+    def miles_away(other_user_id:)
       @other_user = User.find(other_user_id)
 
       p1 = RGeo::Geographic.spherical_factory.point(object.lonlat.longitude, object.lonlat.latitude)
