@@ -33,10 +33,6 @@ module Mutations
 
           # Does the other user like the current user?
           other_user_likes_user = @likee.likes.where(likee_id: @current_user.id, like_type: [:standard, :super]).count > 0
-
-          puts "Other user likes user: #{other_user_likes_user}"
-          puts "User likes other user: #{user_likes_other_user}"
-          puts "Rejected: #{rejected}"
           
           if user_likes_other_user && other_user_likes_user && !rejected
             # Create a match for current user
