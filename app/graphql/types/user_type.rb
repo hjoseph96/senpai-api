@@ -35,7 +35,9 @@ module Types
     field :gallery, Types::GalleryType
     field :favorite_music, [Types::FavoriteMusicType]
     field :blocks, [Types::BlockType]
-    field :miles_away, Integer
+    field :miles_away, Integer do
+      argument :other_user_id, ID
+    end
 
     def animes
       UserAnime.where(user_id: object.id).order(:order).map(&:anime)

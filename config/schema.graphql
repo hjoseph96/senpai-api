@@ -1005,7 +1005,7 @@ type User {
   lastSignInIp: String
   lonlat: String
   matches: [Match!]
-  milesAway: Int
+  milesAway(otherUserId: ID!): Int
   occupation: String
   onlineStatus: String
   phone: String!
