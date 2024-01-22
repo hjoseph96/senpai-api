@@ -15,7 +15,7 @@ module Mutations
 
         match = nil
         begin
-          if params[:like_type] == 1
+          if params[:like_type] == 'super'
             count = @current_user.super_like_count
 
             if count > 0
