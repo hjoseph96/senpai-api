@@ -19,7 +19,7 @@ module Queries
           convos = convos.joins(:users).where('users.first_name ILIKE ?', search)
         end
 
-        convos.page(page).per(10)
+        convos
       end
     end
   end
