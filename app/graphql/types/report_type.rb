@@ -3,10 +3,10 @@
 module Types
   class ReportType < Types::BaseObject
     field :id, ID, null: false
-    field :user_id, Integer, null: false
-    field :offense_id, Integer
+    field :user_id, ID, null: false
+    field :offense_id, ID
     field :reason, String
-    field :conversation_id, ID, null: false
+    field :conversation_id, String, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 

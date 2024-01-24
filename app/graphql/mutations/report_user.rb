@@ -22,7 +22,7 @@ module Mutations
                 conversation_id: report_params[:conversation_id]
             )
 
-            Block.create(
+            Block.create!(
                 blocker_id: report_params[:user_id],
                 blockee_id: report_params[:offense_id],
                 report_id: r.id
