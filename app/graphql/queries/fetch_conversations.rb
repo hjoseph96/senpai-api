@@ -6,7 +6,7 @@ module Queries
       argument :page, Integer, required: false
       argument :search, String, required: false
       type [Types::ConversationType], null: false
-  
+
       def resolve(user_id:, page: 1, search: '')
         begin
           @user = User.find(user_id)

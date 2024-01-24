@@ -40,23 +40,23 @@ module Types
     end
 
     def animes
-      UserAnime.where(user_id: object.id).order(:order).map(&:anime)
+      dataloader.with(Sources::AnimeByUserId).load(object.id)
     end
 
     def matches
-      object.matches
+      dataloader.with(Sources::MatchByUserId).load(object.id)
     end
 
     def gallery
-      object.gallery
+      dataloader.with(Sources::GalleryByUserId).load(object.id)
     end
 
     def favorite_music
-      object.favorite_music
+      dataloader.with(Sources::FavoriteMusicByUserId).load(object.id)
     end
 
     def blocks
-      object.blocks
+      dataloader.with(Sources::BlockByUserId).load(object.id)
     end
 
     def miles_away(other_user_id:)

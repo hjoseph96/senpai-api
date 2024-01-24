@@ -14,7 +14,7 @@ module Types
     field :url, String, null: false
 
     def user
-      object.user
+      dataloader.with(Sources::UserByVerifyRequestId).load(object.id)
     end
 
     def url

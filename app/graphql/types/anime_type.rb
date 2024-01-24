@@ -27,7 +27,7 @@ module Types
     end
 
     def characters
-      object.characters
+      dataloader.with(Sources::CharactersByAnimeId).load(object.id)
     end
   end
 end

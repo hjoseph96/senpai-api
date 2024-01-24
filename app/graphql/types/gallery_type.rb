@@ -11,7 +11,7 @@ module Types
     field :photos, [Types::PhotoType]
 
     def photos
-      object.photos.order(order: :asc)
+      dataloader.with(Sources::PhotosByGalleryId).load(object.id)
     end
   end
 end

@@ -12,13 +12,15 @@ module Types
     field :matchee, Types::UserType, null: false
 
     def conversation
-      object.conversation
+      dataloader.with(Sources::ConversationByMatchId).load(object.id)
     end
+
     def user
-      object.user
+      dataloader.with(Sources::UserByMatchId).load(object.id)
     end
+
     def matchee
-      object.matchee
+      dataloader.with(Sources::MatcheeByMatchId).load(object.id)
     end
   end
 end

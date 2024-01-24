@@ -15,15 +15,15 @@ module Types
     field :conversation, Types::ConversationType, null: false
 
     def reporter
-      object.user
+      dataloader.with(Sources::UserByReportId).load(object.id)
     end
 
     def offender
-      object.offender
+      dataloader.with(Sources::OffenderByReportId).load(object.id)
     end
 
     def conversation
-      object.conversation
+      dataloader.with(Sources::ConversationByReportId).load(object.id)
     end
   end
 end

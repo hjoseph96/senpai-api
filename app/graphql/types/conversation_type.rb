@@ -16,20 +16,20 @@ module Types
 
 
     def messages
-      object.messages.order(created_at: :desc)
+      dataloader.with(Sources::MessagesByConversationId).load(object.id)
     end
 
     def match
-      object.match
+      dataloader.with(Sources::MatchByConversationId).load(object.id)
     end
 
     def last_message
-      object.messages.order(created_at: :desc).first
+      dataloader.with(Sources::MessagesByConversationId).load(object.id).first
     end
 
     def unread_count(user_id:)
-      other_persons_messages = object.messages.where.not(sender_id: user_id)
-      other_persons_messages.where(read: false).count
+      other_persons_messages = dataloader.with(Sources::MessagesByConversationId).load(object.id).select { |message| message.sender_id != user_id }
+      other_persons_messages.select { |message| !message.read }.count
     end
   end
 end

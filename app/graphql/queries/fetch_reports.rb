@@ -12,7 +12,6 @@ module Queries
     def resolve(user_id:, page: 1, per_page: 50, reason:)
       @current_user = User.find(user_id)
 
-
       if @current_user.present? && @current_user.on_the_team?
         results = Report.all.order(created_at: :desc)
 
@@ -22,7 +21,6 @@ module Queries
       else
         GraphQL::ExecutionError.new("No admin or mod found")
       end
-
     end
   end
 end
