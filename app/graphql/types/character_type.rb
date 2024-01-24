@@ -15,7 +15,7 @@ module Types
 
     field :image_url, String, null: false
 
-    def url
+    def image_url
       cdn_for(object.image)
     end
   end
