@@ -70,7 +70,7 @@ type AddSuperLikesPayload {
 
 type Anime {
   averageScore: Int
-  characters: Character
+  characters: [Character!]
   cover: String
   createdAt: ISO8601DateTime!
   endDate: ISO8601DateTime
