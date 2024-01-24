@@ -20,7 +20,7 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
     field :cover, String
-    field :characters, Types::CharacterType
+    field :characters, [Types::CharacterType]
 
     def cover
       cdn_for(object.cover_image)
