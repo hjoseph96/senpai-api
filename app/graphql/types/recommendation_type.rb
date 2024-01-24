@@ -12,8 +12,8 @@ module Types
 
     field :anime, Types::AnimeType
 
-    def message
-      object.anime
+    def anime
+      dataloader.with(Sources::AnimeByRecommendationId).load(object.id)
     end
   end
 end

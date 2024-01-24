@@ -23,11 +23,11 @@ module Types
     end
 
     def sticker
-      object.sticker
+      dataloader.with(Sources::StickerByMessageId).load(object.id)
     end
 
     def recommendation
-      object.recommendation
+      dataloader.with(Sources::RecommendationByMessageId).load(object.id)
     end
 
     def attachment_type
