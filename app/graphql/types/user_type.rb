@@ -40,11 +40,11 @@ module Types
     end
 
     def animes
-      dataloader.with(Sources::AnimeByUserId).load(object.id)
+      dataloader.with(Sources::AnimesByUserId).load(object.id)
     end
 
     def matches
-      dataloader.with(Sources::MatchByUserId).load(object.id)
+      dataloader.with(Sources::MatchesByUserId).load(object.id)
     end
 
     def gallery
@@ -52,11 +52,11 @@ module Types
     end
 
     def favorite_music
-      dataloader.with(Sources::FavoriteMusicByUserId).load(object.id)
+      dataloader.with(Sources::FavoriteMusicsByUserId).load(object.id)
     end
 
     def blocks
-      dataloader.with(Sources::BlockByUserId).load(object.id)
+      dataloader.with(Sources::BlocksByUserId).load(object.id)
     end
 
     def miles_away(other_user_id:)
