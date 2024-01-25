@@ -35,7 +35,7 @@ module Mutations
             PushNotification.create!(
               user_id: @current_user.id,
               event_name: 'unmatched_user',
-              content: "#{@current_user.first_name} unmatched #{blocked_user.first_name}"
+              content: "#{@current_user.first_name} reported #{blocked_user.first_name}"
             )
 
             { blocked: true, report: r }
