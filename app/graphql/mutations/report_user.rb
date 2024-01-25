@@ -33,7 +33,7 @@ module Mutations
 
             blocked_user = User.find(report_params[:offense_id])
             PushNotification.create!(
-              user_id: user.id,
+              user_id: @current_user.id,
               event_name: 'unmatched_user',
               content: "#{@current_user.first_name} unmatched #{blocked_user.first_name}"
             )
