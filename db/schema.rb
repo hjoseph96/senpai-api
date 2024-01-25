@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_20_040121) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_25_202631) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -67,9 +67,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_040121) do
     t.bigint "report_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["blockee_id"], name: "index_blocks_on_blockee_id"
     t.index ["blocker_id"], name: "index_blocks_on_blocker_id"
     t.index ["report_id"], name: "index_blocks_on_report_id"
+    t.index ["user_id"], name: "index_blocks_on_user_id"
   end
 
   create_table "characters", force: :cascade do |t|
@@ -303,6 +305,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_040121) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "blocks", "reports"
+  add_foreign_key "blocks", "users"
   add_foreign_key "characters", "animes"
   add_foreign_key "conversations", "matches"
   add_foreign_key "favorite_musics", "users"

@@ -14,6 +14,7 @@ module Mutations
         user.matches.where(matchee_id: block_params[:blocked_user_id]).destroy_all
 
         Block.create!(
+          user_id: user.id,
           blocker_id: block_params[:user_id],
           blockee_id: block_params[:blocked_user_id]
         )
