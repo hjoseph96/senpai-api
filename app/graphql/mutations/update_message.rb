@@ -20,11 +20,13 @@ module Mutations
         reacted_user = @message.conversation.users.where.not(id: @message.sender_id)
 
 
-        PushNotification.create!(
-          user_id: reacted_user.id,
-          event_name: 'message_reaction',
-          content: "#{reacted_user.first_name} reacted to your message."
-        )
+        if update_params[:reaction].present?
+          PushNotification.create!(
+            user_id: reacted_user.id,
+            event_name: 'message_reaction',
+            content: "#{reacted_user.first_name} reacted to your message."
+          )
+        end
 
         { message: @message.reload }
       rescue ActiveRecord::RecordInvalid => e
