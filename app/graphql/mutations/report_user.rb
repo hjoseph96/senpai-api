@@ -23,12 +23,20 @@ module Mutations
             )
 
             Block.create!(
+                user_id: @current_user.id,
                 blocker_id: report_params[:user_id],
                 blockee_id: report_params[:offense_id],
                 report_id: r.id
             )
 
             Match.where(user_id: @current_user.id, matchee_id: report_params[:offense_id]).destroy_all
+
+            blocked_user = User.find(report_params[:offense_id])
+            PushNotification.create!(
+              user_id: user.id,
+              event_name: 'unmatched_user',
+              content: "#{@current_user.first_name} unmatched #{blocked_user.first_name}"
+            )
 
             { blocked: true, report: r }
         rescue ActiveRecord::RecordInvalid => e
