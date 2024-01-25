@@ -156,7 +156,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_040121) do
     t.index ["user_id"], name: "index_matches_on_user_id"
   end
 
-  create_table "messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "messages", force: :cascade do |t|
     t.integer "sender_id", null: false
     t.text "content"
     t.integer "reaction"
@@ -195,7 +195,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_20_040121) do
     t.bigint "user_id", null: false
     t.integer "recommendee_id", null: false
     t.bigint "anime_id", null: false
-    t.uuid "message_id", null: false
+    t.bigint "message_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
