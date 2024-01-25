@@ -15,10 +15,6 @@ class RoomChannel < ApplicationCable::Channel
 
       convo.messages.where.not(sender_id: current_user.id).update(read: true)
 
-      puts "==============="
-      puts "    READ EVENT"
-      puts "==============="
-
       PushNotification.create(
         user_id: current_user.id,
         event_name: 'reset_message',
