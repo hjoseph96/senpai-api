@@ -28,7 +28,7 @@ module Types
     end
 
     def unread_count(user_id:)
-      other_persons_messages = object.messages.where.not(sender_id: user_id)
+      other_persons_messages = object.messages.where(conversation_id: object.id).not(sender_id: user_id)
       other_persons_messages.where(read: false).count
     end
   end
