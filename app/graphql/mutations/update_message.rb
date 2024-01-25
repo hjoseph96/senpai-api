@@ -17,6 +17,15 @@ module Mutations
 
         @message.update!(update_params)
 
+        reacted_user = @message.conversation.users.where.not(id: @message.sender_id)
+
+
+        PushNotification.create!(
+          user_id: reacted_user.id,
+          event_name: 'message_reaction',
+          content: "#{reacted_user.first_name} reacted to your message."
+        )
+
         { message: @message.reload }
       rescue ActiveRecord::RecordInvalid => e
         GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}: #{e.record.errors.full_messages.join(', ')}")
