@@ -4,7 +4,7 @@ module Sources
       records = {}
 
       Gallery.includes(:photos).where(id: gallery_ids).each do |gallery|
-        records[gallery.id] = gallery.photos.order(order: :asc)
+        records[gallery.id] = gallery.photos.includes(image_attachment: :blob).order(order: :asc)
       end
 
       gallery_ids.map { |id| records[id] }

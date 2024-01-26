@@ -4,7 +4,7 @@ class FeedLoader
     end
 
     def create_feed(user_id:, distance_in_miles:, anime_ids:)
-        @user = User.find(user_id)
+        @user = User.preload(:likes, :matches, :blocks).find(user_id)
         @miles = distance_in_miles
 
         rejects = @user.likes.where(like_type: :rejection).pluck(:likee_id)
@@ -33,10 +33,11 @@ class FeedLoader
         user_pool = []
 
         # Show super likers first
+
         super_likers = User.joins(:likes).where(likes: { like_type: :super, likee_id: @user.id })
         if super_likers.present?
             super_likers.each do |s|
-                next if @user.has_liked?(s) || @user.matched_with?(s) || @user.blocked?(s)
+                next if User.has_liked?(@user.likes, s) || User.matched_with?(@user.matches, s) || User.blocked?(@user.blocks, s)
                 next unless want_each_other?(@user, s)
                 next unless calculate_distance(u) <= @miles
 
@@ -48,7 +49,7 @@ class FeedLoader
         likers = User.joins(:likes).where(likes: { like_type: :standard, likee_id: @user.id })
         if likers.present?
             likers.each do |u|
-                next if @user.has_liked?(u) || @user.matched_with?(u) || @user.blocked?(u)
+                next if User.has_liked?(@user.likes, u) || User.matched_with?(@user.matches, u) || User.blocked?(@user.blocks, u)
                 next unless want_each_other?(@user, u)
                 next unless calculate_distance(u) <= @miles
 
@@ -59,7 +60,7 @@ class FeedLoader
         (50 - user_pool.count).times do
             u = pool.sample
 
-            next if @user.has_liked?(u) || @user.matched_with?(u) || @user.blocked?(u)
+            next if User.has_liked?(@user.likes, u) || User.matched_with?(@user.matches, u) || User.blocked?(@user.blocks, u)
             next unless want_each_other?(@user, u)
             next unless calculate_distance(u) <= @miles
 
@@ -68,7 +69,7 @@ class FeedLoader
 
         ids = user_pool.map(&:id).uniq - reject_ids
 
-        User.where(id: ids)
+        User.where(id: ids).preload(:animes)
     end
 
     def want_each_other?(user, other_user)
