@@ -49,7 +49,7 @@ class FeedLoader
         likers = User.joins(:likes).where(likes: { like_type: :standard, likee_id: @user.id })
         if likers.present?
             likers.each do |u|
-                next if User.has_liked?(@user.likes, s) || User.matched_with?(@user.matches, s) || User.blocked?(@user.blocks, s)
+                next if User.has_liked?(@user.likes, u) || User.matched_with?(@user.matches, u) || User.blocked?(@user.blocks, u)
                 next unless want_each_other?(@user, u)
                 next unless calculate_distance(u) <= @miles
 
@@ -60,7 +60,7 @@ class FeedLoader
         (50 - user_pool.count).times do
             u = pool.sample
 
-            next if User.has_liked?(@user.likes, s) || User.matched_with?(@user.matches, s) || User.blocked?(@user.blocks, s)
+            next if User.has_liked?(@user.likes, u) || User.matched_with?(@user.matches, u) || User.blocked?(@user.blocks, u)
             next unless want_each_other?(@user, u)
             next unless calculate_distance(u) <= @miles
 
