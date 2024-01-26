@@ -4,7 +4,7 @@ module Sources
       records = {}
 
       Anime.includes(:characters).where(id: anime_ids).each do |anime|
-        records[anime.id] = anime.characters.order(favorites: :desc)
+        records[anime.id] = anime.characters.includes(image_attachment: :blob).order(favorites: :desc)
       end
 
       anime_ids.map { |id| records[id] }

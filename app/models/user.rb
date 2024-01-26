@@ -113,12 +113,23 @@ class User < ApplicationRecord
     self.likes.where(likee_id: user.id).present?
   end
 
+  def self.has_liked?(likes, user)
+    likes.select { |like| like.likee_id == user.id }.present?
+  end
+
   def matched_with?(user)
     self.matches.where(matchee_id: user.id).count > 0
   end
 
-  def blocked?(user_id)
-    self.blocks.where(blockee_id: user_id).present?
+  def self.matched_with?(matches, user)
+    matches.select { |match| match.matchee_id == user.id }.present?
   end
 
+  def blocked?(user)
+    self.blocks.where(blockee_id: user.id).present?
+  end
+
+  def self.blocked?(blocks, user)
+    blocks.select { |block| block.blockee_id == user.id }.present?
+  end
 end

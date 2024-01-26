@@ -4,7 +4,7 @@ module Sources
       records = {}
 
       User.includes(:animes).where(id: user_ids).each do |user|
-        records[user.id] = user.animes.order(:order)
+        records[user.id] = user.animes.includes(cover_image_attachment: :blob).order(:order)
       end
 
       user_ids.map { |id| records[id] }
