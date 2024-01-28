@@ -57,6 +57,12 @@ module Mutations
             content: "#{@current_user.first_name} sent you a new message."
           )
 
+          PushNotification.create(
+            user_id: @current_user.id,
+            event_name: 'new_message',
+            content: 'You sent a message.'
+          )
+
           @message.sender.appear
 
           { message: @message.reload(lock: true) }
