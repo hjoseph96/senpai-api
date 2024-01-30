@@ -358,6 +358,7 @@ type Like {
 input LikeInput {
   likeType: String!
   likeeId: Int!
+  userId: Int!
 }
 
 """
