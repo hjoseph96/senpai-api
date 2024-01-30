@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :conversations, through: :user_conversations, dependent: :destroy
 
   has_one :gallery, dependent: :destroy
-  has_many :photos, through: :gallery
+  has_many :photos, through: :gallery, dependent: :destroy
 
   has_many :matches, dependent: :destroy
   has_many :favorite_music, dependent: :destroy
