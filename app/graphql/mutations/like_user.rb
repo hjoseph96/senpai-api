@@ -14,7 +14,8 @@ module Mutations
           raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
         end
 
-        @current_user = context[:current_user]
+        @current_user = User.find(params[:user_id])
+
         @likee = User.find(params[:likee_id])
 
         match = nil
