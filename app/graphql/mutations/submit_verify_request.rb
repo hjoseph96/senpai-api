@@ -9,8 +9,13 @@ module Mutations
       field :user, Types::UserType, null: false
   
       def resolve(params:)
+        unless context[:ready?]
+          raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
+        end
+
+        @current_user = context[:current_user]
+
         verify_params = Hash params
-        @current_user = User.find(verify_params[:user_id])
 
         file = verify_params[:image]
         blob = ActiveStorage::Blob.create_and_upload!(

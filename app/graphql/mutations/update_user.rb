@@ -9,9 +9,13 @@ module Mutations
       field :user, Types::UserType, null: false
 
       def resolve(params:)
-        update_params = Hash params
+        unless context[:ready?]
+          raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
+        end
 
-        @current_user = User.find(update_params[:user_id])
+        @current_user = context[:current_user]
+
+        update_params = Hash params
 
         begin
             update_params.delete(:user_id)

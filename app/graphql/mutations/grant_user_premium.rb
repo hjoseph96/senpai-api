@@ -3,13 +3,15 @@
 module Mutations
     class GrantUserPremium < Mutations::BaseMutation
       graphql_name "GrantUserPremium"
-  
-      argument :user_id, Integer, required: true
 
       field :user, Types::UserType, null: false
 
       def resolve(user_id:)
-        @current_user = User.find(user_id)
+        unless context[:ready?]
+          raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
+        end
+
+        @current_user = context[:current_user]
 
         begin
             @current_user.update!(premium: true)

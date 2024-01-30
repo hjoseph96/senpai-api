@@ -12,11 +12,15 @@ module Mutations
       def resolve(params:)
         report_params = Hash params
 
-        @current_user = User.find(report_params[:user_id])
+        unless context[:ready?]
+          raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
+        end
+
+        @current_user = context[:current_user]
 
         begin
             r = Report.create!(
-                user_id: report_params[:user_id],
+                user_id: @current_user.id,
                 offense_id: report_params[:offense_id],
                 reason: report_params[:reason],
                 conversation_id: report_params[:conversation_id]
@@ -24,7 +28,7 @@ module Mutations
 
             Block.create!(
                 user_id: @current_user.id,
-                blocker_id: report_params[:user_id],
+                blocker_id: @current_user.id,
                 blockee_id: report_params[:offense_id],
                 report_id: r.id
             )

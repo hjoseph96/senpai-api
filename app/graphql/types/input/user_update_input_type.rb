@@ -1,7 +1,6 @@
 module Types
     module Input
       class UserUpdateInputType < Types::BaseInputObject
-        argument :user_id, ID, required: true
         argument :first_name, String, required: false
         argument :birthday, GraphQL::Types::ISO8601DateTime, required: false
         argument :bio, String, required: false

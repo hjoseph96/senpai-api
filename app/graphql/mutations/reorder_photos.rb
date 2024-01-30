@@ -11,7 +11,13 @@ module Mutations
       field :gallery, Types::GalleryType
 
       def resolve(photo_id:, order:)
-        @photo = Photo.find(photo_id)
+        unless context[:ready?]
+          raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
+        end
+
+        @current_user = context[:current_user]
+
+        @photo = @current_user.photos.find(photo_id)
 
         @photo.update!(order: order)
 

@@ -8,7 +8,6 @@ input AddFavoriteAnimeInput {
   A unique identifier for the client performing the mutation.
   """
   clientMutationId: String
-  userId: ID!
 }
 
 """
@@ -54,7 +53,6 @@ input AddSuperLikesInput {
   A unique identifier for the client performing the mutation.
   """
   clientMutationId: String
-  userId: ID!
 }
 
 """
@@ -104,7 +102,6 @@ type Block {
 
 input BlockUserInput {
   blockedUserId: ID!
-  userId: ID!
 }
 
 type Character {
@@ -162,7 +159,6 @@ input DeleteFavoriteAnimeInput {
   A unique identifier for the client performing the mutation.
   """
   clientMutationId: String
-  userId: ID!
 }
 
 """
@@ -186,7 +182,6 @@ input DeleteFavoriteMusicInput {
   """
   clientMutationId: String
   musicIds: [ID!]!
-  userId: ID!
 }
 
 """
@@ -210,7 +205,6 @@ input DeletePhotoInput {
   """
   clientMutationId: String
   photoId: ID!
-  userId: ID!
 }
 
 """
@@ -233,7 +227,6 @@ input DeleteUserInput {
   A unique identifier for the client performing the mutation.
   """
   clientMutationId: String
-  userId: Int!
 }
 
 """
@@ -267,7 +260,6 @@ input FavoriteMusicInput {
   musicType: String!
   spotifyId: String!
   trackName: String
-  userId: ID!
 }
 
 input FavoriteMusicUpdate {
@@ -278,7 +270,6 @@ input FavoriteMusicUpdate {
   musicType: String!
   spotifyId: String!
   trackName: String
-  userId: ID!
 }
 
 input FetchCharactersInput {
@@ -315,7 +306,6 @@ input GetDistanceBetweenUsersInput {
   A unique identifier for the client performing the mutation.
   """
   clientMutationId: String
-  userId: Int!
   vieweeId: Int!
 }
 
@@ -338,7 +328,6 @@ input GrantUserPremiumInput {
   A unique identifier for the client performing the mutation.
   """
   clientMutationId: String
-  userId: Int!
 }
 
 """
@@ -427,7 +416,7 @@ input MessageInput {
   content: String
   conversationId: String!
   recommendedAnimeId: ID
-  senderId: Int!
+  senderId: ID!
   stickerId: ID
 }
 
@@ -608,14 +597,14 @@ type Photo {
 type Query {
   fetchAnime(params: AnimeInput!): [Anime!]!
   fetchCharacters(params: FetchCharactersInput!): [Character!]!
-  fetchConversations(page: Int, search: String, userId: ID!): [Conversation!]!
+  fetchConversations(page: Int, search: String): [Conversation!]!
   fetchFeed(params: FetchFeedInput!): [User!]!
   fetchMessages(conversationId: ID!, page: Int): [Message!]!
-  fetchReports(page: Int, perPage: Int, reason: Int, userId: ID!): [Report!]!
+  fetchReports(page: Int, perPage: Int, reason: Int): [Report!]!
   fetchSticker(stickerId: ID!): Sticker!
   fetchStickers(page: Int): [Sticker!]!
   fetchUser(userId: ID!): User!
-  fetchVerifyRequests(page: Int, perPage: Int, userId: ID!): [VerifyRequest!]!
+  fetchVerifyRequests(page: Int, perPage: Int): [VerifyRequest!]!
 }
 
 """
@@ -694,7 +683,6 @@ input ReportInput {
   conversationId: String!
   offenseId: ID!
   reason: String!
-  userId: ID!
 }
 
 """
@@ -776,7 +764,6 @@ input SetUserLocationInput {
   clientMutationId: String
   latitude: String!
   longitude: String!
-  userId: Int!
 }
 
 """
@@ -854,7 +841,6 @@ input UndoLikeInput {
   A unique identifier for the client performing the mutation.
   """
   clientMutationId: String
-  userId: ID!
 }
 
 """
@@ -969,7 +955,6 @@ input UploadPhotoInput {
   clientMutationId: String
   image: Upload
   order: Int!
-  userId: Int!
 }
 
 """
@@ -1034,7 +1019,6 @@ input UserUpdateInput {
   phone: String
   school: String
   superLikeCount: Int
-  userId: ID!
   verified: Boolean
 }
 
@@ -1075,5 +1059,4 @@ type VerifyRequest {
 
 input VerifyRequestInput {
   image: Upload!
-  userId: Int!
 }

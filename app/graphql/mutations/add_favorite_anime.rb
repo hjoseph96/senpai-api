@@ -4,13 +4,16 @@ module Mutations
     class AddFavoriteAnime < Mutations::BaseMutation
       graphql_name "AddFavoriteAnime"
   
-      argument :user_id, ID, required: true
       argument :anime_ids, [ID], required: true
   
       field :user, Types::UserType, null: false
   
       def resolve(user_id:, anime_ids:)
-        @current_user = User.find(user_id)
+        unless context[:ready?]
+          raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
+        end
+
+        @current_user = context[:current_user]
 
         begin
             @animes = Anime.where(id: anime_ids)

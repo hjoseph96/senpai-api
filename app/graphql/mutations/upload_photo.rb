@@ -4,14 +4,17 @@ module Mutations
     class UploadPhoto < Mutations::BaseMutation
       graphql_name "UploadPhoto"
   
-      argument :user_id, Integer, required: true
       argument :image, ApolloUploadServer::Upload, required: false
       argument :order, Integer, required: true
 
       field :user, Types::UserType, null: false
   
-      def resolve(user_id:, image:, order:)
-        @current_user = User.find(user_id)
+      def resolve(image:, order:)
+        unless context[:ready?]
+          raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
+        end
+
+        @current_user = context[:current_user]
 
         if @current_user.gallery.nil?
           g = Gallery.create

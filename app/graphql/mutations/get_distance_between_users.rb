@@ -1,12 +1,15 @@
 module Mutations
     class GetDistanceBetweenUsers < Mutations::BaseMutation
-      argument :user_id, Integer, required: true
       argument :viewee_id, Integer, required: true
   
       field :mi, Integer, null: false
   
-      def resolve(user_id:, viewee_id:)
-        @user = User.find(user_id)
+      def resolve(viewee_id:)
+        unless context[:ready?]
+          raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
+        end
+
+        @user = context[:current_user]
         @viewee = User.find(viewee_id)
 
         p1 = RGeo::Geographic.spherical_factory.point(@user.lonlat.longitude, @user.lonlat.latitude)

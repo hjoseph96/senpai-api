@@ -8,7 +8,11 @@ module Mutations
 
     field :user, Types::UserType, null: false
     def resolve(params:)
-      @current_user = User.find(params[0][:user_id])
+      unless context[:ready?]
+        raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
+      end
+
+      @current_user = context[:current_user]
 
       begin
         params.each do |p|

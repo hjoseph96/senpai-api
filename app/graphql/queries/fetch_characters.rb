@@ -6,6 +6,10 @@ module Queries
     type [Types::CharacterType], null: false
 
     def resolve(params:)
+      unless context[:ready?]
+        raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
+      end
+
       char_params = Hash params
 
       page = char_params[:page] || 1

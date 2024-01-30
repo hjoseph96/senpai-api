@@ -21,7 +21,6 @@ module Types
     field :bio, String
     field :school, String
     field :occupation, String
-    field :spotify_email, String
     field :premium, Boolean, null: false
     field :verified, Boolean, null: false
     field :role, String, null: false

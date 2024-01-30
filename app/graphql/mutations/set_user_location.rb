@@ -1,14 +1,17 @@
 module Mutations
     class SetUserLocation < Mutations::BaseMutation
-      argument :user_id, Integer, required: true
       argument :longitude, String, required: true
       argument :latitude, String, required: true
   
       field :user, Types::UserType, null: false
   
       def resolve(user_id:, latitude:, longitude:)
-        @user = User.find(user_id)
-        
+        unless context[:ready?]
+          raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
+        end
+
+        @user = context[:current_user]
+
         location =  Geocoder.search("#{latitude}, #{longitude}")[0]
         point = "POINT(#{longitude} #{latitude})"
         state = location.city == location.state ? location.country : location.state

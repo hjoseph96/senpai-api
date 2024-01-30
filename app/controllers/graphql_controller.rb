@@ -9,14 +9,34 @@ class GraphqlController < ApplicationController
     query = params[:query]
     operation_name = params[:operationName]
 
-    context = {
-      ip: request.remote_ip
-    }
     result = SenpaiApiSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue StandardError => e
     raise e unless Rails.env.development?
     handle_error_in_development(e)
+  end
+
+  def context
+    {
+      ip: request.remote_ip,
+      current_user: current_user,
+      ready?: ready?
+    }
+  end
+
+  def current_user
+    token = request.headers['Authorization']
+
+    if token.present?
+      decoded = JsonWebToken.decode(token)
+      @current_user ||= User.find(decoded[:user_id])
+    end
+  end
+
+  def ready?
+    return true if current_user
+
+    false
   end
 
   private

@@ -1,13 +1,16 @@
 module Mutations
   class DeletePhoto < Mutations::BaseMutation
-    argument :user_id, ID, required: true
     argument :photo_id, ID, required: true
 
     field :deleted, Boolean, null: false
     field :gallery, Types::GalleryType
 
-    def resolve(user_id:, photo_id:)
-      @user = User.find(user_id)
+    def resolve(photo_id:)
+      unless context[:ready?]
+        raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
+      end
+
+      @user = context[:current_user]
 
       @photo = @user.gallery.photos.find(photo_id)
 
