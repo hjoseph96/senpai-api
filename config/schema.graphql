@@ -416,6 +416,7 @@ input MessageInput {
   content: String
   conversationId: String!
   recommendedAnimeId: ID
+  senderId: ID!
   stickerId: ID
 }
 
