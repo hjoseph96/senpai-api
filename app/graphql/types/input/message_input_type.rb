@@ -1,6 +1,7 @@
 module Types
     module Input
       class MessageInputType < Types::BaseInputObject
+        argument :sender_id, ID, required: true
         argument :conversation_id, String, required: true
         argument :content, String, required: false
         argument :sticker_id, ID, required: false
