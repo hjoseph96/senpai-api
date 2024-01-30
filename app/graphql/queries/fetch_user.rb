@@ -6,6 +6,10 @@ module Queries
       type Types::UserType, null: false
   
       def resolve(user_id:)
+        unless context[:ready?]
+          raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
+        end
+
         @user = User.find(user_id)
 
         @user

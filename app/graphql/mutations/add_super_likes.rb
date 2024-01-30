@@ -4,13 +4,16 @@ module Mutations
   class AddSuperLikes < Mutations::BaseMutation
     graphql_name "AddSuperLikes"
 
-    argument :user_id, ID, required: true
     argument :amount, Integer, required: true
 
     field :user, Types::UserType, null: false
 
-    def resolve(user_id:, amount:)
-      @current_user = User.find(user_id)
+    def resolve(amount:)
+      unless context[:ready?]
+        raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
+      end
+
+      @current_user = context[:current_user]
 
       unless @current_user.present?
         return GraphQL::ExecutionError.new("User not found")

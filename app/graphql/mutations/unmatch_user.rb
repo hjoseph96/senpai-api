@@ -8,14 +8,17 @@ module Mutations
       block_params = Hash params
 
       begin
-        user = User.find(block_params[:user_id])
+        unless context[:ready?]
+          raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
+        end
 
+        user = context[:current_user]
         # Unmatch blocked user
         user.matches.where(matchee_id: block_params[:blocked_user_id]).destroy_all
 
         Block.create!(
           user_id: user.id,
-          blocker_id: block_params[:user_id],
+          blocker_id: user.id,
           blockee_id: block_params[:blocked_user_id]
         )
 

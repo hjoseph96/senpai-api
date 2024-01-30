@@ -10,7 +10,11 @@ module Mutations
       field :match, Types::MatchType
 
       def resolve(params:)
-        @current_user = User.find(params[:user_id])
+        unless context[:ready?]
+          raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
+        end
+
+        @current_user = context[:current_user]
         @likee = User.find(params[:likee_id])
 
         match = nil

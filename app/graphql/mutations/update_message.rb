@@ -9,6 +9,10 @@ module Mutations
     field :message, Types::MessageType, null: false
 
     def resolve(params:)
+      unless context[:ready?]
+        raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
+      end
+
       @message = Message.find(params[:message_id])
 
       begin

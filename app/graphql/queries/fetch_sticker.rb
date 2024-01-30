@@ -6,6 +6,10 @@ module Queries
     type Types::StickerType, null: false
 
     def resolve(sticker_id:)
+      unless context[:ready?]
+        raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
+      end
+
       result = Sticker.find(sticker_id)
     end
   end

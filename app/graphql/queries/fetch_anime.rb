@@ -6,6 +6,10 @@ module Queries
       type [Types::AnimeType], null: false
   
       def resolve(params:)
+        unless context[:ready?]
+          raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
+        end
+
         anime_params = Hash params
 
         page = anime_params[:page] || 1

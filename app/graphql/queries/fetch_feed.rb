@@ -7,15 +7,21 @@ module Queries
         type [Types::UserType], null: false
 
         def resolve(params:)
+          unless context[:ready?]
+            raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
+          end
+
+          @user = context[:current_user]
+
           feed_params = Hash  params
-          feed  = Rails.cache.read("#{feed_params[:user_id]}-FEED")
+          feed  = Rails.cache.read("#{@user.id}-FEED")
 
           if feed.present? && !feed_params[:refresh].present?
             results = User.where(id: feed)
           else
-            results = FeedLoader.create_feed(user_id: feed_params[:user_id], distance_in_miles: feed_params[:miles_away])
+            results = FeedLoader.create_feed(user_id: @user.id, distance_in_miles: feed_params[:miles_away])
 
-            Rails.cache.write("#{feed_params[:user_id]}-FEED", results.pluck(:id))
+            Rails.cache.write("#{@user.id}-FEED", results.pluck(:id))
           end
 
           return [] unless results.count > 0
@@ -35,7 +41,7 @@ module Queries
             results = results.joins(:animes).where({ animes: { id: feed_params[:anime_ids] } })
           end
 
-          @user = User.find(feed_params[:user_id]).appear
+          @user.appear
 
           page = feed_params[:page] || 1
 

@@ -7,6 +7,10 @@ module Queries
     type [Types::MessageType], null: false
 
     def resolve(conversation_id:, page: 1)
+      unless context[:ready?]
+        raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
+      end
+
       @convo = Conversation.find(conversation_id)
 
       unless @convo.present?

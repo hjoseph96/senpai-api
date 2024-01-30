@@ -9,13 +9,17 @@ module Mutations
       field :message, Types::MessageType, null: false
   
       def resolve(params:)
-        @current_user = User.find(params[:sender_id])
+        unless context[:ready?]
+          raise GraphQL::ExecutionError.new('Unauthorized Error', options: { status: :unauthorized, code: 401 })
+        end
+
+        @current_user = context[:current_user]
 
         begin
           @conversation = Conversation.find(params[:conversation_id])
 
           message_params = {
-            sender_id: params[:sender_id],
+            sender_id: @current_user.id,
             conversation_id: @conversation.id,
             content: params[:content]
           }
@@ -38,7 +42,7 @@ module Mutations
           end
 
           if params[:recommended_anime_id].present?
-            recommendee_id = @conversation.user_ids.reject{|i| i == @current_user.id}[0]
+            recommendee_id = @conversation.user_ids.reject{|i| i == @current_user.id }[0]
 
             @message.recommendation = Recommendation.new(
                 user_id: @current_user.id,
@@ -63,7 +67,7 @@ module Mutations
             content: 'You sent a message.'
           )
 
-          @message.sender.appear
+          @current_user.appear
 
           { message: @message.reload(lock: true) }
         rescue ActiveRecord::RecordInvalid => e
