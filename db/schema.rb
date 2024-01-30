@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_25_202631) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_30_232156) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -269,7 +269,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_25_202631) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.string "spotify_email"
     t.string "first_name"
     t.string "occupation"
     t.string "display_city"
@@ -281,13 +280,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_25_202631) do
     t.boolean "banned", default: false
     t.integer "warning_count", default: 0
     t.boolean "has_location_hidden"
+    t.datetime "next_payment_date"
     t.index ["birthday"], name: "index_users_on_birthday"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["has_location_hidden"], name: "index_users_on_has_location_hidden"
     t.index ["online_status"], name: "index_users_on_online_status"
     t.index ["phone"], name: "index_users_on_phone", unique: true
     t.index ["premium"], name: "index_users_on_premium"
-    t.index ["spotify_email"], name: "index_users_on_spotify_email"
     t.index ["super_like_count"], name: "index_users_on_super_like_count"
   end
 
