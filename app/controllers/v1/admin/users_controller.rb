@@ -27,6 +27,12 @@ class V1::Admin::UsersController < ApplicationController
     @user = User.find(strong_params['user_id'])
     @user.update!(warning_count: @user.warning_count + 1)
 
+    PushNotification.create(
+      user_id: @user.id,
+      event_name: 'warn_user',
+      content: "You've been warned."
+    )
+
     render json:  @user.reload
   end
 
