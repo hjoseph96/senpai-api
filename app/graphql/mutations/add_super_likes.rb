@@ -17,8 +17,9 @@ module Mutations
       end
 
       begin
+        current_count = @current_user.super_like_count.nil? ? 0 : @current_user.super_like_count
         @current_user.update(
-          super_like_count: @current_user.super_like_count + amount
+          super_like_count: current_count + amount
         )
 
         { user: @current_user }
