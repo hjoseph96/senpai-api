@@ -115,6 +115,7 @@ type Character {
   firstName: String
   id: ID!
   imageUrl: String!
+  japaneseFullName: String
   lastName: String
   role: String
   updatedAt: ISO8601DateTime!
