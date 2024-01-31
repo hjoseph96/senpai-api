@@ -193,6 +193,7 @@ class ProfileSeeder
         user.update!(
           display_city: location.city,
           display_state: state,
+          country: location.country
         )
     end
 
