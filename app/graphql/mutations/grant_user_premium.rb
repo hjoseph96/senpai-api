@@ -12,7 +12,8 @@ module Mutations
         @current_user = User.find(user_id)
 
         begin
-            @current_user.update!(premium: true, next_payment_date: Date.today + 1.month)
+            next_payment_date = 1.month.from_now
+            @current_user.update!(premium: true, next_payment_date: next_payment_date)
 
             { user: @current_user.reload }
         rescue ActiveRecord::RecordInvalid => e
