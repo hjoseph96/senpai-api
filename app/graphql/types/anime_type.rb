@@ -6,6 +6,7 @@ module Types
 
     field :id, ID, null: false
     field :title, String
+    field :japanese_title, String
     field :year, Integer
     field :genres, String
     field :popularity, Integer

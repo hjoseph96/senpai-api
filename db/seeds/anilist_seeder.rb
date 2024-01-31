@@ -45,6 +45,7 @@ class AnilistSeeder
       			id
       			title {
       				english
+              native
       			}
             characters(page: 1) {
               edges { # Array of character edges
@@ -130,6 +131,7 @@ class AnilistSeeder
         attributes[:episodes] = anime['episodes']
         attributes[:is_adult] = anime['isAdult']
         attributes[:status] = anime['status']
+        attributes[:japanese_title] = anime['title']['native']
         attributes[:studios] = extract_studios(anime['studios'])
         attributes[:start_date] = extract_date(anime['startDate'])
         attributes[:end_date] = extract_date(anime['endDate'])
