@@ -1009,7 +1009,7 @@ type User {
   lonlat: String
   matches: [Match!]
   milesAway(otherUserId: ID!): Int
-  nextPaymentDate: ISO8601DateTime!
+  nextPaymentDate: String!
   occupation: String
   onlineStatus: String
   phone: String!
