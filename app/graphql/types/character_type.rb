@@ -8,6 +8,7 @@ module Types
     field :anime_id, Integer, null: false
     field :first_name, String
     field :last_name, String
+    field :japanese_full_name, String
     field :favorites, Integer
     field :role, String
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false

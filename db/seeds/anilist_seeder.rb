@@ -55,6 +55,7 @@ class AnilistSeeder
                   name {
                     first
                     last
+                    native
                   }
                   favourites
                 }
@@ -172,7 +173,7 @@ class AnilistSeeder
   end
 
   def extract_characters(anime_data, created_anime)
-    lit_characters = anime_data['characters']['edges'].reject {|c| c['node']['favourites'] < 200 }
+    lit_characters = anime_data['characters']['edges'].reject {|c| c['node']['favourites'] < 100 }
 
     lit_characters.sort_by! {|h| h['node']['favourites'] }.reverse
 
@@ -188,6 +189,7 @@ class AnilistSeeder
         role: c['role'],
         first_name: character['name']['first'],
         last_name: character['name']['last'],
+        japanese_full_name: character['name']['native'],
         favorites: character['favourites'],
       )
 

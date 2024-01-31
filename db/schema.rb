@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_31_163828) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_31_170357) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -84,6 +84,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_31_163828) do
     t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "japanese_full_name"
     t.index ["anime_id"], name: "index_characters_on_anime_id"
     t.index ["favorites"], name: "index_characters_on_favorites"
     t.index ["role"], name: "index_characters_on_role"
