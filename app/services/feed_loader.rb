@@ -1,6 +1,6 @@
 class FeedLoader
     def self.create_feed(user_id:, distance_in_miles: 40, anime_ids: [])
-        new.create_feed(user_id: user_id, distance_in_miles: distance_in_miles, anime_ids: [])
+        new.create_feed(user_id: user_id, distance_in_miles: distance_in_miles, anime_ids: anime_ids)
     end
 
     def create_feed(user_id:, distance_in_miles:, anime_ids:)
