@@ -13,6 +13,7 @@ module Mutations
         point = "POINT(#{longitude} #{latitude})"
         state = location.city == location.state ? location.country : location.state
         updated = @user.update(
+            country: location.country,
             display_city: location.city,
             display_state: state,
             lonlat: point

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_31_162002) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_31_163828) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -284,7 +284,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_31_162002) do
     t.integer "warning_count", default: 0
     t.boolean "has_location_hidden"
     t.datetime "next_payment_date"
+    t.string "country"
     t.index ["birthday"], name: "index_users_on_birthday"
+    t.index ["country"], name: "index_users_on_country"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["has_location_hidden"], name: "index_users_on_has_location_hidden"
     t.index ["online_status"], name: "index_users_on_online_status"

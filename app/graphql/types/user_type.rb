@@ -25,6 +25,7 @@ module Types
     field :premium, Boolean, null: false
     field :verified, Boolean, null: false
     field :role, String, null: false
+    field :country, String
     field :display_city, String
     field :display_state, String
     field :super_like_count, Integer
