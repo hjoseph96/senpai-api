@@ -78,6 +78,7 @@ type Anime {
   genres: String
   id: ID!
   isAdult: Boolean
+  japaneseTitle: String
   popularity: Int
   startDate: ISO8601DateTime
   status: String
@@ -988,6 +989,7 @@ type User {
   bio: String
   birthday: ISO8601DateTime
   blocks: [Block!]
+  country: String
   createdAt: ISO8601DateTime!
   currentSignInAt: ISO8601DateTime
   currentSignInIp: String
