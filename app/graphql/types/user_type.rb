@@ -30,7 +30,7 @@ module Types
     field :display_state, String
     field :super_like_count, Integer
     field :has_location_hidden, Boolean
-    field :next_payment_date, String, null: false
+    field :next_payment_date, GraphQL::Types::ISO8601DateTime
 
 
     field :animes, [Types::AnimeType]
