@@ -27,7 +27,7 @@ module Mutations
 
           # 50% chance of a robot profile liking you back
           if @likee.is_fake_profile? && %w(standard super).include?(params[:like_type])
-            if (1...50).to_a.sample < 50
+            if (1...100).to_a.sample < 50
               @like = Like.create(user_id: @likee.id, likee_id: @current_user.id, like_type: params[:like_type])
             end
           end
