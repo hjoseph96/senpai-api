@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_31_170357) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_02_153101) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -286,10 +286,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_31_170357) do
     t.boolean "has_location_hidden"
     t.datetime "next_payment_date"
     t.string "country"
+    t.boolean "is_fake_profile", default: false
     t.index ["birthday"], name: "index_users_on_birthday"
     t.index ["country"], name: "index_users_on_country"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["has_location_hidden"], name: "index_users_on_has_location_hidden"
+    t.index ["is_fake_profile"], name: "index_users_on_is_fake_profile"
     t.index ["online_status"], name: "index_users_on_online_status"
     t.index ["phone"], name: "index_users_on_phone", unique: true
     t.index ["premium"], name: "index_users_on_premium"

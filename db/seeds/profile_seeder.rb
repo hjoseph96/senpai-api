@@ -90,7 +90,8 @@ class ProfileSeeder
                 occupation: Faker::Job.position,
                 current_sign_in_ip: '173.52.91.160',
                 current_sign_in_at: DateTime.now,
-                verified: [true, false].sample
+                verified: [true, false].sample,
+                is_fake_profile: true
             )
             g = Gallery.create
             u.gallery = g
@@ -147,7 +148,8 @@ class ProfileSeeder
                 lonlat: RGeo::Cartesian.factory(srid: 4326).point(point[:long], point[:lat]),
                 current_sign_in_ip: '173.52.91.160',
                 current_sign_in_at: DateTime.now,
-                verified: [true, false].sample
+                verified: [true, false].sample,
+                is_fake_profile: true
             )
 
             set_display_location(u, point)
