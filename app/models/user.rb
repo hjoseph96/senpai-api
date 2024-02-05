@@ -46,12 +46,21 @@ class User < ApplicationRecord
 
   validates :phone, presence: true, uniqueness: true
   validate :validate_age
+  validates :validate_device_tokens
 
   after_commit :clear_feed
 
   def validate_age
     if birthday.present? && birthday > 18.years.ago
       errors.add(:birthday, 'You should be over 18 years old.')
+    end
+  end
+
+  def validate_device_tokens
+    return unless self.device_tokens.present?
+
+    unless self.device_tokens.uniq.length == self.device_tokens.length
+      errors.add(:device_token, 'Device token has already been added')
     end
   end
 
