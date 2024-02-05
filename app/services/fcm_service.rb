@@ -12,7 +12,7 @@ class FcmService
   def send_fcm_push_notification
     options = {
       priority: 'high',
-      data: { message: @notif.event_type },
+      data: { message: @notif.event_name },
       notification: {
         body: @notif.content,
         # sound: 'default',

@@ -21,13 +21,13 @@ class PushNotificationBroadcastJob
     "Notification-#{id}"
   end
 
-  def blacklist_event_types
+  def blacklist_event_names
     %w(reset_message unmatched_user)
   end
 
   def trigger_fcm_notification(notif)
     # Don't bother sending FCM requests for these event_types
-    return if blacklist_event_types.include?(notif.event_name)
+    return if blacklist_event_names.include?(notif.event_name)
 
     client = FcmService.new(notification: notif)
     client.send_fcm_push_notification
