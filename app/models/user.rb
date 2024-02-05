@@ -46,7 +46,7 @@ class User < ApplicationRecord
 
   validates :phone, presence: true, uniqueness: true
   validate :validate_age
-  validates :validate_device_tokens
+  validate :validate_device_tokens
 
   after_commit :clear_feed
 
