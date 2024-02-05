@@ -22,7 +22,7 @@ class PushNotificationBroadcastJob
   end
 
   def blacklist_event_names
-    %w(reset_message unmatched_user)
+    %w(reset_message unmatched_user sent_new_message)
   end
 
   def trigger_fcm_notification(notif)
