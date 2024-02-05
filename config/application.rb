@@ -34,7 +34,5 @@ module SenpaiApi
 
     # Don't generate system test files.
     config.generators.system_tests = nil
-
-    RSpotify::authenticate(Rails.application.credentials.spotify_id, Rails.application.credentials.spotify_token)
   end
 end
