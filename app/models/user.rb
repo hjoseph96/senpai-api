@@ -57,8 +57,6 @@ class User < ApplicationRecord
   end
 
   def validate_device_tokens
-    return unless self.device_tokens.present?
-
     unless self.device_tokens.uniq.length == self.device_tokens.length
       errors.add(:device_token, 'Device token has already been added')
     end
