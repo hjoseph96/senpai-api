@@ -59,7 +59,7 @@ module Mutations
 
           PushNotification.create(
             user_id: @current_user.id,
-            event_name: 'new_message',
+            event_name: 'sent_new_message',
             content: 'You sent a message.'
           )
 

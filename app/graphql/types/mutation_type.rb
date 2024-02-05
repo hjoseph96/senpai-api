@@ -18,6 +18,7 @@ module Types
     field :get_distance_between_users, mutation: Mutations::GetDistanceBetweenUsers
     field :like_user, mutation: Mutations::LikeUser
     field :undo_like, mutation: Mutations::UndoLike
+    field :add_device_token, mutation: Mutations::AddDeviceToken
     field :send_message, mutation: Mutations::SendMessage
     field :update_message, mutation: Mutations::UpdateMessage
     field :report_user, mutation: Mutations::ReportUser

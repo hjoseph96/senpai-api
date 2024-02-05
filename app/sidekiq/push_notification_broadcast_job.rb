@@ -13,9 +13,23 @@ class PushNotificationBroadcastJob
     }
 
     ActionCable.server.broadcast(build_channel_id(notification.user.id), payload)
+
+    trigger_fcm_notification(notification)
   end
 
   def build_channel_id(id)
     "Notification-#{id}"
+  end
+
+  def blacklist_event_types
+    %w(reset_message unmatched_user)
+  end
+
+  def trigger_fcm_notification(notif)
+    # Don't bother sending FCM requests for these event_types
+    return if blacklist_event_types.include?(notif.event_type)
+
+    client = FcmService.new(notification: notif)
+    client.send_fcm_push_notification
   end
 end
