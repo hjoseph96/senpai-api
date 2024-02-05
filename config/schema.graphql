@@ -1034,6 +1034,8 @@ type User {
   gender: String
   hasLocationHidden: Boolean
   id: ID!
+  isDisplayingActive: Boolean!
+  isDisplayingRecentlyActive: Boolean!
   isFakeProfile: Boolean!
   lastSignInAt: ISO8601DateTime
   lastSignInIp: String
@@ -1065,6 +1067,8 @@ input UserUpdateInput {
   firstName: String
   gender: Int
   hasLocationHidden: Boolean
+  isDisplayingActive: Boolean
+  isDisplayingRecentlyActive: Boolean
   occupation: String
   phone: String
   school: String
