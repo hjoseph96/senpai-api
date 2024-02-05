@@ -32,6 +32,8 @@ module Types
     field :has_location_hidden, Boolean
     field :is_fake_profile, Boolean, null: false
     field :next_payment_date, GraphQL::Types::ISO8601DateTime
+    field :device_tokens, [String]
+
 
 
     field :animes, [Types::AnimeType]

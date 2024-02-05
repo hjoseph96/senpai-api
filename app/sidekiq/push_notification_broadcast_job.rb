@@ -27,7 +27,7 @@ class PushNotificationBroadcastJob
 
   def trigger_fcm_notification(notif)
     # Don't bother sending FCM requests for these event_types
-    return if blacklist_event_types.include?(notif.event_type)
+    return if blacklist_event_types.include?(notif.event_name)
 
     client = FcmService.new(notification: notif)
     client.send_fcm_push_notification

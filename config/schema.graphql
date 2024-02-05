@@ -1024,6 +1024,7 @@ type User {
   currentSignInAt: ISO8601DateTime
   currentSignInIp: String
   desiredGender: String
+  deviceTokens: [String!]
   displayCity: String
   displayState: String
   encryptedPassword: String!
