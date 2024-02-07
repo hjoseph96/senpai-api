@@ -10,7 +10,7 @@ module Queries
 
         page = anime_params[:page] || 1
 
-        results = Anime.order(popularity: :desc).page(page)
+        results = Anime.order(popularity: :desc)
         if anime_params[:genres].present?
           results = results.search_by_genre(anime_params[:genres]).order(popularity: :desc).page(page)
         end
