@@ -12,14 +12,14 @@ module Queries
 
         results = Anime.order(popularity: :desc)
         if anime_params[:genres].present?
-          results = results.search_by_genre(anime_params[:genres]).order(popularity: :desc).page(page)
+          results = results.search_by_genre(anime_params[:genres]).order(popularity: :desc)
         end
 
         if anime_params[:title].present?
-          results = results.search_by_title(anime_params[:title]).order(popularity: :desc).page(page)
+          results = results.search_by_title(anime_params[:title]).order(popularity: :desc)
         end
 
-        results
+        results.page(page)
       end
     end
   end
