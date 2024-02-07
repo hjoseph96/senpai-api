@@ -17,7 +17,7 @@ module Mutations
 
         @message.update!(update_params)
 
-        reacted_user = @message.conversation.users.where.not(id: @message.sender_id)
+        reacted_user = @message.conversation.users.where.not(id: @message.sender_id).first
 
 
         if update_params[:reaction].present?
