@@ -1063,8 +1063,8 @@ type User {
   gender: String
   hasLocationHidden: Boolean
   id: ID!
-  isDisplayingActive: Boolean!
-  isDisplayingRecentlyActive: Boolean!
+  isDisplayingActive: Boolean
+  isDisplayingRecentlyActive: Boolean
   isFakeProfile: Boolean!
   lastSignInAt: ISO8601DateTime
   lastSignInIp: String
