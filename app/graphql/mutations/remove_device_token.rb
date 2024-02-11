@@ -17,7 +17,7 @@ module Mutations
       end
 
       begin
-        tokens = @current_user.device_tokens - device_token
+        tokens = @current_user.device_tokens - [device_token]
         @current_user.update!(device_tokens: tokens)
 
         { user: @current_user.reload }
