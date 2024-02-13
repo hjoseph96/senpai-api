@@ -4,7 +4,7 @@ class V1::Admin::UsersController < ApplicationController
   def index
     page = strong_params[:page]
 
-    render json: User.page(page).per(50)
+    render json: User.profile_filled.where(is_fake_profile: false).page(page).per(50)
   end
 
   def show
@@ -13,7 +13,7 @@ class V1::Admin::UsersController < ApplicationController
   end
 
   def all_users
-    render json: User.profile_filled
+    render json: User.profile_filled.where(is_fake_profile: false)
   end
 
   def ban_user
