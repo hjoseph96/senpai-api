@@ -14,6 +14,7 @@ module Mutations
 
           verify_token = (SecureRandom.random_number(9e5) + 1e5).to_i
           user.password = verify_token
+          user.super_like_count = 5
           user.save!
 
           twilio_sid = Rails.application.credentials.twilio_sid
