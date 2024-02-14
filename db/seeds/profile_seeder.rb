@@ -56,6 +56,12 @@ class ProfileSeeder
         { long: chandigarh_long_points.sample, lat: chandigarh_lat_points.sample }
     end
 
+    def tokyo_points
+        tokyo_lat_points = (35.674830..36).step(0.0005).to_a
+        tokyo_long_points = (139.700447..140).step(0.0005).to_a
+        { long: tokyo_lat_points.sample, lat: tokyo_long_points.sample }
+    end
+
     def create_females
         puts 'Seeding women...'
 
@@ -72,6 +78,7 @@ class ProfileSeeder
                 when 'MANDI' then point = mandi_points
                 when 'CHANDIGARH' then point = chandigarh_points
                 when 'PALO ALTO' then point = palo_alto_points
+                when 'TOKYO' then point = tokyo_points
                 else
                     throw StandardError("Unsupported seed location.")
             end
@@ -130,7 +137,8 @@ class ProfileSeeder
                 when 'MANDI' then point = mandi_points
                 when 'CHANDIGARH' then point = chandigarh_points
                 when 'PALO ALTO' then point = palo_alto_points
-                else
+                when 'TOKYO' then point = tokyo_points
+            else
                     throw StandardError("Unsupported seed location.")
             end
 
