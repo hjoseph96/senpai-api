@@ -58,7 +58,7 @@ class ProfileSeeder
 
     def tokyo_points
         tokyo_lat_points = (35.674830..36).step(0.0005).to_a
-        tokyo_long_points = (139.700447..140).step(0.0005).to_a
+        tokyo_long_points = (139.700447..130.8).step(0.0005).to_a
         { long: tokyo_lat_points.sample, lat: tokyo_long_points.sample }
     end
 
