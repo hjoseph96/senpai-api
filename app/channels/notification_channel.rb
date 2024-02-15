@@ -4,5 +4,6 @@ class NotificationChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
+    current_user.disappear
   end
 end
