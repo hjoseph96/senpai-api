@@ -92,7 +92,7 @@ class ProfileSeeder
                 desired_gender: :desires_men,
                 lonlat: RGeo::Cartesian.factory(:srid => 4326).point(point[:long], point[:lat]),
                 birthday: (30.years.ago.to_date..18.years.ago.to_date).to_a.sample,
-                bio: Faker::Lorem.paragraphs,
+                bio: generate_bio,
                 school: Faker::University.name,
                 occupation: Faker::Job.position,
                 current_sign_in_ip: '173.52.91.160',
@@ -149,7 +149,7 @@ class ProfileSeeder
                 role: :user,
                 gender: :male,
                 desired_gender: :desires_women,
-                bio: Faker::Lorem.paragraphs,
+                bio: generate_bio,
                 birthday: (30.years.ago.to_date..18.years.ago.to_date).to_a.sample,
                 school: Faker::University.name,
                 occupation: Faker::Job.position,
@@ -205,6 +205,15 @@ class ProfileSeeder
           display_state: state,
           country: location.country
         )
+    end
+
+    def generate_bio
+        [
+          Faker::Quote.mitch_hedberg,
+          Faker::Quote.jack_handey,
+          Faker::Quote.famous_last_words,
+          Faker::Quote.robin
+        ].sample
     end
 
 end
