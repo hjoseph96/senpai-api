@@ -29,5 +29,6 @@ module Types
     field :delete_user, mutation: Mutations::DeleteUser
     field :delete_photo, mutation: Mutations::DeletePhoto
     field :create_event, mutation: Mutations::CreateEvent
+    field :update_event, mutation: Mutations::UpdateEvent
   end
 end

@@ -10,11 +10,15 @@ module Mutations
         @user = User.find(user_id)
         
         location =  Geocoder.search("#{latitude}, #{longitude}")[0]
-        point = "POINT(#{longitude} #{latitude})"
+        point = "POINT(#{location.longitude} #{location.latitude})"
         state = location.city == location.state ? location.country : location.state
+
+        place = location.instance_values['place']
+        city = location.city || place.sub_municipality || place.region
+
         updated = @user.update(
             country: location.country,
-            display_city: location.city,
+            display_city: city,
             display_state: state,
             lonlat: point
         )

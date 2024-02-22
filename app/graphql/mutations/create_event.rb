@@ -45,7 +45,7 @@ module Mutations
 
         if event_params[:cosplay_required].present?
           unless %w(no optional required).include? event_params[:cosplay_required]
-            raise StandardError("Invalid cosplay_required setting.")
+            return GraphQL::ExecutionError.new('Invalid cosplay_required setting.')
           end
 
           event.cosplay_required = event_params[:cosplay_required]
