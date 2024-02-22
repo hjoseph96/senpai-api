@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_21_194902) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_22_043100) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -173,6 +173,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_21_194902) do
     t.index ["deleted_at"], name: "index_influencers_on_deleted_at"
     t.index ["referral_count"], name: "index_influencers_on_referral_count"
     t.index ["user_id"], name: "index_influencers_on_user_id"
+  end
+
+  create_table "join_requests", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
+    t.integer "status", default: 0, null: false
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_join_requests_on_event_id"
+    t.index ["user_id"], name: "index_join_requests_on_user_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -385,6 +396,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_21_194902) do
   add_foreign_key "favorite_musics", "users"
   add_foreign_key "galleries", "users"
   add_foreign_key "influencers", "users"
+  add_foreign_key "join_requests", "events"
+  add_foreign_key "join_requests", "users"
   add_foreign_key "likes", "users"
   add_foreign_key "matches", "users"
   add_foreign_key "messages", "conversations"

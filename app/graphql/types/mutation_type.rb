@@ -30,5 +30,7 @@ module Types
     field :delete_photo, mutation: Mutations::DeletePhoto
     field :create_event, mutation: Mutations::CreateEvent
     field :update_event, mutation: Mutations::UpdateEvent
+    field :create_join_request, mutation: Mutations::CreateJoinRequest
+    field :update_join_request, mutation: Mutations::UpdateJoinRequest
   end
 end
