@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_22_043100) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_22_062710) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -234,6 +234,29 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_043100) do
     t.index ["host_id"], name: "index_parties_on_host_id"
   end
 
+  create_table "party_chats", force: :cascade do |t|
+    t.bigint "party_id", null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["party_id"], name: "index_party_chats_on_party_id"
+  end
+
+  create_table "party_messages", force: :cascade do |t|
+    t.integer "sender_id"
+    t.text "content"
+    t.integer "reaction"
+    t.bigint "party_chat_id", null: false
+    t.integer "sticker_id"
+    t.boolean "read"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["party_chat_id"], name: "index_party_messages_on_party_chat_id"
+    t.index ["read"], name: "index_party_messages_on_read"
+    t.index ["sender_id"], name: "index_party_messages_on_sender_id"
+  end
+
   create_table "photos", force: :cascade do |t|
     t.bigint "gallery_id", null: false
     t.integer "order"
@@ -262,9 +285,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_043100) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.bigint "party_message_id"
     t.index ["anime_id"], name: "index_recommendations_on_anime_id"
     t.index ["deleted_at"], name: "index_recommendations_on_deleted_at"
     t.index ["message_id"], name: "index_recommendations_on_message_id"
+    t.index ["party_message_id"], name: "index_recommendations_on_party_message_id"
     t.index ["recommendee_id"], name: "index_recommendations_on_recommendee_id"
     t.index ["user_id"], name: "index_recommendations_on_user_id"
   end
@@ -401,10 +426,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_043100) do
   add_foreign_key "likes", "users"
   add_foreign_key "matches", "users"
   add_foreign_key "messages", "conversations"
+  add_foreign_key "party_chats", "parties"
+  add_foreign_key "party_messages", "party_chats"
   add_foreign_key "photos", "galleries"
   add_foreign_key "push_notifications", "users"
   add_foreign_key "recommendations", "animes"
   add_foreign_key "recommendations", "messages"
+  add_foreign_key "recommendations", "party_messages"
   add_foreign_key "recommendations", "users"
   add_foreign_key "reports", "conversations"
   add_foreign_key "reports", "users"

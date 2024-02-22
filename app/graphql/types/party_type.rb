@@ -9,9 +9,19 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
     field :members, [Types::UserType]
+    field :party_chat, Types::PartyChatType
+    field :messages, [Types::PartyMessageType]
 
     def members
       dataloader.with(Sources::MembersByPartyId).load(object.id)
+    end
+
+    def party_chat
+      object.party_chat
+    end
+
+    def messages
+      object.party_chat.messages
     end
   end
 end

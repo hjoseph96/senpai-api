@@ -32,5 +32,6 @@ module Types
     field :update_event, mutation: Mutations::UpdateEvent
     field :create_join_request, mutation: Mutations::CreateJoinRequest
     field :update_join_request, mutation: Mutations::UpdateJoinRequest
+    field :send_party_message, mutation: Mutations::SendPartyMessage
   end
 end
