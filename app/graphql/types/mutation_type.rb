@@ -30,8 +30,11 @@ module Types
     field :delete_photo, mutation: Mutations::DeletePhoto
     field :create_event, mutation: Mutations::CreateEvent
     field :update_event, mutation: Mutations::UpdateEvent
+    field :send_event_invite, mutation: Mutations::SendEventInvite
+    field :update_event_invite, mutation: Mutations::UpdateEventInvite
     field :create_join_request, mutation: Mutations::CreateJoinRequest
     field :update_join_request, mutation: Mutations::UpdateJoinRequest
     field :send_party_message, mutation: Mutations::SendPartyMessage
+    field :remove_party_member, mutation: Mutations::RemovePartyMember
   end
 end

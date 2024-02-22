@@ -15,6 +15,10 @@ module Mutations
         @party = Party.find(params[:party_id])
         @party_chat = @party.party_chat
 
+        unless @party.all_participants.pluck(:id).include? params[:sender_id]
+          return GraphQL::ExecutionError.new('Message sender is not a party member')
+        end
+
         message_params = {
           sender_id: params[:sender_id],
           party_chat_id: @party.party_chat.id,

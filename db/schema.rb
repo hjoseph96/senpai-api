@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_22_062710) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_22_080430) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -114,6 +114,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_062710) do
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_conversations_on_deleted_at"
     t.index ["match_id"], name: "index_conversations_on_match_id"
+  end
+
+  create_table "event_invites", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.integer "sender_id", null: false
+    t.integer "receiver_id", null: false
+    t.integer "status", default: 0
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_invites_on_event_id"
+    t.index ["receiver_id"], name: "index_event_invites_on_receiver_id"
+    t.index ["sender_id"], name: "index_event_invites_on_sender_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -418,6 +431,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_062710) do
   add_foreign_key "blocks", "users"
   add_foreign_key "characters", "animes"
   add_foreign_key "conversations", "matches"
+  add_foreign_key "event_invites", "events"
   add_foreign_key "favorite_musics", "users"
   add_foreign_key "galleries", "users"
   add_foreign_key "influencers", "users"
