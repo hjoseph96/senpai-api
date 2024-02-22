@@ -372,7 +372,7 @@ type EventInvite {
   receiverId: Int!
   sender: User
   senderId: Int!
-  status: Int!
+  status: String!
   updatedAt: ISO8601DateTime!
 }
 
@@ -1288,10 +1288,9 @@ input UpdateEventInviteInput {
   A unique identifier for the client performing the mutation.
   """
   clientMutationId: String
-  eventId: ID!
+  eventInviteId: ID!
   receiverId: ID!
-  senderId: ID!
-  status: String
+  status: String!
 }
 
 """
