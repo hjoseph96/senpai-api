@@ -45,6 +45,7 @@ module Types
     field :miles_away, Integer do
       argument :other_user_id, ID
     end
+    field :events, [Types::EventType]
 
     def animes
       dataloader.with(Sources::AnimesByUserId).load(object.id)
@@ -64,6 +65,10 @@ module Types
 
     def blocks
       dataloader.with(Sources::BlocksByUserId).load(object.id)
+    end
+
+    def events
+      dataloader.with(Sources::EventsByUserId).load(object.id)
     end
 
     def miles_away(other_user_id:)

@@ -9,5 +9,6 @@ namespace :senpai do
     ProfileSeeder.create_profiles(location: 'MANDI')
     ProfileSeeder.create_profiles(location: 'CHANDIGARH')
     ProfileSeeder.create_profiles(location: 'PALO ALTO')
+    ProfileSeeder.create_profiles(location: 'TOKYO')
   end
 end

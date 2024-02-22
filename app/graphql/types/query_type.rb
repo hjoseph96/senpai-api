@@ -15,6 +15,8 @@ module Types
     field :fetch_messages, resolver: Queries::FetchMessages
     field :fetch_stickers, resolver: Queries::FetchStickers
     field :fetch_sticker, resolver: Queries::FetchSticker
+    field :fetch_events, resolver: Queries::FetchEvents
+    field :fetch_conventions, resolver: Queries::FetchConventions
 
     #  admin queries
     field :fetch_reports, resolver: Queries::FetchReports

@@ -28,5 +28,6 @@ module Types
     field :add_super_likes, mutation: Mutations::AddSuperLikes
     field :delete_user, mutation: Mutations::DeleteUser
     field :delete_photo, mutation: Mutations::DeletePhoto
+    field :create_event, mutation: Mutations::CreateEvent
   end
 end

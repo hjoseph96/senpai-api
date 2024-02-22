@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_16_182355) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_21_194902) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -90,6 +90,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_182355) do
     t.index ["role"], name: "index_characters_on_role"
   end
 
+  create_table "conventions", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "venue", null: false
+    t.string "country", null: false
+    t.string "display_city", null: false
+    t.string "display_state", null: false
+    t.datetime "start_date", null: false
+    t.datetime "end_date"
+    t.string "website"
+    t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lonlat"], name: "index_conventions_on_lonlat"
+    t.index ["start_date"], name: "index_conventions_on_start_date"
+    t.index ["title"], name: "index_conventions_on_title"
+  end
+
   create_table "conversations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.bigint "match_id", null: false
     t.datetime "created_at", null: false
@@ -97,6 +114,26 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_182355) do
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_conversations_on_deleted_at"
     t.index ["match_id"], name: "index_conversations_on_match_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "title"
+    t.datetime "start_date", null: false
+    t.datetime "end_date"
+    t.string "venue", null: false
+    t.string "country", null: false
+    t.string "display_city", null: false
+    t.string "display_state", null: false
+    t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}, null: false
+    t.text "description"
+    t.integer "host_id", null: false
+    t.integer "convention_id"
+    t.integer "cosplay_required", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["host_id"], name: "index_events_on_host_id"
+    t.index ["start_date"], name: "index_events_on_start_date"
+    t.index ["title"], name: "index_events_on_title"
   end
 
   create_table "favorite_musics", force: :cascade do |t|
@@ -176,6 +213,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_182355) do
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
+  create_table "parties", force: :cascade do |t|
+    t.integer "host_id", null: false
+    t.integer "event_id", null: false
+    t.integer "member_limit", default: 10, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_parties_on_event_id"
+    t.index ["host_id"], name: "index_parties_on_host_id"
+  end
+
   create_table "photos", force: :cascade do |t|
     t.bigint "gallery_id", null: false
     t.integer "order"
@@ -243,6 +290,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_182355) do
     t.index ["user_id"], name: "index_user_animes_on_user_id"
   end
 
+  create_table "user_conventions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "convention_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["convention_id"], name: "index_user_conventions_on_convention_id"
+    t.index ["user_id"], name: "index_user_conventions_on_user_id"
+  end
+
   create_table "user_conversations", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.uuid "conversation_id", null: false
@@ -252,6 +308,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_182355) do
     t.index ["conversation_id"], name: "index_user_conversations_on_conversation_id"
     t.index ["deleted_at"], name: "index_user_conversations_on_deleted_at"
     t.index ["user_id"], name: "index_user_conversations_on_user_id"
+  end
+
+  create_table "user_parties", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "party_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["party_id"], name: "index_user_parties_on_party_id"
+    t.index ["user_id"], name: "index_user_parties_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -330,7 +395,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_182355) do
   add_foreign_key "recommendations", "users"
   add_foreign_key "reports", "conversations"
   add_foreign_key "reports", "users"
+  add_foreign_key "user_conventions", "conventions"
+  add_foreign_key "user_conventions", "users"
   add_foreign_key "user_conversations", "conversations"
   add_foreign_key "user_conversations", "users"
+  add_foreign_key "user_parties", "parties"
+  add_foreign_key "user_parties", "users"
   add_foreign_key "verify_requests", "users"
 end
