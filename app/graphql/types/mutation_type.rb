@@ -36,5 +36,6 @@ module Types
     field :update_join_request, mutation: Mutations::UpdateJoinRequest
     field :send_party_message, mutation: Mutations::SendPartyMessage
     field :remove_party_member, mutation: Mutations::RemovePartyMember
+    field :mark_convention_attendance, mutation: Mutations::MarkConventionAttendance
   end
 end

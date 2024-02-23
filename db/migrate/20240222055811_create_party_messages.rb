@@ -6,7 +6,7 @@ class CreatePartyMessages < ActiveRecord::Migration[7.1]
       t.integer :reaction
       t.references :party_chat, null: false, foreign_key: true
       t.integer :sticker_id
-      t.boolean :read
+      t.boolean :read, null: false, default: false
       t.datetime :deleted_at
 
       t.timestamps

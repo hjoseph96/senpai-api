@@ -10,6 +10,9 @@ module Types
 
     field :party, Types::PartyType, null: false
     field :messages, [Types::PartyMessageType], null: false
+    field :unread_count, Integer do
+      argument :user_id, ID
+    end
 
     def party
       object.party
@@ -17,6 +20,11 @@ module Types
 
     def messages
       dataloader.with(Sources::PartyMessagesByPartyChat).load(object.id)
+    end
+
+    def unread_count(user_id:)
+      other_persons_messages = object.messages.where.not(sender_id: user_id)
+      other_persons_messages.where(read: false).count
     end
   end
 end

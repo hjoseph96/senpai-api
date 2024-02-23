@@ -1,6 +1,6 @@
 class Convention < ApplicationRecord
   has_many :user_conventions
-  has_many :attendees, through: :user_conventions, foreign_key: :user_id, class_name: 'User'
+  has_many :attendees, through: :user_conventions, source: 'user', source_type: 'User'
   has_many :events
   has_many :parties, through: :events
 
@@ -8,6 +8,10 @@ class Convention < ApplicationRecord
   validates :start_date, presence: true
 
   has_one_attached :cover_image
+
+  include PgSearch::Model
+  pg_search_scope :search_by_title, against: [:title],  using: { tsearch: { dictionary: 'english' } }
+
 
   scope :within, -> (latitude, longitude, distance_in_mile = 1) {
     where(%{

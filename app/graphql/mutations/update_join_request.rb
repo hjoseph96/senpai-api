@@ -15,7 +15,7 @@ module Mutations
 
           case join_params[:status]
             when 'approved'
-              @join_request.approved!
+              @join_request.mark_approved
 
               PushNotification.create!(
                 user_id: @join_request.user_id,
