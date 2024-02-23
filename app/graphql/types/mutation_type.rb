@@ -37,5 +37,6 @@ module Types
     field :send_party_message, mutation: Mutations::SendPartyMessage
     field :remove_party_member, mutation: Mutations::RemovePartyMember
     field :mark_convention_attendance, mutation: Mutations::MarkConventionAttendance
+    field :leave_review, mutation: Mutations::LeaveReview
   end
 end

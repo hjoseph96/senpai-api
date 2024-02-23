@@ -6,6 +6,8 @@ class Party < ApplicationRecord
   has_many :members, through: :user_parties, source: 'user'
 
   has_one :party_chat
+  has_many :reviews, as: :reviewable
+
 
   def all_participants
     user_ids = [self.host, members].flatten.map(&:id)

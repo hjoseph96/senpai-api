@@ -1,7 +1,7 @@
 module Mutations
   class MarkConventionAttendance < Mutations::BaseMutation
-    argument :convention_id
-    argument :user_id
+    argument :convention_id, ID
+    argument :user_id, ID
 
     field :convention, Types::ConventionType, null: false
 

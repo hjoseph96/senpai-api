@@ -22,6 +22,7 @@ module Types
 
     field :party, Types::PartyType
     field :cover_image_url, String
+    field :reviews, [Types::ReviewType]
 
     def party
       object.party
@@ -29,6 +30,10 @@ module Types
 
     def cover_image_url
       cdn_for(object.cover_image)
+    end
+
+    def reviews
+      object.reviews
     end
   end
 end

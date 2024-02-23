@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_22_080430) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_23_184922) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -321,6 +321,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_080430) do
     t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.decimal "score", precision: 1, scale: 1, null: false
+    t.integer "review_type", null: false
+    t.string "reviewable_type", null: false
+    t.bigint "reviewable_id", null: false
+    t.text "feedback"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["review_type"], name: "index_reviews_on_review_type"
+    t.index ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "stickers", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -450,6 +464,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_22_080430) do
   add_foreign_key "recommendations", "users"
   add_foreign_key "reports", "conversations"
   add_foreign_key "reports", "users"
+  add_foreign_key "reviews", "users"
   add_foreign_key "user_conventions", "conventions"
   add_foreign_key "user_conventions", "users"
   add_foreign_key "user_conversations", "conversations"

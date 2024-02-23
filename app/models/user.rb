@@ -22,6 +22,7 @@ class User < ApplicationRecord
   has_many :blocks, foreign_key: :blocker_id, dependent: :destroy
   has_many :recommendations, dependent: :destroy
   has_many :push_notifications, dependent: :delete_all
+  has_many :reviews, as: :reviewable
 
   has_many :events, foreign_key: :host_id, class_name: 'Event'
   has_many :hosted_parties, foreign_key: :host_id, class_name: 'Party'

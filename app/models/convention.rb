@@ -3,6 +3,7 @@ class Convention < ApplicationRecord
   has_many :attendees, through: :user_conventions, source: 'user', source_type: 'User'
   has_many :events
   has_many :parties, through: :events
+  has_many :reviews, as: :reviewable
 
   validates :title, presence: true
   validates :start_date, presence: true

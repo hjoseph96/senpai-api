@@ -13,6 +13,7 @@ module Types
 
     field :events, [Types::EventType]
     field :attendees, [Types::UserType]
+    field :reviews, [Types::ReviewType]
 
     def events
       object.events
@@ -20,6 +21,10 @@ module Types
 
     def attendees
       object.attendees
+    end
+
+    def reviews
+      object.reviews
     end
   end
 end

@@ -46,6 +46,8 @@ module Types
       argument :other_user_id, ID
     end
     field :events, [Types::EventType]
+    field :host_reviews, [Types::ReviewType]
+    field :party_member_reviews, [Types::ReviewType]
 
     def animes
       dataloader.with(Sources::AnimesByUserId).load(object.id)
@@ -79,6 +81,14 @@ module Types
       p2 = RGeo::Geographic.spherical_factory.point(@other_user.lonlat.longitude, @other_user.lonlat.latitude)
 
       p1.distance(p2) / 1609.34
+    end
+
+    def host_reviews
+      object.reviews.where(review_type: :host)
+    end
+
+    def party_member_reviews
+      object.reviews.where(review_type: :party_member)
     end
   end
 end
