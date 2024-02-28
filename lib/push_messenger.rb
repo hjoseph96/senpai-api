@@ -19,7 +19,7 @@ module PushMessenger
       n.app = Rpush::Gcm::App.find_by_name(app)
       n.registration_ids = tokens
       n.data = payload
-      n.notification = { title: payload[:payload][:title] }
+      n.notification = { title: payload[:notification][:body] }
       n.save!
     end
   end
