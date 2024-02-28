@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_23_184922) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_28_004750) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -114,6 +114,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_23_184922) do
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_conversations_on_deleted_at"
     t.index ["match_id"], name: "index_conversations_on_match_id"
+  end
+
+  create_table "device_infos", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "device_type"
+    t.string "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_device_infos_on_user_id"
   end
 
   create_table "event_invites", force: :cascade do |t|
@@ -335,6 +344,75 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_23_184922) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "rpush_apps", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "environment"
+    t.text "certificate"
+    t.string "password"
+    t.integer "connections", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "type", null: false
+    t.string "auth_key"
+    t.string "client_id"
+    t.string "client_secret"
+    t.string "access_token"
+    t.datetime "access_token_expiration"
+    t.text "apn_key"
+    t.string "apn_key_id"
+    t.string "team_id"
+    t.string "bundle_id"
+    t.boolean "feedback_enabled", default: true
+  end
+
+  create_table "rpush_feedback", force: :cascade do |t|
+    t.string "device_token"
+    t.datetime "failed_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "app_id"
+    t.index ["device_token"], name: "index_rpush_feedback_on_device_token"
+  end
+
+  create_table "rpush_notifications", force: :cascade do |t|
+    t.integer "badge"
+    t.string "device_token"
+    t.string "sound"
+    t.text "alert"
+    t.text "data"
+    t.integer "expiry", default: 86400
+    t.boolean "delivered", default: false, null: false
+    t.datetime "delivered_at", precision: nil
+    t.boolean "failed", default: false, null: false
+    t.datetime "failed_at", precision: nil
+    t.integer "error_code"
+    t.text "error_description"
+    t.datetime "deliver_after", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "alert_is_json", default: false, null: false
+    t.string "type", null: false
+    t.string "collapse_key"
+    t.boolean "delay_while_idle", default: false, null: false
+    t.text "registration_ids"
+    t.integer "app_id", null: false
+    t.integer "retries", default: 0
+    t.string "uri"
+    t.datetime "fail_after", precision: nil
+    t.boolean "processing", default: false, null: false
+    t.integer "priority"
+    t.text "url_args"
+    t.string "category"
+    t.boolean "content_available", default: false, null: false
+    t.text "notification"
+    t.boolean "mutable_content", default: false, null: false
+    t.string "external_device_id"
+    t.string "thread_id"
+    t.boolean "dry_run", default: false, null: false
+    t.boolean "sound_is_json", default: false
+    t.index ["delivered", "failed", "processing", "deliver_after", "created_at"], name: "index_rpush_notifications_multi", where: "((NOT delivered) AND (NOT failed))"
+  end
+
   create_table "stickers", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -414,7 +492,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_23_184922) do
     t.datetime "next_payment_date"
     t.string "country"
     t.boolean "is_fake_profile", default: false
-    t.text "device_tokens", default: [], array: true
     t.boolean "is_displaying_active", default: true
     t.boolean "is_displaying_recently_active", default: true
     t.index ["birthday"], name: "index_users_on_birthday"
@@ -445,6 +522,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_23_184922) do
   add_foreign_key "blocks", "users"
   add_foreign_key "characters", "animes"
   add_foreign_key "conversations", "matches"
+  add_foreign_key "device_infos", "users"
   add_foreign_key "event_invites", "events"
   add_foreign_key "favorite_musics", "users"
   add_foreign_key "galleries", "users"

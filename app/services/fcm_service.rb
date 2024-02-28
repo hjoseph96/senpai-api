@@ -4,13 +4,10 @@ class FcmService
   def initialize(notification:)
     @notif = notification
     @user = notification.user
-
-    fcm_api_key = Rails.application.credentials.fcm_server_key
-    @client = FCM.new(fcm_api_key)
   end
 
   def send_fcm_push_notification
-    options = {
+    payload = {
       priority: 'high',
       data: { message: @notif.event_name },
       notification: {
@@ -19,9 +16,8 @@ class FcmService
       }
     }
 
-    @user.device_tokens.each do |device_token|
-      response = @client.send(device_token, options)
-      puts response
+    @user.device_infos.each do |info|
+      DeviceInfo.send_notification([info.token], payload, info.device_type)
     end
   end
 end

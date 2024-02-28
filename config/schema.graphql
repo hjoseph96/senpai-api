@@ -7,6 +7,7 @@ input AddDeviceTokenInput {
   """
   clientMutationId: String
   deviceToken: String!
+  deviceType: String!
   userId: ID!
 }
 
@@ -328,6 +329,15 @@ type DeleteUserPayload {
   """
   clientMutationId: String
   softDeletedUser: User!
+}
+
+type DeviceInfo {
+  createdAt: ISO8601DateTime!
+  deviceType: Int
+  id: ID!
+  token: String
+  updatedAt: ISO8601DateTime!
+  userId: Int!
 }
 
 type Event {
@@ -1525,7 +1535,7 @@ type User {
   currentSignInAt: ISO8601DateTime
   currentSignInIp: String
   desiredGender: String
-  deviceTokens: [String!]
+  deviceInfos: [DeviceInfo!]
   displayCity: String
   displayState: String
   encryptedPassword: String!

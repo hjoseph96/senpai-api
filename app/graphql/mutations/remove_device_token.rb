@@ -16,11 +16,19 @@ module Mutations
         return GraphQL::ExecutionError.new("User not found")
       end
 
-      begin
-        tokens = @current_user.device_tokens - [device_token]
-        @current_user.update!(device_tokens: tokens)
+      unless @current_user.device_infos.where(token: device_token).count > 0
+        return GraphQL::ExecutionError.new("Token not found")
+      end
 
-        { user: @current_user.reload }
+      begin
+        device_info = DeviceInfo.where(
+          user_id: @current_user.id,
+          token: device_token
+        )
+
+        device_info.destroy_all
+
+        { user: @current_user }
       rescue ActiveRecord::RecordInvalid => e
         GraphQL::ExecutionError.new("Invalid attributes for #{e.record.class}: #{e.record.errors.full_messages.join(', ')}")
       end

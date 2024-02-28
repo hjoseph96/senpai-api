@@ -33,8 +33,6 @@ module Types
     field :is_displaying_recently_active, Boolean
     field :is_fake_profile, Boolean, null: false
     field :next_payment_date, GraphQL::Types::ISO8601DateTime
-    field :device_tokens, [String]
-
 
 
     field :animes, [Types::AnimeType]
@@ -48,6 +46,7 @@ module Types
     field :events, [Types::EventType]
     field :host_reviews, [Types::ReviewType]
     field :party_member_reviews, [Types::ReviewType]
+    field :device_infos, [Types::DeviceInfoType]
 
     def animes
       dataloader.with(Sources::AnimesByUserId).load(object.id)
@@ -89,6 +88,10 @@ module Types
 
     def party_member_reviews
       object.reviews.where(review_type: :party_member)
+    end
+
+    def device_infos
+      object.device_infos
     end
   end
 end
