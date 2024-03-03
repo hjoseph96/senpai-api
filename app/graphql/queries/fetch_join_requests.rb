@@ -2,16 +2,13 @@ module Queries
   class FetchJoinRequests < Queries::BaseQuery
     graphql_name "FetchJoinRequests"
 
-    argument :host_id, ID, required: true
-    argument :page, Integer, required: true
+    argument :event_id, ID, required: true
+    argument :page, Integer, required: false
 
     type [Types::JoinRequestType], null: false
 
-    def resolve(host_id:, page: 1)
-      @host = User.find(host_id)
-
-      event_ids = @host.events.pluck(:id)
-      results = JoinRequest.includes(:event).where(event_id: event_ids)
+    def resolve(event_id:, page: 1)
+      results = JoinRequest.includes(:event).where(events: { id: event_id })
 
       results = results.order(created_at: :desc)
 
