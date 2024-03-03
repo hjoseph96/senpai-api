@@ -8,7 +8,7 @@ module Mutations
     argument :device_type, String, required: true
     argument :device_token, String, required: true
 
-    field :user, Types::UserType, null: false
+    field :device_info, Types::DeviceInfoType, null: false
 
     def resolve(user_id:, device_token:, device_type:)
       @current_user = User.find(user_id)
