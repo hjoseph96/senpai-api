@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_28_004750) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_03_020024) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -108,7 +108,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_004750) do
   end
 
   create_table "conversations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.bigint "match_id", null: false
+    t.integer "match_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
@@ -204,6 +204,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_004750) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "conversation_id"
     t.index ["event_id"], name: "index_join_requests_on_event_id"
     t.index ["user_id"], name: "index_join_requests_on_user_id"
   end

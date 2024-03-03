@@ -18,7 +18,7 @@ class FcmService
         # sound: 'default',
       }
     }
-    
+
     @user.device_infos.pluck(:token).each do |device_token|
       response = @client.send(device_token, options)
       puts response

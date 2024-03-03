@@ -5,7 +5,7 @@ class PartyMessage < ApplicationRecord
 
   belongs_to :party_chat
   has_one :party, through: :party_chat, source: 'party'
-  belongs_to :sender, class_name: :User, foreign_key: 'sender_id'
+  belongs_to :sender, class_name: 'User', foreign_key: 'sender_id'
   belongs_to :sticker, required: false
   has_one :recommendation, required: false
 

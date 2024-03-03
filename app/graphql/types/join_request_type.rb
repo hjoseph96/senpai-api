@@ -5,6 +5,7 @@ module Types
     field :id, ID, null: false
     field :user_id, Integer, null: false
     field :event_id, Integer, null: false
+    field :conversation_id, String
     field :status, String, null: false
     field :description, String
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
@@ -12,6 +13,7 @@ module Types
 
     field :applicant, Types::UserType
     field :event, Types::EventType
+    field :conversation, Types::ConversationType
 
     def applicant
       object.user
@@ -19,6 +21,10 @@ module Types
 
     def event
       object.event
+    end
+
+    def conversation
+      object.conversation
     end
   end
 end

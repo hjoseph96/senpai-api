@@ -19,6 +19,15 @@ module Mutations
         join_request.description = join_params[:description] if join_params[:description].present?
 
         if join_request.save!
+          direct_message_room = Conversation.create!
+
+          direct_message_room.users << @event.host
+          direct_message_room << applicant
+          direct_message_room.save!
+
+          join_request.conversation = direct_message_room
+          join_request.save!
+
           PushNotification.create!(
             user_id: @event.host_id,
             event_name: 'party_join_request',

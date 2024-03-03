@@ -1,6 +1,7 @@
 class JoinRequest < ApplicationRecord
   belongs_to :user
   belongs_to :event
+  belongs_to :conversation, optional: true
 
   enum :status, [:pending, :approved, :denied]
 
