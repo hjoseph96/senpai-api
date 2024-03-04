@@ -4,7 +4,6 @@ class Event < ApplicationRecord
   belongs_to :host, foreign_key: :host_id, class_name: 'User'
   belongs_to :convention, optional: true
   has_many :join_requests
-  has_many :reviews, as: :reviewable
 
   has_one_attached :cover_image
 
@@ -38,5 +37,11 @@ class Event < ApplicationRecord
     return unless self.convention_id.present?
 
     self.update(start_date: self.convention.start_date, end_date: self.convention.end_date)
+  end
+
+  def is_running?
+    event_end_date = self.end_date || self.start_date + 1
+
+    self.start_date..event_end_date === DateTime.now
   end
 end
