@@ -1,6 +1,8 @@
 require_relative './seeds/anilist_seeder'
 require_relative './seeds/profile_seeder'
 require_relative './seeds/sticker_seeder'
+require_relative './seeds/convention_seeder'
+require_relative './seeds/event_seeder'
 
 AnilistSeeder.create_animes
 
@@ -14,3 +16,7 @@ ProfileSeeder.create_profiles(location: 'PALO ALTO')
 ProfileSeeder.create_profiles(location: 'TOKYO')
 
 StickerSeeder.create_stickers
+
+ConventionSeeder.create_conventions
+
+EventSeeder.create_events
