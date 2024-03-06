@@ -8,7 +8,7 @@ module Queries
     type [Types::JoinRequestType], null: false
 
     def resolve(event_id:, page: 1)
-      results = JoinRequest.includes(:event).where(events: { id: event_id })
+      results = JoinRequest.includes(:event).where(events: { id: event_id }).where(status: :pending)
 
       results = results.order(created_at: :desc)
 

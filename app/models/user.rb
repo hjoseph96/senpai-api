@@ -142,4 +142,26 @@ class User < ApplicationRecord
   def self.blocked?(blocks, user)
     blocks.select { |block| block.blockee_id == user.id }.present?
   end
+
+  def host_reviews
+    self.reviews.where(review_type: :host)
+  end
+
+  def host_score
+    return nil if host_reviews.empty?
+
+    scores = self.host_reviews.pluck(:score)
+    scores.inject{ |sum, score| sum + score }.to_f / scores.size
+  end
+
+  def party_member_reviews
+    self.reviews.where(review_type: :party_member)
+  end
+
+  def party_member_score
+    return nil if party_member_reviews.empty?
+
+    scores = self.party_member_reviews.pluck(:score)
+    scores.inject{ |sum, score| sum + score }.to_f / scores.size
+  end
 end

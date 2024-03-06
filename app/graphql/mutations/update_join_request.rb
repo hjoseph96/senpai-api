@@ -15,13 +15,20 @@ module Mutations
 
           case join_params[:status]
             when 'approved'
-              @join_request.mark_approved
+              party_is_full = @join_request.event.party.members.count >= @join_request.event.member_limit
 
-              PushNotification.create!(
-                user_id: @join_request.user_id,
-                event_name: 'accepted_to_party',
-                content: "#{@join_request.event.host.first_name} accepted you into their party!"
-              )
+              if party_is_full
+                return GraphQL::ExecutionError.new("Party is full")
+              else
+                @join_request.mark_approved
+
+                PushNotification.create!(
+                  user_id: @join_request.user_id,
+                  event_name: 'accepted_to_party',
+                  content: "#{@join_request.event.host.first_name} accepted you into their party!"
+                )
+              end
+
             when 'denied' then @join_request.denied!
           end
         end

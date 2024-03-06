@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_04_122346) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_06_195948) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -153,7 +153,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_122346) do
     t.integer "cosplay_required", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "payment_required", default: false
+    t.index ["cosplay_required"], name: "index_events_on_cosplay_required"
     t.index ["host_id"], name: "index_events_on_host_id"
+    t.index ["payment_required"], name: "index_events_on_payment_required"
     t.index ["start_date"], name: "index_events_on_start_date"
     t.index ["title"], name: "index_events_on_title"
   end
@@ -253,7 +256,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_122346) do
     t.integer "member_limit", default: 10, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "disbanded"
+    t.boolean "disbanded", default: false
     t.index ["event_id"], name: "index_parties_on_event_id"
     t.index ["host_id"], name: "index_parties_on_host_id"
   end

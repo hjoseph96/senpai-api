@@ -45,7 +45,10 @@ module Types
     end
     field :events, [Types::EventType]
     field :host_reviews, [Types::ReviewType]
+    field :host_score, Float
     field :party_member_reviews, [Types::ReviewType]
+    field :party_member_score, Float
+
     field :device_infos, [Types::DeviceInfoType]
 
     def animes
@@ -83,11 +86,19 @@ module Types
     end
 
     def host_reviews
-      object.reviews.where(review_type: :host)
+      object.host_reviews
+    end
+
+    def host_score
+      object.host_score
     end
 
     def party_member_reviews
-      object.reviews.where(review_type: :party_member)
+      object.party_member_reviews
+    end
+
+    def party_member_score
+      object.party_member_score
     end
 
     def device_infos

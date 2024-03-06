@@ -24,6 +24,7 @@ module Mutations
           lonlat: point,
           venue: event_params[:venue],
           description: event_params[:description],
+          payment_required: event_params[:payment_required]
           )
 
         if event_params[:cover_image].present?

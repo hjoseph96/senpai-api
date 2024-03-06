@@ -39,5 +39,6 @@ module Types
     field :mark_convention_attendance, mutation: Mutations::MarkConventionAttendance
     field :leave_review, mutation: Mutations::LeaveReview
     field :disband_party, mutation: Mutations::DisbandParty
+    field :leave_party, mutation: Mutations::LeaveParty
   end
 end

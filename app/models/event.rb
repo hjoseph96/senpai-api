@@ -10,6 +10,7 @@ class Event < ApplicationRecord
   validates :title, presence: true
   validates :start_date, presence: true
   validates :lonlat, presence: true
+  validates :payment_required, presence: true
   validates :cosplay_required, presence: true
   validates :description, presence: true
 

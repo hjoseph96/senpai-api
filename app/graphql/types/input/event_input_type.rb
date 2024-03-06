@@ -11,6 +11,7 @@ module Types
       argument :end_date, GraphQL::Types::ISO8601DateTime, required: false
       argument :convention_id, Integer, required: false
       argument :cosplay_required, String, required: false
+      argument :payment_required, Boolean, required: false
     end
   end
 end
