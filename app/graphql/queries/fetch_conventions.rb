@@ -23,8 +23,11 @@ module Queries
         results = results.within(@user.lonlat.latitude, @user.lonlat.longitude, convention_params[:miles_away])
       end
 
-      results =  results.where('start_date > ?', convention_params[:start_date]) if convention_params[:start_date].present?
-      results = results.where('end_date < ?', convention_params[:end_date]) if convention_params[:end_date].present?
+      if convention_params[:start_date].present?
+        results = results.where(start_date: DateTime.now...convention_params[:start_date])
+      end
+
+      results = results.where('end_date > ?', convention_params[:end_date]) if convention_params[:end_date].present?
 
       if convention_params[:query].present?
         results = results.search_by_title(event_params[:title])
