@@ -81,10 +81,10 @@ class ConventionSeeder
       title: 'Anime NYC',
       venue: 'Javits Convention Center',
       country: 'US',
-      display_city: 'Austin',
-      display_state: 'TX',
-      start_date: Date.parse('July 26, 2024'),
-      end_date: Date.parse('July 28, 2024'),
+      display_city: 'New York',
+      display_state: 'NY',
+      start_date: Date.parse('August 23, 2024'),
+      end_date: Date.parse('August 25, 2024'),
       website: 'https://animenyc.com/',
       lonlat: "POINT(-74.002040 40.757355)"
     )
