@@ -28,6 +28,13 @@ class Event < ApplicationRecord
     } % [longitude, latitude, distance_in_mile * 1609.34]) # approx
   }
 
+  scope :accepting_members, -> () do
+    Event.joins(:party).where(parties: { status: :open })
+  end
+
+  scope :full_party, -> () do
+    Event.joins(:party).where(parties: { status: :full })
+  end
 
   def create_party
     Party.create!(event_id: self.id, host_id: self.host_id)

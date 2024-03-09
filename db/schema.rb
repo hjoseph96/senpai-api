@@ -154,6 +154,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_06_195948) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "payment_required", default: false
+    t.integer "member_limit", default: 10, null: false
     t.index ["cosplay_required"], name: "index_events_on_cosplay_required"
     t.index ["host_id"], name: "index_events_on_host_id"
     t.index ["payment_required"], name: "index_events_on_payment_required"
@@ -253,10 +254,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_06_195948) do
   create_table "parties", force: :cascade do |t|
     t.integer "host_id", null: false
     t.integer "event_id", null: false
-    t.integer "member_limit", default: 10, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "disbanded", default: false
+    t.integer "member_limit"
     t.index ["event_id"], name: "index_parties_on_event_id"
     t.index ["host_id"], name: "index_parties_on_host_id"
   end

@@ -6,10 +6,15 @@ class JoinRequest < ApplicationRecord
   enum :status, [:pending, :approved, :denied]
 
   def mark_approved
+    return if party.event.is_full?
+
     self.approved!
 
     party = self.event.party
     party.members << self.user
-    party.save!
+
+    if party.save!
+      party.full! if party.event.is_full?
+    end
   end
 end

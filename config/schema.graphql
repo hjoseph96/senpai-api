@@ -957,6 +957,7 @@ type Party {
   members: [User!]
   messages: [PartyMessage!]
   partyChat: PartyChat
+  status: String!
   updatedAt: ISO8601DateTime!
 }
 

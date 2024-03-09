@@ -5,6 +5,7 @@ module Types
     field :id, ID, null: false
     field :host_id, Integer, null: false
     field :event_id, Integer, null: false
+    field :status, String, null: false
     field :disbanded, Boolean, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
