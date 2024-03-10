@@ -3,6 +3,7 @@ module Types
     class EventUpdateInputType < Types::BaseInputObject
       argument :user_id, ID, required: true
       argument :event_id, ID, required: true
+      argument :member_limit, Integer, required: false
       argument :full_address, String, required: false
       argument :venue, String, required: false
       argument :title, String, required: false

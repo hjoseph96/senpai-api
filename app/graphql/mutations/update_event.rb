@@ -54,6 +54,14 @@ module Mutations
           @event.cosplay_required = event_params[:cosplay_required]
         end
 
+        if event_params[:member_limit].present?
+          if event_params[:member_limit] < @event.party.members.count
+            return GraphQL::ExecutionError.new("Cannot set limit lower than current party members.")
+          end
+
+          @event.party.member_limit = event_params[:member_limit]
+        end
+        
         @event.save!
 
         { event: @event.reload }
