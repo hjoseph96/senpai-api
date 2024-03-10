@@ -61,7 +61,7 @@ module Mutations
 
           @event.party.member_limit = event_params[:member_limit]
         end
-        
+
         @event.save!
 
         { event: @event.reload }
