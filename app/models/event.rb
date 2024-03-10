@@ -18,8 +18,6 @@ class Event < ApplicationRecord
   include PgSearch::Model
   pg_search_scope :search_by_title, against: [:title],  using: { tsearch: { dictionary: 'english' } }
 
-
-  after_create_commit :create_party
   after_create_commit :set_date_range
 
   scope :within, -> (latitude, longitude, distance_in_mile = 1) {
@@ -34,10 +32,6 @@ class Event < ApplicationRecord
 
   scope :full_party, -> () do
     Event.joins(:party).where(parties: { status: :full })
-  end
-
-  def create_party
-    Party.create!(event_id: self.id, host_id: self.host_id)
   end
 
   def set_date_range

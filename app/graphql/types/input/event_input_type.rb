@@ -7,6 +7,7 @@ module Types
       argument :title, String, required: true
       argument :start_date, GraphQL::Types::ISO8601DateTime, required: true
       argument :description, String, required: true
+      argument :member_limit, Boolean, required: true
       argument :cover_image, ApolloUploadServer::Upload, required: false
       argument :end_date, GraphQL::Types::ISO8601DateTime, required: false
       argument :convention_id, Integer, required: false

@@ -52,9 +52,15 @@ module Mutations
           event.cosplay_required = event_params[:cosplay_required]
         end
 
-        event.save!
+        if event.save!
+          Party.create!(
+            event_id: event.id,
+            host_id: event.host_id,
+            member_limit: event_params[:member_limit]
+          )
 
-        { event: event.reload }
+          { event: event.reload }
+        end
       rescue ActiveRecord::RecordInvalid => e
         GraphQL::ExecutionError.new("#{e.record.errors.full_messages.join(', ')}")
       end

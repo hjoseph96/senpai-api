@@ -10,12 +10,12 @@ class VerifyRequest < ApplicationRecord
   def approve!
     self.approved!
 
-    user.update(verified: true)
+    user.update!(verified: true)
 
     PushNotification.create(
       user_id: self.user_id,
       event_name: 'verify_request_approve',
-      content: 'Your verification has been approved!'
+      content: "You've been verified!"
     )
   end
 
@@ -25,7 +25,7 @@ class VerifyRequest < ApplicationRecord
     PushNotification.create(
       user_id: self.user_id,
       event_name: 'verify_request_deny',
-      content: 'Your verification has been approved!'
+      content: 'Your verification has been denied!'
     )
   end
 end

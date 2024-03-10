@@ -15,8 +15,6 @@ module Types
         argument :is_displaying_active, Boolean, required: false
         argument :is_displaying_recently_active, Boolean, required: false
         argument :super_like_count, Integer, required: false
-
-
       end
     end
 end
