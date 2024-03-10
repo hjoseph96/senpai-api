@@ -390,6 +390,7 @@ input EventInput {
   description: String!
   endDate: ISO8601DateTime
   fullAddress: String!
+  memberLimit: Boolean!
   paymentRequired: Boolean
   startDate: ISO8601DateTime!
   title: String!
@@ -419,6 +420,7 @@ input EventUpdateInput {
   endDate: ISO8601DateTime
   eventId: ID!
   fullAddress: String
+  memberLimit: Int
   startDate: ISO8601DateTime
   title: String
   userId: ID!
