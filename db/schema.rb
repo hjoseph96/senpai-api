@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_06_195948) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_09_003406) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -258,8 +258,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_06_195948) do
     t.datetime "updated_at", null: false
     t.boolean "disbanded", default: false
     t.integer "member_limit"
+    t.integer "status", default: 0, null: false
     t.index ["event_id"], name: "index_parties_on_event_id"
     t.index ["host_id"], name: "index_parties_on_host_id"
+    t.index ["status"], name: "index_parties_on_status"
   end
 
   create_table "party_chats", force: :cascade do |t|

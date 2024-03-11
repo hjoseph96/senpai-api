@@ -8,7 +8,7 @@ class Party < ApplicationRecord
   has_one :party_chat
   has_many :reviews, as: :reviewable
 
-  enum  :status, [:open, :full]
+  enum :status, [:open, :full]
 
 
   def all_participants
