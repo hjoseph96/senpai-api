@@ -7,6 +7,10 @@ module Types
     field :start_date, GraphQL::Types::ISO8601DateTime, null: false
     field :end_date, GraphQL::Types::ISO8601DateTime
     field :website, String
+    field :display_city, String
+    field :display_state, String
+    field :country, String
+    field :full_address, String, null: false
     field :lonlat, String, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false

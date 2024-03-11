@@ -33,7 +33,8 @@ class EventSeeder
       display_state: 'CA',
       start_date: Date.parse('June 24, 2024'),
       description: "Let's have a fun night out!",
-      lonlat: "POINT(-122.142677 37.459775)"
+      lonlat: "POINT(-122.142677 37.459775)",
+      full_address: '2050 University Ave, East Palo Alto, CA 94303'
     )
 
     event.cover_image.attach(blob)
@@ -62,7 +63,8 @@ class EventSeeder
       display_state: 'CA',
       start_date: Date.parse('April 24, 2024'),
       description: "Hit strikes all night!",
-      lonlat: "POINT(-122.014012 37.326806)"
+      lonlat: "POINT(-122.014012 37.326806)",
+      full_address: '10123 N Wolfe Rd Ste 20 Cupertino, CA 95014'
     )
 
     event.cover_image.attach(blob)

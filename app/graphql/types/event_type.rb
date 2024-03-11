@@ -12,6 +12,7 @@ module Types
     field :display_city, String, null: false
     field :display_state, String, null: false
     field :country, String, null: false
+    field :full_address, String, null: false
     field :lonlat, String, null: false
     field :description, String
     field :host_id, Integer, null: false

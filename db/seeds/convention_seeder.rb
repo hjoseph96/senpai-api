@@ -32,7 +32,8 @@ class ConventionSeeder
       start_date: Date.parse('May 24, 2024'),
       end_date: Date.parse('May 27, 2024'),
       website: 'https://www.momocon.com/',
-      lonlat: "POINT(-84.402063 33.759965)"
+      lonlat: "POINT(-84.402063 33.759965)",
+      full_address: '285 Andrew Young International Blvd NW Atlanta, GA 30303'
     )
 
     momocon.cover_image.attach(blob)
@@ -59,7 +60,8 @@ class ConventionSeeder
       start_date: Date.parse('July 26, 2024'),
       end_date: Date.parse('July 28, 2024'),
       website: 'https://www.dreamconvention.com/',
-      lonlat: "POINT(-97.738789 30.264003)"
+      lonlat: "POINT(-97.738789 30.264003)",
+      full_address: '500 E. Cesar Chavez St. Austin, TX 78701'
     )
 
     dreamcon.cover_image.attach(blob)
@@ -86,7 +88,8 @@ class ConventionSeeder
       start_date: Date.parse('August 23, 2024'),
       end_date: Date.parse('August 25, 2024'),
       website: 'https://animenyc.com/',
-      lonlat: "POINT(-74.002040 40.757355)"
+      lonlat: "POINT(-74.002040 40.757355)",
+      full_address: '445 11th Ave, New York, NY 10001'
     )
 
     anime_nyc.cover_image.attach(blob)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_09_003406) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_11_210230) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -102,6 +102,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_09_003406) do
     t.geography "lonlat", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "full_address", null: false
     t.index ["lonlat"], name: "index_conventions_on_lonlat"
     t.index ["start_date"], name: "index_conventions_on_start_date"
     t.index ["title"], name: "index_conventions_on_title"
@@ -155,6 +156,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_09_003406) do
     t.datetime "updated_at", null: false
     t.boolean "payment_required", default: false
     t.integer "member_limit", default: 10, null: false
+    t.string "full_address", null: false
     t.index ["cosplay_required"], name: "index_events_on_cosplay_required"
     t.index ["host_id"], name: "index_events_on_host_id"
     t.index ["payment_required"], name: "index_events_on_payment_required"

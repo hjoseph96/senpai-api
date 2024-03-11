@@ -21,6 +21,7 @@ module Mutations
           country: location.country,
           display_city: location.city,
           display_state: state,
+          full_address: event_params[:full_address],
           lonlat: point,
           venue: event_params[:venue],
           description: event_params[:description],

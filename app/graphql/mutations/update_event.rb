@@ -35,6 +35,7 @@ module Mutations
           @event.display_state = state
           @event.country = location.country
           @event.lonlat = point
+          @event.full_address = event_params[:full_address]
         end
 
         if event_params[:cover_image].present?
