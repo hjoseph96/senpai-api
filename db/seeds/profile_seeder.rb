@@ -62,6 +62,12 @@ class ProfileSeeder
         { long: tokyo_long_points.sample, lat: tokyo_lat_points.sample }
     end
 
+    def juiz_de_fora_points
+        juiz_lat_points = (-21.766135.21.81).step(0.0005).to_a
+        juiz_long_points = (-43.350200.-43.34).step(0.0005).to_a
+        { long: juiz_lat_points.sample, lat: juiz_long_points.sample }
+    end
+
     def create_females
         puts 'Seeding women...'
 
@@ -79,8 +85,9 @@ class ProfileSeeder
                 when 'CHANDIGARH' then point = chandigarh_points
                 when 'PALO ALTO' then point = palo_alto_points
                 when 'TOKYO' then point = tokyo_points
-                else
-                    throw StandardError("Unsupported seed location.")
+                when 'JUIZ DE FORA' then point = juiz_de_fora_points
+            else
+                throw StandardError("Unsupported seed location.")
             end
 
             u = User.create(
@@ -138,8 +145,9 @@ class ProfileSeeder
                 when 'CHANDIGARH' then point = chandigarh_points
                 when 'PALO ALTO' then point = palo_alto_points
                 when 'TOKYO' then point = tokyo_points
+                when 'JUIZ DE FORA' then point = juiz_de_fora_points
             else
-                    throw StandardError("Unsupported seed location.")
+                throw StandardError("Unsupported seed location.")
             end
 
             u = User.create(
