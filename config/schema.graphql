@@ -147,9 +147,13 @@ type Character {
 
 type Convention {
   attendees: [User!]
+  country: String
   createdAt: ISO8601DateTime!
+  displayCity: String
+  displayState: String
   endDate: ISO8601DateTime
   events: [Event!]
+  fullAddress: String!
   id: ID!
   lonlat: String!
   reviews: [Review!]
@@ -372,6 +376,7 @@ type Event {
   displayCity: String!
   displayState: String!
   endDate: ISO8601DateTime
+  fullAddress: String!
   hostId: Int!
   id: ID!
   lonlat: String!
