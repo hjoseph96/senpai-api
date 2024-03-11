@@ -63,8 +63,8 @@ class ProfileSeeder
     end
 
     def juiz_de_fora_points
-        juiz_lat_points = (-21.766135.21.81).step(0.0005).to_a
-        juiz_long_points = (-43.350200.-43.34).step(0.0005).to_a
+        juiz_lat_points = (-21.766135..21.81).step(0.0005).to_a
+        juiz_long_points = (-43.350200..-43.34).step(0.0005).to_a
         { long: juiz_lat_points.sample, lat: juiz_long_points.sample }
     end
 
