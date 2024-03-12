@@ -9,6 +9,6 @@ sync_anime_job:
   queue: sync_anime_job
 
 hourly_unfilled_jon:
-  cron: 0 * * * *
+  cron: 0 */6 * * *
   class: "HourlyUnfilledJob"
   queue: hourly_unfilled_job
