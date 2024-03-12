@@ -53,6 +53,7 @@ class User < ApplicationRecord
   scope :profile_filled, -> { joins(:user_animes)
                                 .group('users.id')
                                 .having("count('animes.id') > 0") }
+  scope :profile_unfilled, -> { includes(:user_animes).where(user_animes: { user_id: nil }) }
 
 
   validates :phone, presence: true, uniqueness: true
