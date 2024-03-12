@@ -27,7 +27,7 @@ module Queries
       results = results.where('end_date >= ?', convention_params[:end_date]) if convention_params[:end_date].present?
 
       if convention_params[:query].present?
-        results = results.search_by_title(convention_params[:title])
+        results = results.search_by_title(convention_params[:query])
       end
 
       results.page(page)
