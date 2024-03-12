@@ -11,7 +11,7 @@ class Convention < ApplicationRecord
   has_one_attached :cover_image
 
   include PgSearch::Model
-  pg_search_scope :search_by_title, against: [:title],  using: { tsearch: { dictionary: 'english' } }
+  pg_search_scope :search_by_title, against: [:title],  using: { tsearch: { dictionary: 'english', any_word: true } }
 
 
   scope :within, -> (latitude, longitude, distance_in_mile = 1) {
