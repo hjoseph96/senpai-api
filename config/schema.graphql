@@ -148,6 +148,7 @@ type Character {
 type Convention {
   attendees: [User!]
   country: String
+  coverImageUrl: String
   createdAt: ISO8601DateTime!
   displayCity: String
   displayState: String

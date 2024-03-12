@@ -2,6 +2,8 @@
 
 module Types
   class ConventionType < Types::BaseObject
+    include ApplicationHelper
+
     field :id, ID, null: false
     field :title, String, null: false
     field :start_date, GraphQL::Types::ISO8601DateTime, null: false
@@ -15,9 +17,14 @@ module Types
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
+    field :cover_image_url, String
     field :events, [Types::EventType]
     field :attendees, [Types::UserType]
     field :reviews, [Types::ReviewType]
+
+    def cover_image_url
+      cdn_for(object.cover_image)
+    end
 
     def events
       object.events
