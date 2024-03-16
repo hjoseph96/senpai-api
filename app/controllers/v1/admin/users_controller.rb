@@ -3,7 +3,6 @@ class V1::Admin::UsersController < ApplicationController
 
   def index
     page = strong_params[:page]
-
     render json: User.profile_filled.where(is_fake_profile: false).page(page).per(50)
   end
 

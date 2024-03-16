@@ -10,16 +10,22 @@ class UserSerializer < ActiveModel::Serializer
 
 
   def age
+    return nil unless object.birthday.present?
+
     now = Time.now.utc.to_date
     dob = object.birthday.to_date
     now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
   end
 
   def latlong
+    return nil unless object.lonlat.present?
+
     { lat: object.lonlat.latitude, long: object.lonlat.longitude } if object.lonlat.present?
   end
 
   def cover_photo_url
+    return nil unless object.photos.present?
+
     cdn_for object.photos.order(order: :desc).first.try(:image)
   end
 
