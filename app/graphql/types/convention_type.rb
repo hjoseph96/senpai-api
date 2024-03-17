@@ -6,6 +6,7 @@ module Types
 
     field :id, ID, null: false
     field :title, String, null: false
+    field :payment_required, Boolean, null: false
     field :start_date, GraphQL::Types::ISO8601DateTime, null: false
     field :end_date, GraphQL::Types::ISO8601DateTime
     field :website, String

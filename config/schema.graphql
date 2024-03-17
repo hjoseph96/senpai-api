@@ -157,6 +157,7 @@ type Convention {
   fullAddress: String!
   id: ID!
   lonlat: String!
+  paymentRequired: Boolean!
   reviews: [Review!]
   startDate: ISO8601DateTime!
   title: String!

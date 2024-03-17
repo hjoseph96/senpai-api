@@ -11,6 +11,12 @@ class V1::Admin::UsersController < ApplicationController
     render json: @user
   end
 
+  def destroy
+    @user = User.find(strong_params[:id])
+
+    render json: { success: true } if @user.destroy
+  end
+
   def all_users
     render json: User.profile_filled.where(is_fake_profile: false)
   end
