@@ -43,7 +43,9 @@ module Types
     field :miles_away, Integer do
       argument :other_user_id, ID
     end
-    field :events, [Types::EventType]
+    field :events, [Types::EventType] do
+      argument :page, Integer
+    end
     field :host_reviews, [Types::ReviewType]
     field :host_score, Float
     field :party_member_reviews, [Types::ReviewType]
@@ -71,8 +73,8 @@ module Types
       dataloader.with(Sources::BlocksByUserId).load(object.id)
     end
 
-    def events
-      dataloader.with(Sources::EventsByUserId).load(object.id)
+    def events(page: 1)
+      object.events.page(page)
     end
 
     def miles_away(other_user_id:)
