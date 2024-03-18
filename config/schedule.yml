@@ -8,7 +8,12 @@ sync_anime_job:
   class: "SyncAnimeJob"
   queue: sync_anime_job
 
-hourly_unfilled_jon:
+hourly_unfilled_job:
   cron: 0 */6 * * *
   class: "HourlyUnfilledJob"
   queue: hourly_unfilled_job
+
+event_reminder_job:
+  cron: 0 * * * *
+  class: "EventReminderJob"
+  queue: event_reminder_job

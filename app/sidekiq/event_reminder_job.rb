@@ -5,7 +5,7 @@ class EventReminderJob
     events = Event.where('start_date BETWEEN ? AND ?', Time.zone.now, 1.hour.from_now)
 
     return if events.empty?
-    
+
     events.find_in_batches do |group|
       group.each do |e|
         e.party.all_participants.each do |u|
