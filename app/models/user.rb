@@ -35,6 +35,11 @@ class User < ApplicationRecord
 
   has_one :influencer, dependent: :destroy
 
+  has_many :referrals, foreign_key: :referer_id, class_name: 'Referral'
+  has_one :referred_by, foreign_key: :referred_id, class_name: 'Referral'
+
+  has_one_attached :referral_qr_code
+
   enum :online_status, [ :online, :offline ]
   enum :role, [ :user, :mod, :admin ]
   enum :gender, { male: 0, female: 1 }
@@ -58,7 +63,36 @@ class User < ApplicationRecord
 
   validates :phone, presence: true, uniqueness: true
   validate :validate_age
+
   after_commit :clear_feed
+  after_create_commit :generate_qr_code
+
+
+  def generate_qr_code
+    qrcode = RQRCode::QRCode.new("http://github.com/")
+
+    # NOTE: showing with default options specified explicitly
+    png = qrcode.as_png(
+      bit_depth: 1,
+      border_modules: 4,
+      color_mode: ChunkyPNG::COLOR_GRAYSCALE,
+      color: "black",
+      file: nil,
+      fill: "white",
+      module_px_size: 6,
+      resize_exactly_to: false,
+      resize_gte_to: false,
+      size: 120
+    )
+
+    self.referral_qr_code.attach(
+      io: StringIO.new(png.to_s),
+      filename: "referral_qrcode.png",
+      content_type: "image/png"
+    )
+
+    self.save!
+  end
 
   def validate_age
     if birthday.present? && birthday > 18.years.ago

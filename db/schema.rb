@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_17_214502) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_19_204808) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -328,6 +328,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_17_214502) do
     t.index ["user_id"], name: "index_recommendations_on_user_id"
   end
 
+  create_table "referrals", force: :cascade do |t|
+    t.integer "referer_id"
+    t.integer "referred_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "reports", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "status", default: 0, null: false
@@ -506,6 +513,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_17_214502) do
     t.boolean "is_fake_profile", default: false
     t.boolean "is_displaying_active", default: true
     t.boolean "is_displaying_recently_active", default: true
+    t.uuid "referral_code", default: -> { "uuid_generate_v4()" }
     t.index ["birthday"], name: "index_users_on_birthday"
     t.index ["country"], name: "index_users_on_country"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
