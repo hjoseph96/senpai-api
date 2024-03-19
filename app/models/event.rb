@@ -16,7 +16,7 @@ class Event < ApplicationRecord
   enum :cosplay_required, [:no, :optional, :required]
 
   include PgSearch::Model
-  pg_search_scope :search_by_title, against: [:title],  using: { tsearch: { any_word: true } }
+  pg_search_scope :search_by_title, against: [:title],  using: { trigram: { threshold: 0.1 } }
 
   after_create_commit :set_date_range
 
