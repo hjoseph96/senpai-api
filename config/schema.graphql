@@ -1022,7 +1022,7 @@ type Photo {
 type Query {
   fetchAnime(params: AnimeInput!): [Anime!]!
   fetchCharacters(params: FetchCharactersInput!): [Character!]!
-  fetchConvention(conventionId: ID!): Event!
+  fetchConvention(conventionId: ID!): Convention!
   fetchConventions(params: SearchEventInput!): [Convention!]!
   fetchConversations(page: Int, search: String, userId: ID!): [Conversation!]!
   fetchEvent(eventId: ID!): Event!
@@ -1610,7 +1610,7 @@ type User {
   displayCity: String
   displayState: String
   encryptedPassword: String!
-  events: [Event!]
+  events(page: Int!): [Event!]
   favoriteMusic: [FavoriteMusic!]
   firstName: String!
   gallery: Gallery
