@@ -27,7 +27,7 @@ module Queries
       results = results.where('end_date >= ?', event_params[:end_date]) if event_params[:end_date].present?
 
       if event_params[:query].present?
-        results = results.search_by_title(event_params[:title])
+        results = results.search_by_title(event_params[:query])
       end
 
       results.page(page)
