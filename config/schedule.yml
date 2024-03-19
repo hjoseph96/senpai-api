@@ -17,3 +17,8 @@ event_reminder_job:
   cron: 0 * * * *
   class: "EventReminderJob"
   queue: event_reminder_job
+
+convention_reminder_job:
+  cron: 0 * * * *
+  class: "ConventionReminderJob"
+  queue: convention_reminder_job
