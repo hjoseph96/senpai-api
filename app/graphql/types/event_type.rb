@@ -17,7 +17,7 @@ module Types
     field :description, String
     field :host_id, Integer, null: false
     field :convention_id, Integer
-    field :cosplay_required, Integer
+    field :cosplay_required, String
     field :payment_required, Boolean
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false

@@ -370,7 +370,7 @@ type DisbandPartyPayload {
 
 type Event {
   conventionId: Int
-  cosplayRequired: Int
+  cosplayRequired: String
   country: String!
   coverImageUrl: String
   createdAt: ISO8601DateTime!
