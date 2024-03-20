@@ -10,6 +10,6 @@ class Anime < ApplicationRecord
   serialize :studios, coder: JSON
 
   include PgSearch::Model
-  pg_search_scope :search_by_title, against: [:title, :japanese_title], using: { tsearch: { any_word: true } }
+  pg_search_scope :search_by_title, against: [:title, :japanese_title], using: { trigram: { threshold: 0.1 } }
   pg_search_scope :search_by_genre, against: :genres, using: { tsearch: { any_word: true } }
 end
