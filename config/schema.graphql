@@ -1234,7 +1234,9 @@ input ReviewInput {
 union Reviewable = Convention | Event | Party | User
 
 input SearchEventInput {
+  cosplayRequired: String
   endDate: ISO8601DateTime
+  hostRating: Float
   milesAway: Int
   page: Int
   paymentRequired: Boolean

@@ -8,6 +8,7 @@ module Types
       argument :end_date, GraphQL::Types::ISO8601DateTime, required: false
       argument :payment_required, Boolean, required: false
       argument :cosplay_required, String, required: false
+      argument :host_rating, Float, required: false
       argument :page, Integer, required: false
     end
   end

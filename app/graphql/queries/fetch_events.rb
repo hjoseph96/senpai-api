@@ -42,6 +42,13 @@ module Queries
         results = results.search_by_title(event_params[:query])
       end
 
+      if event_params[:host_rating].present?
+        results = results.joins(host: :reviews)
+                         .where('reviews.review_type = ?', 1)
+                         .group('events.id')
+                         .select("AVG(reviews.score) > #{event_params[:host_rating]}")
+      end
+
       results.page(page)
     end
   end
