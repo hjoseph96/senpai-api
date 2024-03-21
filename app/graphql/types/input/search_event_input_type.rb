@@ -7,6 +7,7 @@ module Types
       argument :start_date, GraphQL::Types::ISO8601DateTime, required: true
       argument :end_date, GraphQL::Types::ISO8601DateTime, required: false
       argument :payment_required, Boolean, required: false
+      argument :cosplay_required, String, required: false
       argument :page, Integer, required: false
     end
   end

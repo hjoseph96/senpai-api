@@ -29,7 +29,15 @@ module Queries
       if event_params[:payment_required].present?
         results = results.where(payment_required: event_params[:payment_required])
       end
-      
+
+      if event_params[:cosplay_required].present?
+        unless %w(no optional yes).include?(event_params[:cosplay_required])
+          return GraphQL::ExecutionError.new("Invalid cosplay_required provided.")
+        end
+
+        results = results.where(cosplay_required: event_params[:cosplay_required])
+      end
+
       if event_params[:query].present?
         results = results.search_by_title(event_params[:query])
       end
