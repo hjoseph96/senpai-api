@@ -26,6 +26,10 @@ module Queries
       results =  results.where('start_date >= ?', event_params[:start_date]) if event_params[:start_date].present?
       results = results.where('end_date >= ?', event_params[:end_date]) if event_params[:end_date].present?
 
+      if event_params[:payment_required].present?
+        results = results.where(payment_required: event_params[:payment_required])
+      end
+      
       if event_params[:query].present?
         results = results.search_by_title(event_params[:query])
       end

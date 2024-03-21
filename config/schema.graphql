@@ -1237,6 +1237,7 @@ input SearchEventInput {
   endDate: ISO8601DateTime
   milesAway: Int
   page: Int
+  paymentRequired: Boolean
   query: String
   startDate: ISO8601DateTime!
   userId: ID
