@@ -17,7 +17,7 @@ module Queries
         if event_params[:user_id].present?
           @user = User.find(event_params[:user_id])
         else
-          throw new StandardError("Params user_id is missing")
+          return GraphQL::ExecutionError.new("Params user_id is missing")
         end
 
         results = results.within(@user.lonlat.latitude, @user.lonlat.longitude, event_params[:miles_away])
@@ -44,7 +44,7 @@ module Queries
 
       if event_params[:host_rating].present?
         results = results.joins(host: :reviews)
-                         .where('reviews.review_type = ?', 1)
+                         .where('reviews.review_type = ?', 1) # reviews as host only
                          .group('events.id')
                          .having("AVG(reviews.score) > #{event_params[:host_rating]}")
       end
