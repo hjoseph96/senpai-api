@@ -43,6 +43,12 @@ class EventSeeder
     event.cover_image.attach(blob)
 
     event.save!
+
+    Party.create!(
+      event_id: event.id,
+      host_id: event.host_id,
+      member_limit: 10
+    )
   end
 
   def go_bowling
@@ -73,6 +79,13 @@ class EventSeeder
     event.cover_image.attach(blob)
 
     event.save!
+
+    Party.create!(
+      event_id: event.id,
+      host_id: event.host_id,
+      member_limit: 10
+    )
+
   end
 
   def archery_practice
@@ -103,6 +116,12 @@ class EventSeeder
     event.cover_image.attach(blob)
 
     event.save!
+
+    Party.create!(
+      event_id: event.id,
+      host_id: event.host_id,
+      member_limit: 10
+    )
   end
 
   def swordsman_training
@@ -133,6 +152,12 @@ class EventSeeder
     event.cover_image.attach(blob)
 
     event.save!
+
+    Party.create!(
+      event_id: event.id,
+      host_id: event.host_id,
+      member_limit: 10
+    )
   end
 
   def dinner_at_gramercy
@@ -163,5 +188,11 @@ class EventSeeder
     event.cover_image.attach(blob)
 
     event.save!
+
+    Party.create!(
+      event_id: event.id,
+      host_id: event.host_id,
+      member_limit: 10
+    )
   end
 end

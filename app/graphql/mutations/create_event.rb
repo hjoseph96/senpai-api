@@ -25,7 +25,6 @@ module Mutations
           lonlat: point,
           venue: event_params[:venue],
           description: event_params[:description],
-          payment_required: event_params[:payment_required]
           )
 
         if event_params[:cover_image].present?
@@ -51,6 +50,10 @@ module Mutations
           end
 
           event.cosplay_required = event_params[:cosplay_required]
+        end
+
+        unless event_params[:payment_required].nil?
+          event.payment_required = event_params[:payment_required]
         end
 
         if event.save!
