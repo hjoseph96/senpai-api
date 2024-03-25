@@ -1028,7 +1028,7 @@ type Query {
   fetchEvent(eventId: ID!): Event!
   fetchEvents(params: SearchEventInput!): [Event!]!
   fetchFeed(params: FetchFeedInput!): [User!]!
-  fetchJoinRequests(eventId: ID!, page: Int): [JoinRequest!]!
+  fetchJoinRequests(applicantId: ID, eventId: ID!, page: Int): [JoinRequest!]!
   fetchMessages(conversationId: ID!, page: Int): [Message!]!
   fetchReports(page: Int, perPage: Int, reason: Int, userId: ID!): [Report!]!
   fetchSticker(stickerId: ID!): Sticker!
