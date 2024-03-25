@@ -31,7 +31,7 @@ module Queries
       end
 
       if event_params[:cosplay_required].present?
-        unless %w(no optional yes).include?(event_params[:cosplay_required])
+        unless %w(no optional required).include?(event_params[:cosplay_required])
           return GraphQL::ExecutionError.new("Invalid cosplay_required provided.")
         end
 
