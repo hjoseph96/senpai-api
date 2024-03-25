@@ -26,11 +26,11 @@ module Queries
       results =  results.where('start_date >= ?', event_params[:start_date]) if event_params[:start_date].present?
       results = results.where('end_date >= ?', event_params[:end_date]) if event_params[:end_date].present?
 
-      if event_params[:payment_required].nil?
+      unless event_params[:payment_required].nil?
         results = results.where(payment_required: event_params[:payment_required])
       end
 
-      unless event_params[:cosplay_required].present?
+      if event_params[:cosplay_required].present?
         unless %w(no optional required).include?(event_params[:cosplay_required])
           return GraphQL::ExecutionError.new("Invalid cosplay_required provided.")
         end
