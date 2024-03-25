@@ -46,6 +46,7 @@ module Types
     field :events, [Types::EventType] do
       argument :page, Integer
     end
+    field :attending_events, [Types::EventType]
     field :host_reviews, [Types::ReviewType]
     field :host_score, Float
     field :party_member_reviews, [Types::ReviewType]
@@ -75,6 +76,10 @@ module Types
 
     def events(page: 1)
       object.events.page(page)
+    end
+
+    def attending_events
+      object.attended_parties.map(&:event)
     end
 
     def miles_away(other_user_id:)

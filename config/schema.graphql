@@ -1601,6 +1601,7 @@ type UploadPhotoPayload {
 
 type User {
   animes: [Anime!]
+  attendingEvents: [Event!]
   bio: String
   birthday: ISO8601DateTime
   blocks: [Block!]
