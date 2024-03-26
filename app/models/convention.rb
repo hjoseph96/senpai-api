@@ -1,6 +1,6 @@
 class Convention < ApplicationRecord
   has_many :user_conventions
-  has_many :attendees, through: :user_conventions, source: 'user', source_type: 'User'
+  has_many :attendees, through: :user_conventions, source: 'user'
   has_many :events
   has_many :parties, through: :events
   has_many :reviews, as: :reviewable
