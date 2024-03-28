@@ -12,14 +12,18 @@ module Queries
 
       results = Anime.order(popularity: :desc)
 
-      if params[:genre].present?
-        popular_character_ids = results.search_by_genre(char_params[:genre]).map(&:character_ids).flatten
-        results = Character.where(id: popular_character_ids)
-                            .order(favorites: :desc)
-                            .search_by_full_name(char_params[:character_name])
+      if params[:character_name].present?
+        if params[:genre].present?
+          popular_character_ids = results.search_by_genre(char_params[:genre]).map(&:character_ids).flatten
+          results = Character.where(id: popular_character_ids)
+                              .order(favorites: :desc)
+                              .search_by_full_name(char_params[:character_name])
+        else
+          results = Character.order(favorites: :desc)
+                             .search_by_full_name(char_params[:character_name])
+        end
       else
         results = Character.order(favorites: :desc)
-                           .search_by_full_name(char_params[:character_name])
       end
 
       results.page(page).per(30)
