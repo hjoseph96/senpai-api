@@ -4,7 +4,7 @@
 module Types
   module Input
     class FetchCharactersInputType < Types::BaseInputObject
-      argument :character_name, String, required: true
+      argument :character_name, String, required: false
       argument :genre, String, required: false
       argument :page, Integer, required: false
     end

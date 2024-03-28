@@ -469,7 +469,7 @@ input FavoriteMusicUpdate {
 }
 
 input FetchCharactersInput {
-  characterName: String!
+  characterName: String
   genre: String
   page: Int
 }
