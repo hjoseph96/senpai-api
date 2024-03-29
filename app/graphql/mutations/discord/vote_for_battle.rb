@@ -15,7 +15,7 @@ module Mutations
 
         return GraphQL::ExecutionError.new('No battle with that id') unless battle.present?
 
-        if DateTime.now > battle.started_at + battle.round.tournament.hours_durations.hours
+        if battle.ends_at < DateTime.now
           return GraphQL::ExecutionError.new('Voting for this battle has been completed')
         end
 
