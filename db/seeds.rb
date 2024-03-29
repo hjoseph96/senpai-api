@@ -3,6 +3,7 @@ require_relative './seeds/profile_seeder'
 require_relative './seeds/sticker_seeder'
 require_relative './seeds/convention_seeder'
 require_relative './seeds/event_seeder'
+require "#{Rails.root}/db/seeds/tournament_seeder"
 
 AnilistSeeder.create_animes
 
@@ -21,3 +22,5 @@ StickerSeeder.create_stickers
 ConventionSeeder.create_conventions
 
 EventSeeder.create_events
+
+TournamentSeeder.create_tournaments

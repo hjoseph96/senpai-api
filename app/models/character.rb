@@ -1,6 +1,9 @@
 class Character < ApplicationRecord
   belongs_to :anime
 
+  has_many :red_corner_battles, as: :red_cornerable, class_name: 'Battle'
+  has_many :blue_corner_battles, as: :blue_cornerable, class_name: 'Battle'
+
   has_one_attached :image
 
   include PgSearch::Model

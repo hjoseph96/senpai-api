@@ -60,8 +60,10 @@ gem 'nokogiri'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'httparty', '~> 0.21.0'
 gem 'fcm'
-gem 'rpush'
 gem 'rqrcode', '~> 2.0'
+gem 'rmagick'
+gem "down", "~> 5.0"
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

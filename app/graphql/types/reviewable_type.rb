@@ -3,7 +3,7 @@ module Types
     possible_types UserType, PartyType, EventType, ConventionType
 
     def self.resolve_type(obj, ctx)
-      case obj.class
+      case obj
         when User then UserType
         when Party then PartyType
         when Event then EventType

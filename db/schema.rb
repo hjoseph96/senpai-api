@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_19_235621) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_28_223623) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -62,6 +62,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_19_235621) do
     t.datetime "updated_at", null: false
     t.string "japanese_title"
     t.index ["japanese_title"], name: "index_animes_on_japanese_title"
+  end
+
+  create_table "battles", force: :cascade do |t|
+    t.string "blue_cornerable_type"
+    t.integer "blue_cornerable_id"
+    t.string "red_cornerable_type"
+    t.integer "red_cornerable_id"
+    t.integer "blue_corner_votes", default: 0
+    t.integer "red_corner_votes", default: 0
+    t.datetime "started_at"
+    t.bigint "round_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blue_corner_votes"], name: "index_battles_on_blue_corner_votes"
+    t.index ["blue_cornerable_id"], name: "index_battles_on_blue_cornerable_id"
+    t.index ["red_corner_votes"], name: "index_battles_on_red_corner_votes"
+    t.index ["red_cornerable_id"], name: "index_battles_on_red_cornerable_id"
+    t.index ["round_id"], name: "index_battles_on_round_id"
   end
 
   create_table "blocks", force: :cascade do |t|
@@ -364,6 +382,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_19_235621) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "rounds", force: :cascade do |t|
+    t.integer "number"
+    t.integer "tournament_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "rpush_apps", force: :cascade do |t|
     t.string "name", null: false
     t.string "environment"
@@ -436,6 +461,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_19_235621) do
   create_table "stickers", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "tournaments", force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "tournament_type", null: false
+    t.bigint "user_id"
+    t.integer "hours_duration"
+    t.integer "combatant_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["title"], name: "index_tournaments_on_title"
+    t.index ["tournament_type"], name: "index_tournaments_on_tournament_type"
+    t.index ["user_id"], name: "index_tournaments_on_user_id"
   end
 
   create_table "user_animes", force: :cascade do |t|
@@ -539,6 +577,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_19_235621) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "battles", "rounds"
   add_foreign_key "blocks", "reports"
   add_foreign_key "blocks", "users"
   add_foreign_key "characters", "animes"
@@ -564,6 +603,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_19_235621) do
   add_foreign_key "reports", "conversations"
   add_foreign_key "reports", "users"
   add_foreign_key "reviews", "users"
+  add_foreign_key "tournaments", "users"
   add_foreign_key "user_conventions", "conventions"
   add_foreign_key "user_conventions", "users"
   add_foreign_key "user_conversations", "conversations"

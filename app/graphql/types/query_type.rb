@@ -20,6 +20,7 @@ module Types
     field :fetch_conventions, resolver: Queries::FetchConventions
     field :fetch_convention, resolver: Queries::FetchConvention
     field :fetch_join_requests, resolver: Queries::FetchJoinRequests
+    field :fetch_tournaments, resolver: Queries::FetchTournaments
 
     #  admin queries
     field :fetch_reports, resolver: Queries::FetchReports

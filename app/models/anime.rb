@@ -3,6 +3,9 @@ class Anime < ApplicationRecord
   has_many :users, through: :user_animes
   has_many :recommendations
   has_many :characters
+  has_many :red_corner_battles, as: :red_cornerable, class_name: 'Battle'
+  has_many :blue_corner_battles, as: :blue_cornerable, class_name: 'Battle'
+
 
   has_one_attached :cover_image
 
