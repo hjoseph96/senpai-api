@@ -23,8 +23,10 @@ module Mutations
         when 'red' then battle.update(red_corner_votes: battle.red_corner_votes + 1)
         when 'blue' then battle.update(blue_corner_votes: battle.blue_corner_votes + 1)
         else
-          GraphQL::ExecutionError.new('Invalid battle_vote given, must be red or blue.')
+          return GraphQL::ExecutionError.new('Invalid battle_vote given, must be red or blue.')
         end
+
+        { battle: battle }
       end
     end
   end
