@@ -3,7 +3,7 @@
 module Mutations
   module Discord
     class VoteForBattle < Mutations::BaseMutation
-      graphql_name "VoteForBAttle"
+      graphql_name "VoteForBattle"
 
       argument :battle_id, ID, required: true
       argument :battle_vote, String, required: true

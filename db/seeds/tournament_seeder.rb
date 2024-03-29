@@ -20,7 +20,8 @@ class TournamentSeeder
       title: "Who's the strongest?",
       tournament_type: :characters,
       combatant_count: '16',
-      hours_duration: 72
+      hours_duration: 72,
+      current_round: 1
     )
 
     r = Round.create(number: 1, tournament_id: tourney.id)
