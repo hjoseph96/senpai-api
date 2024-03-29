@@ -19,6 +19,7 @@ module Types
 
     field :blue_corner, Types::CornerableType
     field :red_corner, Types::CornerableType
+    field :winner, Types::CornerableType
     field :discord_cover, String
 
     def blue_corner
@@ -27,6 +28,10 @@ module Types
 
     def red_corner
       object.red_cornerable
+    end
+
+    def winner
+      object.winner
     end
 
     def discord_cover

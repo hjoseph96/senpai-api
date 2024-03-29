@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_28_223623) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_29_194319) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -71,10 +71,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_28_223623) do
     t.integer "red_cornerable_id"
     t.integer "blue_corner_votes", default: 0
     t.integer "red_corner_votes", default: 0
-    t.datetime "started_at"
     t.bigint "round_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "ends_at"
     t.index ["blue_corner_votes"], name: "index_battles_on_blue_corner_votes"
     t.index ["blue_cornerable_id"], name: "index_battles_on_blue_cornerable_id"
     t.index ["red_corner_votes"], name: "index_battles_on_red_corner_votes"
@@ -471,6 +471,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_28_223623) do
     t.integer "combatant_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "completed"
+    t.integer "current_round"
+    t.index ["completed"], name: "index_tournaments_on_completed"
     t.index ["title"], name: "index_tournaments_on_title"
     t.index ["tournament_type"], name: "index_tournaments_on_tournament_type"
     t.index ["user_id"], name: "index_tournaments_on_user_id"

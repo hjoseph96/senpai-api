@@ -40,5 +40,8 @@ module Types
     field :leave_review, mutation: Mutations::LeaveReview
     field :disband_party, mutation: Mutations::DisbandParty
     field :leave_party, mutation: Mutations::LeaveParty
+
+    field :vote_for_battle, mutation: Mutations::Discord::VoteForBattle
+    field :advance_to_next_round, mutation: Mutations::Discord::AdvanceToNextRound
   end
 end

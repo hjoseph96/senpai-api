@@ -22,6 +22,8 @@ module Types
     field :fetch_join_requests, resolver: Queries::FetchJoinRequests
     field :fetch_tournaments, resolver: Queries::FetchTournaments
 
+    field :fetch_current_battle, resolver: Queries::Discord::FetchCurrentBattle
+
     #  admin queries
     field :fetch_reports, resolver: Queries::FetchReports
     field :fetch_verify_requests, resolver: Queries::FetchVerifyRequests
