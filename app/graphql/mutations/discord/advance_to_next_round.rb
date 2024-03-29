@@ -15,7 +15,7 @@ module Mutations
         return GraphQL::ExecutionError.new('This tournament has been completed') if tournament.completed?
 
         round = tournament.rounds.where(number: tournament.current_round).first
-        if round.battles.all(&:voting_over?)
+        if round.battles.all?(&:voting_over?)
           if tournament.current_round == Math.sqrt(tournament.combatant_count.to_i)
             return { round: round, winner: round.battles[0].winner }
           end

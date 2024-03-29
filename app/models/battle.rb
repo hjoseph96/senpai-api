@@ -11,7 +11,7 @@ class Battle < ApplicationRecord
   after_create_commit :generate_discord_cover
 
   def voting_over?
-    self.ends_at > DateTime.now
+    self.ends_at < DateTime.now
   end
 
   def winner
