@@ -11,7 +11,7 @@ module Types
     field :red_cornerable_id, Integer
     field :blue_corner_votes, Integer
     field :red_corner_votes, Integer
-    field :started_at, GraphQL::Types::ISO8601DateTime
+    field :ends_at, GraphQL::Types::ISO8601DateTime
     field :voting_over, Boolean
     field :round_id, Integer, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false

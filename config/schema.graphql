@@ -148,13 +148,13 @@ type Battle {
   blueCornerableType: String
   createdAt: ISO8601DateTime!
   discordCover: String
+  endsAt: ISO8601DateTime
   id: ID!
   redCorner: Cornerable
   redCornerVotes: Int
   redCornerableId: Int
   redCornerableType: String
   roundId: Int!
-  startedAt: ISO8601DateTime
   updatedAt: ISO8601DateTime!
   votingOver: Boolean
   winner: Cornerable
