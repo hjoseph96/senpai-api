@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_29_194319) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_31_094720) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -471,7 +471,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_29_194319) do
     t.integer "combatant_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "completed"
+    t.boolean "completed", default: false, null: false
     t.integer "current_round"
     t.index ["completed"], name: "index_tournaments_on_completed"
     t.index ["title"], name: "index_tournaments_on_title"
