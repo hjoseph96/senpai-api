@@ -25,7 +25,9 @@ class V1::Admin::UsersController < ApplicationController
     @user = User.find(strong_params['user_id'])
     @user.update!(banned: !@user.banned)
 
-    render json:  @user.reload
+    @user.destroy if @user.banned
+
+    render json:  { success: true }
   end
 
   def warn_user

@@ -11,7 +11,7 @@ module Mutations
         unless @user.present?
           @user = User.with_deleted.find_by(phone: phone)
 
-          if @user.nil?
+          if @user.nil? || @user.banned?
             return GraphQL::ExecutionError.new("No user found")
           else
             @user.recover(recursive: true)
