@@ -17,6 +17,7 @@ module Mutations
         round = tournament.rounds.where(number: tournament.current_round).first
         if round.battles.all?(&:voting_over?)
           if tournament.current_round == Math.sqrt(tournament.combatant_count.to_i)
+            tournament.update!(completed: true)
             return { round: round, winner: round.battles[0].winner }
           end
 
