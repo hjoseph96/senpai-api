@@ -1463,7 +1463,9 @@ type Subscription
 
 type Tournament {
   combatantCount: Int
+  completed: Boolean
   createdAt: ISO8601DateTime!
+  currentRound: Int
   hoursDuration: Int
   id: ID!
   rounds: [Round!]
