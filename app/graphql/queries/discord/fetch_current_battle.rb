@@ -7,7 +7,7 @@ module Queries
       type Types::BattleType, null: false
 
       def resolve(tournament_id:)
-        tournament = Tournament.try(:find, tournament_id)
+        tournament = Tournament.where(id: tournament_id).try(:first)
 
         return GraphQL::ExecutionError.new('No tournament with that id was found') unless tournament.present?
         return GraphQL::ExecutionError.new('This tournament has been completed') if tournament.completed?
