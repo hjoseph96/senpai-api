@@ -8,7 +8,7 @@ class HourlyUnfilledJob
       group.each do |u|
         if u.updated_at < 1.hour.from_now
           PushNotification.create!(
-            user_id: u,
+            user_id: u.id,
             event_name: 'profile_unfilled',
             content: 'Did you forget to fill your profile?'
           )
