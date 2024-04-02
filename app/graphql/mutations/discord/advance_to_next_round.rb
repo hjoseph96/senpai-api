@@ -6,7 +6,7 @@ module Mutations
       argument :tournament_id, ID, required: true
 
       field :round, Types::RoundType, null: false
-      field :tournament_winner, Types::CornerableType, null: true
+      field :winner, Types::CornerableType, null: true
 
       def resolve(tournament_id:)
         tournament = Tournament.find(tournament_id)
