@@ -9,7 +9,7 @@ module Queries
     def resolve(page:)
       p = page || 1
 
-      Tournament.all.order(created_at: :desc).page(p).per(30)
+      Tournament.where(completed: false).order(created_at: :desc).page(p).per(30)
     end
   end
 end
