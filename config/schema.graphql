@@ -112,7 +112,7 @@ type AdvanceToNextRoundPayload {
   """
   clientMutationId: String
   round: Round!
-  tournamentWinner: Cornerable
+  winner: Cornerable
 }
 
 type Anime {
