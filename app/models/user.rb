@@ -31,7 +31,7 @@ class User < ApplicationRecord
   has_many :attended_parties, through: :user_parties, source: 'party', dependent: :destroy
   has_many :join_requests, dependent: :destroy
   has_many :user_conventions, dependent: :destroy
-  has_many :attended_conventions, through: :user_conventions, dependent: :destroy
+  has_many :attended_conventions, through: :user_conventions, source: 'convention', dependent: :destroy
 
   has_one :influencer, dependent: :destroy
 
