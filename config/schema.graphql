@@ -1470,7 +1470,7 @@ type Tournament {
   id: ID!
   rounds: [Round!]
   title: String!
-  tournamentType: Int!
+  tournamentType: String!
   updatedAt: ISO8601DateTime!
   userId: Int
 }

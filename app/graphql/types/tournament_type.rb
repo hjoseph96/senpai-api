@@ -4,7 +4,7 @@ module Types
   class TournamentType < Types::BaseObject
     field :id, ID, null: false
     field :title, String, null: false
-    field :tournament_type, Integer, null: false
+    field :tournament_type, String, null: false
     field :user_id, Integer
     field :hours_duration, Integer
     field :combatant_count, Integer
