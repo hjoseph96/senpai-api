@@ -2,6 +2,8 @@
 
 module Types
   class TournamentType < Types::BaseObject
+    include ApplicationHelper
+
     field :id, ID, null: false
     field :title, String, null: false
     field :tournament_type, String, null: false
@@ -15,9 +17,14 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
     field :rounds, [Types::RoundType]
+    field :winner_image_url, String
 
     def rounds
       object.rounds
+    end
+
+    def winner_image_url
+      cdn_for(object.winner_image)
     end
   end
 end

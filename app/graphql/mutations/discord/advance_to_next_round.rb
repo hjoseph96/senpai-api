@@ -1,12 +1,14 @@
 module Mutations
   module Discord
     class AdvanceToNextRound < Mutations::BaseMutation
+      include ApplicationHelper
+
       graphql_name "AdvanceToNextRound"
 
       argument :tournament_id, ID, required: true
 
       field :round, Types::RoundType, null: false
-      field :winner, Types::CornerableType, null: true
+      field :winner_image_url, String, null: true
 
       def resolve(tournament_id:)
         tournament = Tournament.find(tournament_id)
@@ -16,9 +18,12 @@ module Mutations
 
         round = tournament.rounds.where(number: tournament.current_round).first
         if round.battles.all?(&:voting_over?)
+
           if tournament.current_round == Math.sqrt(tournament.combatant_count.to_i)
             tournament.update!(completed: true)
-            return { round: round, winner: round.battles[0].winner }
+            tournament.generate_winner_image
+
+            return { round: round, winner_image_url: cdn_for(tournament.winner_image) }
           end
 
           new_round = Round.create(number: round.number + 1, tournament_id: tournament_id)

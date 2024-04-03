@@ -12,6 +12,7 @@ module Queries
         return GraphQL::ExecutionError.new('No tournament with that id was found') unless tournament.present?
         return GraphQL::ExecutionError.new('This tournament has been completed') if tournament.completed?
 
+        tournament.update(current_round: 1) unless tournament.current_round.present?
         round = tournament.rounds.where(number: tournament.current_round).first
 
         results = round.battles.where('ends_at > ?', DateTime.now)
