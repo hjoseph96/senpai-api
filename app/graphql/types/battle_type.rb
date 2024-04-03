@@ -45,7 +45,7 @@ module Types
     end
 
     def battle_number
-      object.round.battles.index(object) + 1
+      object.battle_index + 1
     end
   end
 end
