@@ -23,15 +23,15 @@ class User < ApplicationRecord
   has_many :recommendations, dependent: :destroy
   has_many :push_notifications, dependent: :delete_all
   has_many :reviews, as: :reviewable
-  has_many :device_infos
+  has_many :device_infos, dependent: :destroy
 
-  has_many :events, foreign_key: :host_id, class_name: 'Event'
-  has_many :hosted_parties, foreign_key: :host_id, class_name: 'Party'
-  has_many :user_parties
-  has_many :attended_parties, through: :user_parties, source: 'party'
-  has_many :join_requests
-  has_many :user_conventions
-  has_many :attended_conventions, through: :user_conventions
+  has_many :events, foreign_key: :host_id, class_name: 'Event', dependent: :destroy
+  has_many :hosted_parties, foreign_key: :host_id, class_name: 'Party', dependent: :destroy
+  has_many :user_parties, dependent: :destroy
+  has_many :attended_parties, through: :user_parties, source: 'party', dependent: :destroy
+  has_many :join_requests, dependent: :destroy
+  has_many :user_conventions, dependent: :destroy
+  has_many :attended_conventions, through: :user_conventions, dependent: :destroy
 
   has_one :influencer, dependent: :destroy
 
