@@ -26,11 +26,11 @@ class TournamentSeeder
 
     r = Round.create(number: 1, tournament_id: tourney.id)
 
-    (tourney.combatant_count.to_i / 2).times do
+    (tourney.combatant_count.to_i / 2).times do |i|
       red_corner = character_pool.pop
       blue_corner = character_pool.pop
 
-      b = Battle.new(round_id: r.id, ends_at: DateTime.now + tourney.hours_duration.hours)
+      b = Battle.new(round_id: r.id, battle_index: i + 1, ends_at: DateTime.now + tourney.hours_duration.hours)
       b.red_cornerable = red_corner
       b.blue_cornerable = blue_corner
       b.save!

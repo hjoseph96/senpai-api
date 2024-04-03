@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_31_094720) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_03_190901) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -75,6 +75,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_094720) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "ends_at"
+    t.integer "battle_index"
+    t.index ["battle_index"], name: "index_battles_on_battle_index"
     t.index ["blue_corner_votes"], name: "index_battles_on_blue_corner_votes"
     t.index ["blue_cornerable_id"], name: "index_battles_on_blue_cornerable_id"
     t.index ["red_corner_votes"], name: "index_battles_on_red_corner_votes"
