@@ -15,7 +15,7 @@ module Queries
         tournament.update(current_round: 1) unless tournament.current_round.present?
         round = tournament.rounds.where(number: tournament.current_round).first
 
-        results = round.battles.where('ends_at > ?', DateTime.now)
+        results = round.battles.order(created_at: :desc).where('ends_at > ?', DateTime.now)
 
         return GraphQL::ExecutionError.new('There are no active battles, proceed to next round') if results.empty?
 
