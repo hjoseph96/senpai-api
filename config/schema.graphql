@@ -142,6 +142,7 @@ input AnimeInput {
 }
 
 type Battle {
+  battleNumber: Int
   blueCorner: Cornerable
   blueCornerVotes: Int
   blueCornerableId: Int
