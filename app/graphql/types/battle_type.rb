@@ -45,7 +45,7 @@ module Types
     end
 
     def battle_number
-      object.battle_index + 1
+      object.battle_index
     end
   end
 end
