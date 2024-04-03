@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_03_190901) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_03_230154) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -125,6 +125,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_03_190901) do
     t.datetime "updated_at", null: false
     t.string "full_address", null: false
     t.boolean "payment_required", default: true, null: false
+    t.text "description"
     t.index ["lonlat"], name: "index_conventions_on_lonlat"
     t.index ["payment_required"], name: "index_conventions_on_payment_required"
     t.index ["start_date"], name: "index_conventions_on_start_date"

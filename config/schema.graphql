@@ -193,7 +193,7 @@ type Convention {
   attendees: [User!]
   country: String
   coverImageUrl: String
-  createdAt: ISO8601DateTime!
+  description: String
   displayCity: String
   displayState: String
   endDate: ISO8601DateTime

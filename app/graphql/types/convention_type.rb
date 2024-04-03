@@ -13,9 +13,9 @@ module Types
     field :display_city, String
     field :display_state, String
     field :country, String
+    field :description, String
     field :full_address, String, null: false
     field :lonlat, String, null: false
-    field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
     field :cover_image_url, String
