@@ -154,6 +154,7 @@ type Battle {
   redCornerVotes: Int
   redCornerableId: Int
   redCornerableType: String
+  round: Round
   roundId: Int!
   updatedAt: ISO8601DateTime!
   votingOver: Boolean

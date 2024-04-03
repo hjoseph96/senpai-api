@@ -21,6 +21,7 @@ module Types
     field :red_corner, Types::CornerableType
     field :winner, Types::CornerableType
     field :discord_cover, String
+    field :round, Types::RoundType
 
     def blue_corner
       object.blue_cornerable
@@ -36,6 +37,14 @@ module Types
 
     def discord_cover
       cdn_for(object.discord_cover)
+    end
+
+    def round
+      object.round
+    end
+
+    def battle_number
+      object.rounds.index(object) + 1
     end
   end
 end
