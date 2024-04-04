@@ -49,7 +49,7 @@ class TournamentSeeder
   def whos_the_cutest
     begin
       popular_character_ids = Anime.where('popularity > 10000')
-                                   .search_by_genre("Action")
+                                   .search_by_genre("Romance")
                                    .shuffle[0..100]
                                    .map(&:character_ids)
                                    .flatten
