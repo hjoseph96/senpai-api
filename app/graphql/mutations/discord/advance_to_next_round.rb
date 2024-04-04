@@ -27,10 +27,12 @@ module Mutations
 
           new_round = Round.create(number: round.number + 1, tournament_id: tournament_id)
 
-          round.battles.each_slice(2) do |r1, r2|
+          round.battles.each_slice(2).with_index do |(r1, r2), i|
             b = Battle.new(round_id: new_round.id, ends_at: DateTime.now + tournament.hours_duration.hours)
+
             b.red_cornerable = r1.winner
             b.blue_cornerable = r2.winner
+            b.battle_index = i + 1
             b.save!
           end
 
