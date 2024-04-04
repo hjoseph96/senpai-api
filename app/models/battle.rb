@@ -11,6 +11,8 @@ class Battle < ApplicationRecord
   after_create_commit :generate_discord_cover
 
   def voting_over?
+    return false unless self.ends_at.present?
+
     self.ends_at < DateTime.now
   end
 
