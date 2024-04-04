@@ -22,7 +22,7 @@ module Queries
         battle = results.first
 
         if battle.ends_at.nil?
-          battle.update!(ends_at: DateTime.now + 30.seconds) # round.tournament.hours_duration.hours)
+          battle.update!(ends_at: DateTime.now + 16.seconds) # round.tournament.hours_duration.hours)
         end
 
         battle
