@@ -14,7 +14,6 @@ module Mutations
         tournament = Tournament.find(tournament_id)
 
         return GraphQL::ExecutionError.new('This tournament has cannot be found') unless tournament.present?
-        return GraphQL::ExecutionError.new('This tournament has been completed') if tournament.completed?
 
         round = tournament.rounds.where(number: tournament.current_round).first
         if round.battles.all?(&:voting_over?)
