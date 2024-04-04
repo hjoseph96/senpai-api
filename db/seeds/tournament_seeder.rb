@@ -31,7 +31,7 @@ class TournamentSeeder
         red_corner = character_pool.pop
         blue_corner = character_pool.pop
 
-        b = Battle.new(round_id: r.id, battle_index: i + 1, ends_at: DateTime.now + ((i +1 ) * 30.seconds))
+        b = Battle.new(round_id: r.id, battle_index: i + 1, ends_at: DateTime.now + ((i +1 ) * 16.seconds))
         b.red_cornerable = red_corner
         b.blue_cornerable = blue_corner
         b.save!
