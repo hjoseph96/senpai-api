@@ -33,7 +33,7 @@ module Mutations
             b.red_cornerable = r1.winner
             b.blue_cornerable = r2.winner
             b.battle_index = i + 1
-            b.ends_at = DateTime.now + (30.seconds * (i +1) )
+            b.ends_at = DateTime.now + (5.minutes * (i + 1) )
             b.save!
           end
 
