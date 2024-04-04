@@ -34,7 +34,7 @@ class Tournament < ApplicationRecord
                        end
 
     text = Magick::Draw.new
-    template.annotate(text, 700,95,590,1003, winner_name) do |options|
+    template.annotate(text, 700,95,590,990, winner_name) do |options|
       options.gravity = Magick::CenterGravity
       options.pointsize = 35
       options.fill = "#FFFFFF" # Font color
