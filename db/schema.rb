@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_03_230154) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_04_085154) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -106,8 +106,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_03_230154) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "japanese_full_name"
+    t.integer "gender"
     t.index ["anime_id"], name: "index_characters_on_anime_id"
     t.index ["favorites"], name: "index_characters_on_favorites"
+    t.index ["gender"], name: "index_characters_on_gender"
     t.index ["role"], name: "index_characters_on_role"
   end
 
@@ -179,7 +181,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_03_230154) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "payment_required", default: false
-    t.integer "member_limit", default: 10, null: false
     t.string "full_address", null: false
     t.index ["cosplay_required"], name: "index_events_on_cosplay_required"
     t.index ["host_id"], name: "index_events_on_host_id"
@@ -280,10 +281,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_03_230154) do
   create_table "parties", force: :cascade do |t|
     t.integer "host_id", null: false
     t.integer "event_id", null: false
+    t.integer "member_limit", default: 10, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "disbanded", default: false
-    t.integer "member_limit"
     t.integer "status", default: 0, null: false
     t.index ["event_id"], name: "index_parties_on_event_id"
     t.index ["host_id"], name: "index_parties_on_host_id"
@@ -304,7 +305,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_03_230154) do
     t.integer "reaction"
     t.bigint "party_chat_id", null: false
     t.integer "sticker_id"
-    t.boolean "read"
+    t.boolean "read", default: false, null: false
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

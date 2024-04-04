@@ -32,7 +32,7 @@ class TournamentSeeder
         red_corner = character_pool.pop
         blue_corner = character_pool.pop
 
-        last_end_date = last_end_date + 12.hours if i > 0
+        last_end_date = last_end_date + 3.hours if i > 0
 
         b = Battle.new(round_id: r.id, battle_index: i + 1, ends_at: last_end_date)
         b.red_cornerable = red_corner
@@ -40,11 +40,50 @@ class TournamentSeeder
         b.save!
       end
     rescue ActiveRecord::RecordInvalid
-      Tournament.destroy_all
+      Tournament.last.destroy
 
       whos_the_strongest
     end
+  end
 
+  def whos_the_cutest
+    begin
+      popular_character_ids = Anime.where('popularity > 10000')
+                                   .search_by_genre("Action")
+                                   .shuffle[0..100]
+                                   .map(&:character_ids)
+                                   .flatten
 
+      character_pool = Character.where(id: popular_character_ids)
+                                .where('favorites > ?', 2000)
+                                .where(gender: :female).to_a.shuffle
+
+      tourney = Tournament.create(
+        title: "Who's the cutest?",
+        tournament_type: :characters,
+        combatant_count: '16',
+        hours_duration: 6,
+        current_round: 1
+      )
+
+      r = Round.create(number: 1, tournament_id: tourney.id)
+
+      last_end_date = 1.hours.from_now
+      (tourney.combatant_count.to_i / 2).times do |i|
+        red_corner = character_pool.pop
+        blue_corner = character_pool.pop
+
+        last_end_date = last_end_date + 1.hours if i > 0
+
+        b = Battle.new(round_id: r.id, battle_index: i + 1, ends_at: last_end_date)
+        b.red_cornerable = red_corner
+        b.blue_cornerable = blue_corner
+        b.save!
+      end
+    rescue ActiveRecord::RecordInvalid
+      Tournament.last.destroy
+
+      whos_the_cutest
+    end
   end
 end

@@ -58,6 +58,7 @@ class AnilistSeeder
                     native
                   }
                   favourites
+                  gender
                 }
                 role
               }
@@ -184,9 +185,14 @@ class AnilistSeeder
 
       puts "Creating #{character['name']['first']} from #{created_anime.title}."
 
+      gender = nil
+      gender = :male if c['gender'] == 'Male'
+      gender = :female if c['gender'] == 'Female'
+
       char = Character.create!(
         anime_id: created_anime.id,
         role: c['role'],
+        gender: gender,
         first_name: character['name']['first'],
         last_name: character['name']['last'],
         japanese_full_name: character['name']['native'],
