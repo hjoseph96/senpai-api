@@ -19,7 +19,7 @@ class Battle < ApplicationRecord
 
     if blue_corner_votes > red_corner_votes
       blue_cornerable
-    elsif red_corner_votes > blue_corner_votes
+    elsif red_corner_votes >= blue_corner_votes
       red_cornerable
     end
   end
