@@ -186,8 +186,8 @@ class AnilistSeeder
       puts "Creating #{character['name']['first']} from #{created_anime.title}."
 
       gender = nil
-      gender = :male if c['gender'] == 'Male'
-      gender = :female if c['gender'] == 'Female'
+      gender = :male if character['gender'] == 'Male'
+      gender = :female if character['gender'] == 'Female'
 
       char = Character.create!(
         anime_id: created_anime.id,

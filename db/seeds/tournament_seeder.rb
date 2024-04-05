@@ -50,7 +50,6 @@ class TournamentSeeder
   def whos_the_cutest
     begin
       popular_character_ids = Anime.where('popularity > 10000')
-                                   .search_by_genre("Romance")
                                    .shuffle[0..100]
                                    .map(&:character_ids)
                                    .flatten
@@ -58,7 +57,7 @@ class TournamentSeeder
       character_pool = Character.where(id: popular_character_ids)
                                 .where('favorites > ?', 2000)
                                 .where(gender: :female).to_a.shuffle
-      
+
       tourney = Tournament.create(
         title: "Who's the cutest?",
         tournament_type: :characters,
