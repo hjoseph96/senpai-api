@@ -5,6 +5,7 @@ class TournamentSeeder
 
   def create_tournaments
     whos_the_strongest
+    whos_the_cutest
   end
 
   def whos_the_strongest
@@ -57,7 +58,7 @@ class TournamentSeeder
       character_pool = Character.where(id: popular_character_ids)
                                 .where('favorites > ?', 2000)
                                 .where(gender: :female).to_a.shuffle
-
+      
       tourney = Tournament.create(
         title: "Who's the cutest?",
         tournament_type: :characters,
