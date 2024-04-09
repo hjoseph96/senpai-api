@@ -13,6 +13,8 @@ class EventSeeder
     archery_practice
     swordsman_training
     dinner_at_gramercy
+    momocon_party
+    dreamcon_party
   end
 
   def go_out_for_drinks
@@ -183,6 +185,80 @@ class EventSeeder
       description: 'Enjoy fine dining over @ the Gramercy Tavern',
       lonlat: "POINT(-73.98843131581225 40.73851230200502)",
       full_address: '42 E 20th St, New York, NY 10003'
+    )
+
+    event.cover_image.attach(blob)
+
+    event.save!
+
+    Party.create!(
+      event_id: event.id,
+      host_id: event.host_id,
+      member_limit: 10
+    )
+  end
+
+  def momocon_party
+    filename = "dbz_group.jpeg"
+
+    photo = File.open("#{@events_path}/#{filename}")
+
+    blob = ActiveStorage::Blob.create_and_upload!(
+      io: photo,
+      filename: filename
+    )
+
+    event = Event.create!(
+      title: 'DBZ Group Cosplay Party',
+      venue: 'Javits Convention Center',
+      host_id: User.all.sample.id,
+      cosplay_required: :required,
+      payment_required: true,
+      country: 'US',
+      display_city: 'New York',
+      display_state: 'NY',
+      start_date: Date.parse('September 24, 2024'),
+      description: "Let's praise Toriyama with a group DBZ cosplay!",
+      lonlat: "POINT(-74.002040 40.757355)",
+      full_address: '445 11th Ave, New York, NY 10001',
+      convention_id: Convention.find_by(title: 'Anime NYC').id
+    )
+
+    event.cover_image.attach(blob)
+
+    event.save!
+
+    Party.create!(
+      event_id: event.id,
+      host_id: event.host_id,
+      member_limit: 10
+    )
+  end
+
+  def dreamcon_party
+    filename = "group_naruto_cosplay.jpeg"
+
+    photo = File.open("#{@events_path}/#{filename}")
+
+    blob = ActiveStorage::Blob.create_and_upload!(
+      io: photo,
+      filename: filename
+    )
+
+    event = Event.create!(
+      title: 'Naruto Cosplay Party',
+      venue: 'Austin Convention Center',
+      host_id: User.all.sample.id,
+      cosplay_required: :required,
+      payment_required: true,
+      country: 'US',
+      display_city: 'Austin',
+      display_state: 'TX',
+      start_date: Date.parse('July 26, 2024'),
+      description: "Let's praise Kishimoto with a group HxH cosplay!",
+      lonlat: "POINT(-97.738789 30.264003)",
+      full_address: '500 E. Cesar Chavez St. Austin, TX 78701',
+      convention_id: Convention.find_by(title: 'Dream Con').id
     )
 
     event.cover_image.attach(blob)
