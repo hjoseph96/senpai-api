@@ -6,6 +6,10 @@ class TournamentSeeder
   def create_tournaments
     whos_the_strongest
     whos_the_cutest
+
+    Dir.glob("#{Rails.root}/tmp/*").each do |file|
+      File.delete(file) if File.basename(file).include?('.png')
+    end
   end
 
   def whos_the_strongest
