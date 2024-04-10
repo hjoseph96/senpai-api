@@ -46,11 +46,13 @@ class EventSeeder
 
     event.save!
 
-    Party.create!(
+    p = Party.create!(
       event_id: event.id,
       host_id: event.host_id,
       member_limit: 10
     )
+
+    seed_party_members(p)
   end
 
   def go_bowling
@@ -82,12 +84,13 @@ class EventSeeder
 
     event.save!
 
-    Party.create!(
+    p = Party.create!(
       event_id: event.id,
       host_id: event.host_id,
       member_limit: 10
     )
 
+    seed_party_members(p)
   end
 
   def archery_practice
@@ -119,11 +122,13 @@ class EventSeeder
 
     event.save!
 
-    Party.create!(
+    p = Party.create!(
       event_id: event.id,
       host_id: event.host_id,
       member_limit: 10
     )
+
+    seed_party_members(p)
   end
 
   def swordsman_training
@@ -155,11 +160,13 @@ class EventSeeder
 
     event.save!
 
-    Party.create!(
+    p = Party.create!(
       event_id: event.id,
       host_id: event.host_id,
       member_limit: 10
     )
+
+    seed_party_members(p)
   end
 
   def dinner_at_gramercy
@@ -191,11 +198,13 @@ class EventSeeder
 
     event.save!
 
-    Party.create!(
+    p = Party.create!(
       event_id: event.id,
       host_id: event.host_id,
       member_limit: 10
     )
+
+    seed_party_members(p)
   end
 
   def momocon_party
@@ -228,11 +237,13 @@ class EventSeeder
 
     event.save!
 
-    Party.create!(
+    p = Party.create!(
       event_id: event.id,
       host_id: event.host_id,
       member_limit: 10
     )
+
+    seed_party_members(p)
   end
 
   def dreamcon_party
@@ -265,10 +276,20 @@ class EventSeeder
 
     event.save!
 
-    Party.create!(
+    p = Party.create!(
       event_id: event.id,
       host_id: event.host_id,
       member_limit: 10
     )
+
+    seed_party_members(p)
+  end
+
+  def seed_party_members(party)
+    user_pool = User.pluck(:id).shuffle[0..10]
+
+    user_pool.each do |id|
+      UserParty.create!(user_id: id, party_id: party.id)
+    end
   end
 end
