@@ -286,7 +286,7 @@ class EventSeeder
   end
 
   def seed_party_members(party)
-    user_pool = User.pluck(:id).shuffle[0..10]
+    user_pool = User.pluck(:id).shuffle[0..[*3..9].sample]
 
     user_pool.each do |id|
       UserParty.create!(user_id: id, party_id: party.id)
