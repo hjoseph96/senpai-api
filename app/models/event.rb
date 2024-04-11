@@ -3,7 +3,7 @@ class Event < ApplicationRecord
 
   belongs_to :host, foreign_key: :host_id, class_name: 'User'
   belongs_to :convention, optional: true
-  has_many :join_requests
+  has_many :join_requests, dependent: :destroy
 
   has_one_attached :cover_image
 
