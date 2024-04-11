@@ -218,7 +218,7 @@ class EventSeeder
     )
 
     event = Event.create!(
-      title: 'DBZ Group Cosplay Party',
+      title: 'DBZ Group Cosplay',
       venue: 'Javits Convention Center',
       host_id: User.all.sample.id,
       cosplay_required: :required,
