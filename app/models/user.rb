@@ -23,7 +23,7 @@ class User < ApplicationRecord
   has_many :recommendations, dependent: :destroy
   has_many :push_notifications, dependent: :delete_all
   has_many :reviews, as: :reviewable
-  has_many :device_infos, dependent: :destroy
+  has_many :device_infos, dependent: :delete_all
 
   has_many :events, foreign_key: :host_id, class_name: 'Event', dependent: :destroy
   has_many :hosted_parties, foreign_key: :host_id, class_name: 'Party', dependent: :destroy
