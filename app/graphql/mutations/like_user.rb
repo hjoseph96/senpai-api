@@ -35,6 +35,14 @@ module Mutations
           @like = Like.create(user_id: @current_user.id, likee_id: params[:likee_id], like_type: params[:like_type])
           rejected = params[:like_type] == 'rejection'
 
+          unless @like.user.is_fake_profile? || @like.likee.is_fake_profile?
+            PushNotification.create(
+              user_id: @like.likee_id,
+              event_name: 'someone_likes_you',
+              content: 'Someone likes you!'
+            )
+          end
+
           # Does the user like the other user?
           user_likes_other_user = @current_user.likes.where(likee_id: @likee.id, like_type: [:standard, :super]).count > 0
 
