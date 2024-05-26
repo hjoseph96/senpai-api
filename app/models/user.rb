@@ -32,6 +32,8 @@ class User < ApplicationRecord
   has_many :join_requests, dependent: :destroy
   has_many :user_conventions, dependent: :destroy
   has_many :attended_conventions, through: :user_conventions, source: 'convention', dependent: :destroy
+  has_many :video_matches, ->(user) { where("video_matches.user_id = :user_id OR video_matches.matchee_id = :user_id", user_id: user.id) }
+
 
   has_one :influencer, dependent: :destroy
 
@@ -168,6 +170,12 @@ class User < ApplicationRecord
 
   def self.matched_with?(matches, user)
     matches.select { |match| match.matchee_id == user.id }.present?
+  end
+
+  def has_video_matched?(other_user)
+    self.video_matches
+        .where('video_matches.user_id = ? OR video_matches.matchee_id = ?', other_user.id, other_user.id )
+        .count > 0
   end
 
   def blocked?(user)
