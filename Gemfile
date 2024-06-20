@@ -63,6 +63,7 @@ gem 'fcm'
 gem 'rqrcode', '~> 2.0'
 gem 'rmagick'
 gem "down", "~> 5.0"
+gem 'agora_dynamic_key', '~> 0.1.0'
 
 
 group :development, :test do

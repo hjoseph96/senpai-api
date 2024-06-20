@@ -5,5 +5,5 @@ class Report < ApplicationRecord
   has_one :block, dependent: :destroy
 
   enum :status, [:open, :resolved]
-  enum :reason, [:inappropriate_behavior, :spam, :sexual_abuse, :doxxing]
+  enum :reason, [:inappropriate_behavior, :spam, :catfish, :sexual_abuse, :doxxing]
 end
