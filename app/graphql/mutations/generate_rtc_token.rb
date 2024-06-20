@@ -9,7 +9,7 @@ module Mutations
     def resolve(params:)
       @user = User.find(params[:user_id])
 
-      unless @user.present? && params[:user_id] > 0
+      unless @user.present? && params[:user_id].to_i > 0
         return GraphQL::ExecutionError.new("No user with that ID found")
       end
 
