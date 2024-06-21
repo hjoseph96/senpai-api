@@ -19,8 +19,6 @@ class VideoMatchmaker
       pool = pool.where(gender: [:male, :female])
     end
 
-    # pool = pool.joins(:animes).where(animes: { id: anime_ids }) if anime_ids.present?
-
     return [] unless pool.count > 0
 
     user_pool = randomize_users(pool)
@@ -99,6 +97,10 @@ class VideoMatchmaker
     score = same_genre_score + same_taste_score
 
     score *= 1.5 if potential_match.premium?
+
+    score = score / 5
+
+    return 1.0 if score > 1.0
 
     score
   end

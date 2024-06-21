@@ -11,7 +11,7 @@ module Mutations
 
       match = VideoMatch.create!(
         user_id: user_id,
-        matchee_id: @matchee.id,
+        matchee_id: @matchee.id
       )
 
       if @user.update(awaiting_match: false) && @matchee.update(awaiting_match: false)
