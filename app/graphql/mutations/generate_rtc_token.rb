@@ -9,8 +9,10 @@ module Mutations
     def resolve(params:)
       @user = User.where(id: params[:user_id])
 
-      unless @user.present? && params[:user_id].to_i >= 0
-        return GraphQL::ExecutionError.new("No user with that ID found")
+      if @user.empty?
+        unless params[:is_testing] && params[:user_id] == 0
+          return GraphQL::ExecutionError.new("No user with that ID found")
+        end
       end
 
       @token = ''
