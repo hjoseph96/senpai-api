@@ -33,6 +33,7 @@ class VideoMatchmaker
       u = pool.sample
 
       next if @user.has_video_matched?(u) || User.matched_with?(@user.matches, u) || User.blocked?(@user.blocks, u)
+      
       next unless want_each_other?(@user, u)
 
       user_pool << u
@@ -74,17 +75,31 @@ class VideoMatchmaker
   def order_by_similarity(user_pool)
     ranks = {}
 
+    location_weight = 0.7
+
     user_pool.find_in_batches do |group|
       group.each do |u|
+        distance = calculate_distance(u)
+
         ranks[u.id] = {
+          distance: distance / location_weight,
           anime_similarity_score: anime_similarity_score(u)
         }
       end
     end
 
-    feed = ranks.sort_by {|k, v| v[:anime_similarity_score] }.reverse.to_h
+    feed = ranks.sort_by {|k, v| v[:distance] }.reverse.to_h
+    feed = feed.sort_by {|k, v| v[:anime_similarity_score] }.reverse.to_h
 
     User.where(id: feed.keys).in_order_of(:id, feed.keys)
+  end
+
+  def calculate_distance(other_user)
+    p1 = RGeo::Geographic.spherical_factory.point(@user.lonlat.longitude, @user.lonlat.latitude)
+
+    p2 = RGeo::Geographic.spherical_factory.point(other_user.lonlat.longitude, other_user.lonlat.latitude)
+
+    p1.distance(p2) / 1609.34
   end
 
   def anime_similarity_score(potential_match)
