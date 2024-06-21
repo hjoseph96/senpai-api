@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Mutations
-  class SendEventInvite < Mutations::BaseMutation
+  class SendMatchRequest < Mutations::BaseMutation
     graphql_name "SendMatchRequest"
 
     argument :sender_id, ID, required: true
