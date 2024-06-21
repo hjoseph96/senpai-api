@@ -7,7 +7,7 @@ module Mutations
     field :token, String, null: false
 
     def resolve(params:)
-      @user = User.find(params[:user_id])
+      @user = User.where(id: params[:user_id])
 
       unless @user.present? && params[:user_id].to_i > 0
         return GraphQL::ExecutionError.new("No user with that ID found")
