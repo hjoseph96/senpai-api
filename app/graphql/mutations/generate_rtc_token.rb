@@ -10,7 +10,7 @@ module Mutations
       @user = User.where(id: params[:user_id])
 
       if @user.empty?
-        unless params[:is_testing] && params[:user_id] == 0
+        unless params[:is_testing] && params[:user_id].to_i == 0
           return GraphQL::ExecutionError.new("No user with that ID found")
         end
       end
