@@ -26,10 +26,10 @@ Devise.setup do |config|
   # with default "from" parameter.
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
 
-  # Configure the class responsible to send e-mails.
+  # Configure the class responsible to send_match_request.rb e-mails.
   # config.mailer = 'Devise::Mailer'
 
-  # Configure the parent class responsible to send e-mails.
+  # Configure the parent class responsible to send_match_request.rb e-mails.
   # config.parent_mailer = 'ActionMailer::Base'
 
   # ==> ORM configuration

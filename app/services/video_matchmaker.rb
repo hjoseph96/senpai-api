@@ -33,7 +33,7 @@ class VideoMatchmaker
       u = pool.sample
 
       next if @user.has_video_matched?(u) || User.matched_with?(@user.matches, u) || User.blocked?(@user.blocks, u)
-      
+
       next unless want_each_other?(@user, u)
 
       user_pool << u

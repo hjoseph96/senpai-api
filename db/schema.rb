@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_26_195302) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_21_192543) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -250,6 +250,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_26_195302) do
     t.index ["deleted_at"], name: "index_likes_on_deleted_at"
     t.index ["likee_id"], name: "index_likes_on_likee_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "match_requests", force: :cascade do |t|
+    t.integer "sender_id", null: false
+    t.integer "receiver_id", null: false
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["receiver_id"], name: "index_match_requests_on_receiver_id"
+    t.index ["sender_id"], name: "index_match_requests_on_sender_id"
+    t.index ["status"], name: "index_match_requests_on_status"
   end
 
   create_table "matches", force: :cascade do |t|
