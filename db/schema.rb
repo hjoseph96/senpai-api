@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_21_192543) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_24_164112) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -62,6 +62,32 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_21_192543) do
     t.datetime "updated_at", null: false
     t.string "japanese_title"
     t.index ["japanese_title"], name: "index_animes_on_japanese_title"
+  end
+
+  create_table "avatars", force: :cascade do |t|
+    t.string "guid"
+    t.string "name"
+    t.boolean "is_default"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guid"], name: "index_avatars_on_guid"
+    t.index ["name"], name: "index_avatars_on_name"
+    t.index ["user_id"], name: "index_avatars_on_user_id"
+  end
+
+  create_table "background_settings", force: :cascade do |t|
+    t.string "title"
+    t.string "sky_color"
+    t.string "equator_color"
+    t.string "ground_color"
+    t.boolean "enable_stars"
+    t.boolean "enable_clouds"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["title"], name: "index_background_settings_on_title"
+    t.index ["user_id"], name: "index_background_settings_on_user_id"
   end
 
   create_table "battles", force: :cascade do |t|
@@ -606,6 +632,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_21_192543) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "avatars", "users"
+  add_foreign_key "background_settings", "users"
   add_foreign_key "battles", "rounds"
   add_foreign_key "blocks", "reports"
   add_foreign_key "blocks", "users"

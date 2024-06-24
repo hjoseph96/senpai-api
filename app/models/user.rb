@@ -40,6 +40,10 @@ class User < ApplicationRecord
   has_many :referrals, foreign_key: :referer_id, class_name: 'Referral'
   has_one :referred_by, foreign_key: :referred_id, class_name: 'Referral'
 
+  # For Video Chat
+  has_many :avatars
+  has_many :background_settings
+
   has_one_attached :referral_qr_code
 
   enum :online_status, [ :online, :offline ]
