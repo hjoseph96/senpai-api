@@ -26,7 +26,13 @@ class GraphqlController < ApplicationController
     case variables_param
     when String
       if variables_param.present?
-        JSON.parse(variables_param) || {}
+        json = JSON.parse(variables_param)
+
+        if json.try(:[], 'input').try(:[], 'params').present?
+          json['input']['params'] = JSON.parse(json['input']['params'], symbolize_names: true)
+        end
+
+        json || {}
       else
         {}
       end

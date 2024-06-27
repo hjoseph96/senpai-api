@@ -20,6 +20,7 @@ module Types
     field :fetch_conventions, resolver: Queries::FetchConventions
     field :fetch_convention, resolver: Queries::FetchConvention
     field :fetch_join_requests, resolver: Queries::FetchJoinRequests
+    field :fetch_avatars, resolver: Queries::FetchAvatars
     field :fetch_tournaments, resolver: Queries::FetchTournaments
 
     field :fetch_current_battle, resolver: Queries::Discord::FetchCurrentBattle

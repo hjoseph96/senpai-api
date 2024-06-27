@@ -52,6 +52,9 @@ module Types
     field :party_member_reviews, [Types::ReviewType]
     field :party_member_score, Float
 
+    field :avatars, [Types::AvatarType]
+    field :background_settings, [Types::AvatarType]
+
     field :device_infos, [Types::DeviceInfoType]
 
     def animes
@@ -72,6 +75,14 @@ module Types
 
     def blocks
       dataloader.with(Sources::BlocksByUserId).load(object.id)
+    end
+
+    def avatars
+      object.avatars
+    end
+
+    def background_settings
+      object.background_settings
     end
 
     def events(page: 1)

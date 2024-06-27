@@ -1,15 +1,21 @@
 module Mutations
   class SeedAvatars < Mutations::BaseMutation
+    require 'base64'
+    require 'securerandom'
+
     argument :params, [Types::Input::AvatarInputType], required: true
 
-    field :avatars, Types::AvatarType, null: false
+    field :avatars, [Types::AvatarType], null: false
 
     def resolve(params:)
       begin
         avatar_roster_data = params
 
+        avatars = []
         avatar_roster_data.each do |avatar|
           next if Avatar.exists?(guid: avatar[:guid]) # Only create new root avatars for new Avatars
+
+          @tmp_path = "#{Rails.root}/tmp"
 
           new_avatar = Avatar.new(
             user_id: nil,     # Root avatars have no associated user
@@ -18,27 +24,45 @@ module Mutations
             name: avatar[:name]
           )
 
-          if params[:photo].present?
-            file = params[:photo]
+          if avatar[:photo].present?
+            filename = "#{SecureRandom.uuid}-avatar-photo.png"
+            file_path = "#{@tmp_path}/#{filename}"
+            File.open(file_path, 'wb') do |f|
+              f.write(Base64.decode64(avatar[:photo]))
+            end
+
+            file = File.open(file_path)
+            
             blob = ActiveStorage::Blob.create_and_upload!(
-              io: file.tempfile,
-              filename: file.original_filename
+              io: file,
+              filename: filename
             )
-            new_avatar.attachment.attach(blob)
+            new_avatar.photo.attach(blob)
           end
 
-          if params[:thumbnail].present?
-            file = params[:thumbnail]
+          if avatar[:thumbnail].present?
+            filename = "#{SecureRandom.uuid}-avatar-photo.png"
+            file_path = "#{@tmp_path}/#{filename}"
+            File.open(file_path, 'wb') do |f|
+              f.write(Base64.decode64(avatar[:thumbnail]))
+            end
+
+            file = File.open(file_path)
+
             blob = ActiveStorage::Blob.create_and_upload!(
-              io: file.tempfile,
-              filename: file.original_filename
+              io: file,
+              filename: filename
             )
-            new_avatar.attachment.attach(blob)
+            new_avatar.thumbnail.attach(blob)
           end
 
           new_avatar.save
+
+          avatars << new_avatar
         end
-      rescue ActiveRecord::RecordInvalid => e
+
+        { avatars: avatars }
+      rescue => e
         GraphQL::ExecutionError.new("#{e.record.errors.full_messages.join(', ')}")
       end
     end

@@ -43,6 +43,7 @@ module Types
     field :find_video_chat_match, mutation: Mutations::FindVideoChatMatch
     field :generate_rtc_token, mutation: Mutations::GenerateRtcToken
     field :seed_avatars, mutation: Mutations::SeedAvatars
+    field :create_background, mutation: Mutations::CreateBackground
     field :send_match_request, mutation: Mutations::SendMatchRequest
 
     field :vote_for_battle, mutation: Mutations::Discord::VoteForBattle

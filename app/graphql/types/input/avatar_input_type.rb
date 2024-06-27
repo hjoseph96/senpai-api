@@ -4,8 +4,8 @@ module Types
       argument :guid, String, required: true
       argument :name, String, required: true
       argument :is_default, Integer, required: false
-      argument :photo, ApolloUploadServer::Upload, required: true
-      argument :thumbnail, ApolloUploadServer::Upload, required: true
+      argument :photo, String, required: false
+      argument :thumbnail, String, required: false
     end
   end
 end

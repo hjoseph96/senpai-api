@@ -8,6 +8,11 @@ module Queries
       def resolve(user_id:)
         @user = User.find(user_id)
 
+        unless @user.present?
+          GraphQL::ExecutionError.new("User cannot be found")
+        end
+
+
         @user
       end
     end
