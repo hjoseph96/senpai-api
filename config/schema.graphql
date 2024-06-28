@@ -182,6 +182,7 @@ input AvatarInput {
   isDefault: Int
   name: String!
   photo: String
+  price: Int!
   thumbnail: String
 }
 

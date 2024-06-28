@@ -1,7 +1,6 @@
 module Mutations
   class SeedAvatars < Mutations::BaseMutation
     require 'base64'
-    require 'securerandom'
 
     argument :params, [Types::Input::AvatarInputType], required: true
 
@@ -21,8 +20,9 @@ module Mutations
             user_id: nil,     # Root avatars have no associated user
             is_default: nil,  # This field is for user's inventory Avatars
             guid: avatar[:guid],
+            price: avatar[:price],
             name: avatar[:name],
-            gender: avatar[:gender]
+            gender: avatar[:gender],
           )
 
           if avatar[:photo].present?
