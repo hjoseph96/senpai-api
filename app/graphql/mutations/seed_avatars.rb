@@ -38,10 +38,12 @@ module Mutations
               filename: filename
             )
             new_avatar.photo.attach(blob)
+
+            File.delete(file_path)
           end
 
           if avatar[:thumbnail].present?
-            filename = "#{SecureRandom.uuid}-avatar-photo.png"
+            filename = "#{SecureRandom.uuid}-avatar-thumbnail.png"
             file_path = "#{@tmp_path}/#{filename}"
             File.open(file_path, 'wb') do |f|
               f.write(Base64.decode64(avatar[:thumbnail]))
@@ -54,9 +56,12 @@ module Mutations
               filename: filename
             )
             new_avatar.thumbnail.attach(blob)
+
+            File.delete(file_path)
           end
 
           new_avatar.save
+
 
           avatars << new_avatar
         end

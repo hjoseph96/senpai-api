@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_24_164112) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_28_172952) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -276,6 +276,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_164112) do
     t.index ["deleted_at"], name: "index_likes_on_deleted_at"
     t.index ["likee_id"], name: "index_likes_on_likee_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "match_invites", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "invitee_id"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["status"], name: "index_match_invites_on_status"
+    t.index ["user_id"], name: "index_match_invites_on_user_id"
   end
 
   create_table "match_requests", force: :cascade do |t|
@@ -647,6 +657,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_164112) do
   add_foreign_key "join_requests", "events"
   add_foreign_key "join_requests", "users"
   add_foreign_key "likes", "users"
+  add_foreign_key "match_invites", "users"
   add_foreign_key "matches", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "party_chats", "parties"

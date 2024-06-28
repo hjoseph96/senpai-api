@@ -44,7 +44,6 @@ module Types
     field :generate_rtc_token, mutation: Mutations::GenerateRtcToken
     field :seed_avatars, mutation: Mutations::SeedAvatars
     field :create_background, mutation: Mutations::CreateBackground
-    field :send_match_request, mutation: Mutations::SendMatchRequest
 
     field :vote_for_battle, mutation: Mutations::Discord::VoteForBattle
     field :advance_to_next_round, mutation: Mutations::Discord::AdvanceToNextRound
