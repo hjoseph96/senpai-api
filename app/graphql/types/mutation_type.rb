@@ -46,6 +46,7 @@ module Types
     field :create_background, mutation: Mutations::CreateBackground
     field :accept_match_request, mutation: Mutations::AcceptMatchRequest
     field :decline_match_request, mutation: Mutations::DeclineMatchRequest
+    field :grant_user_avatar, mutation: Mutations::GrantUserAvatar
 
     field :vote_for_battle, mutation: Mutations::Discord::VoteForBattle
     field :advance_to_next_round, mutation: Mutations::Discord::AdvanceToNextRound
