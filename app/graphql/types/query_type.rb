@@ -23,6 +23,9 @@ module Types
     field :fetch_avatars, resolver: Queries::FetchAvatars
     field :fetch_tournaments, resolver: Queries::FetchTournaments
     field :fetch_match_request, resolver: Queries::FetchMatchRequest
+    field :fetch_lobby_count, resolver: Queries::FetchLobbyCount
+    field :fetch_anime_similarity_score, resolver: Queries::FetchAnimeSimilarityScore
+
 
     field :fetch_current_battle, resolver: Queries::Discord::FetchCurrentBattle
 

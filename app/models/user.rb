@@ -160,6 +160,24 @@ class User < ApplicationRecord
     offline!
   end
 
+  def anime_similarity_score(potential_match)
+    same_taste_score = (@user.anime_ids & potential_match.anime_ids).count * 0.7
+
+    user_genre_list = @user.animes.pluck(:genres).flatten.uniq
+    match_genre_list = potential_match.animes.pluck(:genres).flatten.uniq
+    same_genre_score = (user_genre_list & match_genre_list).count * 0.4
+
+    score = same_genre_score + same_taste_score
+
+    score *= 1.5 if potential_match.premium?
+
+    score = score / 5
+
+    return 1.0 if score > 1.0
+
+    score
+  end
+
   def has_liked?(user)
     self.likes.where(likee_id: user.id).present?
   end
