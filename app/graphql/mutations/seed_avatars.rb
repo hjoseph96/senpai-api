@@ -21,7 +21,8 @@ module Mutations
             user_id: nil,     # Root avatars have no associated user
             is_default: nil,  # This field is for user's inventory Avatars
             guid: avatar[:guid],
-            name: avatar[:name]
+            name: avatar[:name],
+            gender: avatar[:gender]
           )
 
           if avatar[:photo].present?
