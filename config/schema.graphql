@@ -171,6 +171,7 @@ type Avatar {
   isDefault: Boolean
   name: String
   photoUrl: String
+  productId: String
   thumbnailUrl: String
   updatedAt: ISO8601DateTime!
   userId: Int

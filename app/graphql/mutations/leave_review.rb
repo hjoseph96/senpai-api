@@ -9,7 +9,7 @@ module Mutations
 
       @user = User.find(review_params[:user_id])
 
-      accepted_classes = %w(User Convention)
+      accepted_classes = %w(User Convention VideoMatch)
       class_name = review_params[:reviewable_type]
       unless accepted_classes.include?(class_name)
         return GraphQL::ExecutionError.new('Given invalid class name')
