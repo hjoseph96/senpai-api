@@ -8,6 +8,7 @@ module Types
     field :guid, String
     field :name, String
     field :gender, String
+    field :product_id, String
     field :is_default, Boolean
     field :user_id, Integer
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
