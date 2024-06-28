@@ -165,6 +165,7 @@ input AnimeInput {
 
 type Avatar {
   createdAt: ISO8601DateTime!
+  gender: String
   guid: String
   id: ID!
   isDefault: Boolean
@@ -176,6 +177,7 @@ type Avatar {
 }
 
 input AvatarInput {
+  gender: String!
   guid: String!
   isDefault: Int
   name: String!
