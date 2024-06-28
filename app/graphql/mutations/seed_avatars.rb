@@ -63,7 +63,6 @@ module Mutations
 
           new_avatar.save
 
-
           avatars << new_avatar
         end
 

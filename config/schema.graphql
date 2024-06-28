@@ -1280,7 +1280,7 @@ type Photo {
 type Query {
   fetchAnime(params: AnimeInput!): [Anime!]!
   fetchAnimeSimilarityScore(otherUserId: ID!, userId: ID!): Float!
-  fetchAvatars(page: Int, query: String): [Avatar!]!
+  fetchAvatars(gender: String, page: Int, query: String): [Avatar!]!
   fetchCharacters(params: FetchCharactersInput!): [Character!]!
   fetchConvention(conventionId: ID!): Convention!
   fetchConventions(params: SearchEventInput!): [Convention!]!
