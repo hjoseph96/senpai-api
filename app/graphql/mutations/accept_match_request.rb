@@ -13,7 +13,7 @@ module Mutations
 
       @match_request.accept!
 
-      @match_request
+      { match_request: @match_request }
     end
   end
 end
