@@ -33,5 +33,7 @@ class MatchRequest < ApplicationRecord
 
   def decline!
     self.denied!
+
+    RejectMatchRequestBroadcastJob.perform_async(self.id)
   end
 end

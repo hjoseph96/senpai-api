@@ -1,4 +1,4 @@
-class MatchRequestBroadcastJob
+class RejectMatchRequestBroadcastJob
   include Sidekiq::Job
   include ApplicationHelper
 
@@ -12,7 +12,7 @@ class MatchRequestBroadcastJob
       status: match_request.status
     }
 
-    ActionCable.server.broadcast(build_channel_id(match_request.receiver_id), payload)
+    ActionCable.server.broadcast(build_channel_id(match_request.sender_id), payload)
   end
 
   def build_channel_id(id)
