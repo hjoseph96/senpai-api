@@ -160,6 +160,23 @@ class User < ApplicationRecord
     offline!
   end
 
+  def set_default_avatar!
+    case self.gender
+      when :male
+        luffy_avatar = Avatar.find_by_guid('9c95159a-d72b-4b8c-94ac-68c67366cb3f')
+
+        self.avatars << luffy_avatar.clone!(user_id: self.id)
+
+        self.save!
+      when :female
+        ai_avatar = Avatar.find_by_guid('317c8fdc-6db1-42e0-a0be-8414f521448b')
+
+        self.avatars << ai_avatar.clone!(user_id: self.id)
+
+        self.save!
+    end
+  end
+
   def anime_similarity_score(potential_match)
     same_taste_score = (@user.anime_ids & potential_match.anime_ids).count * 0.7
 

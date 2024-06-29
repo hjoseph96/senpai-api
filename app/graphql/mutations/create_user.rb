@@ -17,6 +17,8 @@ module Mutations
           user.super_like_count = 5
           user.save!
 
+          user.set_default_avatar!
+
           twilio_sid = Rails.application.credentials.twilio_sid
           twilio_token = Rails.application.credentials.twilio_token
           @client = Twilio::REST::Client.new(twilio_sid, twilio_token)
