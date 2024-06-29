@@ -916,7 +916,7 @@ type MatchRequest {
   id: ID!
   receiverId: Int!
   senderId: Int!
-  status: Int
+  status: String
   updatedAt: ISO8601DateTime!
 }
 
