@@ -23,7 +23,7 @@ module Mutations
           PushNotification.create!(
             user_id: @receiver.id,
             event_name: 'match_request_received',
-            content: "#{@sender.first_name} invited you to match!"
+            content: "#{@sender.first_name} invited you to match_request_channel.rb!"
           )
 
           { match_request: @invite.reload }

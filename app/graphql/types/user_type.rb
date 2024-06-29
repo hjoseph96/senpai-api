@@ -51,6 +51,7 @@ module Types
     field :host_score, Float
     field :party_member_reviews, [Types::ReviewType]
     field :party_member_score, Float
+    field :video_call_score, Float
 
     field :avatars, [Types::AvatarType]
     field :background_settings, [Types::AvatarType]
@@ -117,6 +118,10 @@ module Types
 
     def party_member_score
       object.party_member_score
+    end
+
+    def video_call_score
+      object.video_call_score
     end
 
     def device_infos

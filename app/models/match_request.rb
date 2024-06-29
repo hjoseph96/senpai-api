@@ -4,6 +4,8 @@ class MatchRequest < ApplicationRecord
 
   enum :status, %i(pending accepted denied)
 
+  after_create_commit { MatchRequestBroadcastJob.perform_async(self.id) }
+
   def accept!
     self.accepted!
 
