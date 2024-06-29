@@ -240,11 +240,4 @@ class User < ApplicationRecord
     scores = self.video_call_reviews.pluck(:score)
     scores.inject{ |sum, score| sum + score }.to_f / scores.size
   end
-
-  def host_score
-    return nil if host_reviews.empty?
-
-    scores = self.host_reviews.pluck(:score)
-    scores.inject{ |sum, score| sum + score }.to_f / scores.size
-  end
 end
