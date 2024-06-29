@@ -12,7 +12,7 @@ module Mutations
           GraphQL::ExecutionError.new("User cannot be found")
         end
 
-        BackgroundSetting.create(
+        BackgroundSetting.create!(
           user_id: params[:user_id],
           title: params[:title],
           sky_color: params[:sky_color],
