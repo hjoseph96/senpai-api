@@ -7,7 +7,7 @@ class MatchRequestBroadcastJob
 
     payload = {
       match_request_id: match_request.id,
-      sender_id: match_request.user_id,
+      sender_id: match_request.sender_id,
       receiver_id: match_request.receiver_id,
     }
 
